@@ -1,0 +1,1339 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/module-install.dtd">
+	<install version="1.5.0" type="module" client="site" method="upgrade">
+		<name>Jmaps Display</name>
+		<author>Jerry Johnson</author>
+		<authorEmail>jerryjoh@yahoo.com</authorEmail>
+		<authorUrl>www.websolutionware.com</authorUrl>
+		<creationDate>June 2011</creationDate>
+		<copyright>Copyright (C) 2011 Jerry Johnson. All rights reserved.</copyright>
+		<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+		<version>3.0</version>
+		<description>Module to use Jmaps to display a Google map.</description>
+		
+		<media destination="markers">
+			<filename>index.html</filename>
+		</media>
+		<files>
+			<filename module="mod_jmaps">mod_jmaps.php</filename>
+			<filename module="mod_jmaps">mod_jmaps.xml</filename>
+			<filename module="mod_jmaps">index.html</filename>
+			<filename module="mod_jmaps">js/jquery.jmap.min.js</filename>
+			<filename module="mod_jmaps">js/jquery.jmap.js</filename>
+			<filename module="mod_jmaps">js/markerclusterer.js</filename>
+			<filename module="mod_jmaps">js/markerclusterer_packed.js</filename>
+			<filename module="mod_jmaps">js/mapiconmaker.js</filename>
+			<filename module="mod_jmaps">js/mapiconmaker.min.js</filename>
+			<filename module="mod_jmaps">js/colorbox.css</filename>
+			<filename module="mod_jmaps">js/jquery.colorbox-min.js</filename>
+			<filename module="mod_jmaps">js/index.html</filename>
+			<filename module="mod_jmaps">js/images/index.html</filename>
+			<filename module="mod_jmaps">js/images/conv30.png</filename>
+			<filename module="mod_jmaps">js/images/conv40.png</filename>
+			<filename module="mod_jmaps">js/images/conv50.png</filename>
+			<filename module="mod_jmaps">js/images/heart30.png</filename>
+			<filename module="mod_jmaps">js/images/heart40.png</filename>
+			<filename module="mod_jmaps">js/images/heart50.png</filename>
+			<filename module="mod_jmaps">js/images/people35.png</filename>
+			<filename module="mod_jmaps">js/images/people45.png</filename>
+			<filename module="mod_jmaps">js/images/people55.png</filename>
+			<filename module="mod_jmaps">js/images/border.png</filename>
+			<filename module="mod_jmaps">js/images/controls.png</filename>
+			<filename module="mod_jmaps">js/images/loading.gif</filename>
+			<filename module="mod_jmaps">js/images/loading_large.gif</filename>
+			<filename module="mod_jmaps">js/images/loading_background.png</filename>
+			<filename module="mod_jmaps">js/images/overlay.png</filename>
+			<filename module="mod_jmaps">js/images/ie6/index.html</filename>
+			<filename module="mod_jmaps">js/images/ie6/borderBottomCenter.png</filename>
+			<filename module="mod_jmaps">js/images/ie6/borderBottomLeft.png</filename>
+			<filename module="mod_jmaps">js/images/ie6/borderBottomRight.png</filename>
+			<filename module="mod_jmaps">js/images/ie6/borderMiddleLeft.png</filename>
+			<filename module="mod_jmaps">js/images/ie6/borderMiddleRight.png</filename>
+			<filename module="mod_jmaps">js/images/ie6/borderTopCenter.png</filename>
+			<filename module="mod_jmaps">js/images/ie6/borderTopLeft.png</filename>
+			<filename module="mod_jmaps">js/images/ie6/borderTopRight.png</filename>
+		</files>
+
+		<languages>
+			<language tag="en-GB">en-GB.mod_jmaps.ini</language>
+		</languages>
+		
+	<!-- J1.5 version of the parameters: -->
+		<params>
+			<param name="JmapDivID" TYPE="text" default="Jmaps" SIZE="40"
+				label="Google Map Div ID"
+				description="JMAPS_XML_DIVID" />
+
+			<param name="JmapWidth" TYPE="text" default="400" SIZE="5"
+				label="Google Map Width"
+				description="JMAPS_XML_WIDTH" />
+
+			<param name="JmapHeight" TYPE="text" default="400" SIZE="5"
+				label="Google Map Height"
+				description="JMAPS_XML_HEIGHT" />
+
+			<param name="JmapKeepInView" TYPE="list" default="0"
+				label="Float Map down on Scroll"
+				description="JMAPS_XML_KEEPINVIEW">
+				<option VALUE="1">Keep the map in view</option>
+				<option VALUE="0">Allow the map to scroll off the page</option>
+			</param>
+
+			<param TYPE="spacer" default="&lt;b&gt;Map Parameters&lt;/b&gt;" />
+			<param name="JmapBackgroundColor" TYPE="text" default="#FFFFFF" SIZE="10"
+				label="Map Background Color"
+				description="JMAPS_XML_BACKGROUNDCOLOR" />
+
+			<param name="JmapCenterLatitude" TYPE="text" default="38.898748" SIZE="10"
+				label="Initial Center Latitude"
+				description="JMAPS_XML_CENTERLATITUDE" />
+
+			<param name="JmapCenterLongitude" TYPE="text" default="-77.037684" SIZE="10"
+				label="Initial Center Longitude"
+				description="JMAPS_XML_CENTERLONGITUDE" />
+
+			<param name="JmapOverrideCenter" TYPE="list" default='1'
+				label="Center on Marker 1"
+				description="JMAPS_XML_OVERRIDECENTER">
+				<option VALUE='1'>Center on 1</option>
+				<option VALUE='0'>Do not center on 1</option>
+			</param>
+
+			<param name="JmapDisableDoubleClickZoom" TYPE="list" default="0"
+				label="Disable DoubleClick"
+				description="JMAPS_XML_DISABLE_DOUBLECLICK_ZOOM">
+				<option VALUE="1">Disable</option>
+				<option VALUE="0">Allow</option>
+			</param>
+
+			<param name="JmapDraggable" TYPE="list" default="1"
+				label="Allow the map to be dragged"
+				description="JMAPS_XML_DRAGGABLE">
+				<option VALUE="1">Allow dragging</option>
+				<option VALUE="0">Lock map viewport</option>
+			</param>
+
+			<param name="JmapInitZoom" TYPE="text" default="12" SIZE="3"
+				label="Initial Zoom Level"
+				description="JMAPS_XML_INITZOOM" />
+			
+			<param name="JmapZoom" TYPE="text" default="12" SIZE="3"
+				label="Map Zoom Level"
+				description="JMAPS_XML_ZOOM" />
+
+			<param name="JmapMinZoom" TYPE="text" default="14" SIZE="3"
+				label="Minimum Auto Zoom"
+				description="JMAPS_XML_MINZOOM" />
+			
+			<param name="JmapMMMinZoom" TYPE="text" default="4" SIZE="3"
+				label="Minimum Zoom Level"
+				description="JMAPS_XML_MM_MIN_ZOOM" />
+
+			<param name="JmapMMMaxZoom" TYPE="text" default="18" SIZE="3"
+				label="Maximum Zoom Level"
+				description="JMAPS_XML_MM_MAX_ZOOM" />
+
+			<param name="JmapMapTypeId" TYPE="list" default='roadmap'
+				label="Initial Map Type"
+				description="JMAPS_XML_MAPTYPE">
+				<option VALUE='roadmap'>Road Map</option>
+				<option VALUE='satellite'>Satellite Map</option>
+				<option VALUE='hybrid'>Hybrid Map</option>
+			</param>
+
+			<param name="JmapMapTypeControl" TYPE="list" default="1"
+				label="Allow Map Type Change"
+				description="JMAPS_XML_MAPTYPECONTROL">
+				<option VALUE="1">Allow Change</option>
+				<option VALUE="0">No Change</option>
+			</param>
+
+			<param name="JmapMapTypeControlPosition" TYPE="list" default="topRight" SIZE="10"
+				label="Map Type Control Position"
+				description="JMAPS_XML_MAPTYPEPOSITION">
+				<option VALUE="topLeft">Top Left</option>
+				<option VALUE="topCenter">Top Center</option>
+				<option VALUE="topRight">Top Right</option>
+				<option VALUE="rightTop">Right Top</option>
+				<option VALUE="rightCenter">Right Center</option>
+				<option VALUE="rightBottom">Right Bottom</option>
+				<option VALUE="bottomRight">Bottom Right</option>
+				<option VALUE="bottomCenter">Bottom Center</option>
+				<option VALUE="bottomLeft">Bottom Left</option>
+				<option VALUE="leftBottom">Left Bottom</option>
+				<option VALUE="leftCenter">Left Center</option>
+				<option VALUE="leftTop">Left Top</option>
+			</param>
+
+			<param name="JmapMapTypeControlStyle" TYPE="list" default="bar" SIZE="10"
+				label="Map Type Control Style"
+				description="JMAPS_XML_MAPTYPESTYLE">
+				<option VALUE="bar">Horizontal Bar</option>
+				<option VALUE="menu">Dropdown Menu</option>
+			</param>
+			
+			<param name="JmapOverviewMapControl" TYPE="list" default="0"
+				label="Show Map Overview Window"
+				description="JMAPS_XML_MAPOVERVIEWCONTROL">
+				<option VALUE="1">Show Overview</option>
+				<option VALUE="0">Hide Overview</option>
+			</param>
+
+			<param name="JmapOverviewMapControlOpened" TYPE="list" default="0"
+				label="Open Overview On Load"
+				description="JMAPS_XML_MAPOVERVIEWOPENED">
+				<option VALUE="1">Open OnLoad</option>
+				<option VALUE="0">Closed OnLoad</option>
+			</param>
+
+			<param name="JmapPanControl" TYPE="list" default="1"
+				label="Show Pan Control"
+				description="JMAPS_XML_PANCONTROL">
+				<option VALUE="1">Show Pan Control</option>
+				<option VALUE="0">Hide Pan Control</option>
+			</param>
+
+			<param name="JmapPanControlPosition" TYPE="list" default="topLeft" SIZE="10"
+				label="Pan Control Position"
+				description="JMAPS_XML_PANCONTROLPOSITION">
+				<option VALUE="topLeft">Top Left</option>
+				<option VALUE="topCenter">Top Center</option>
+				<option VALUE="topRight">Top Right</option>
+				<option VALUE="rightTop">Right Top</option>
+				<option VALUE="rightCenter">Right Center</option>
+				<option VALUE="rightBottom">Right Bottom</option>
+				<option VALUE="bottomRight">Bottom Right</option>
+				<option VALUE="bottomCenter">Bottom Center</option>
+				<option VALUE="bottomLeft">Bottom Left</option>
+				<option VALUE="leftBottom">Left Bottom</option>
+				<option VALUE="leftCenter">Left Center</option>
+				<option VALUE="leftTop">Left Top</option>
+			</param>
+
+			<param name="JmapScaleControl" TYPE="list" default="1"
+				label="Show Map Scale"
+				description="JMAPS_XML_SCALECONTROL">
+				<option VALUE="1">Show Scale</option>
+				<option VALUE="0">Hide Scale</option>
+			</param>
+
+			<param name="JmapScaleControlPosition" TYPE="list" default="bottomLeft" SIZE="10"
+				label="Map Scale Position"
+				description="JMAPS_XML_SCALEPOSITION">
+				<option VALUE="topLeft">Top Left</option>
+				<option VALUE="topCenter">Top Center</option>
+				<option VALUE="topRight">Top Right</option>
+				<option VALUE="rightTop">Right Top</option>
+				<option VALUE="rightCenter">Right Center</option>
+				<option VALUE="rightBottom">Right Bottom</option>
+				<option VALUE="bottomRight">Bottom Right</option>
+				<option VALUE="bottomCenter">Bottom Center</option>
+				<option VALUE="bottomLeft">Bottom Left</option>
+				<option VALUE="leftBottom">Left Bottom</option>
+				<option VALUE="leftCenter">Left Center</option>
+				<option VALUE="leftTop">Left Top</option>
+			</param>
+
+			<param name="JmapStreetViewControl" TYPE="list" default="1"
+				label="Streetview Pegman"
+				description="JMAPS_XML_STREETVIEWCONTROL">
+				<option VALUE="1">Show Pegman</option>
+				<option VALUE="0">Hide Pegman</option>
+			</param>
+
+			<param name="JmapStreetViewControlPosition" TYPE="list" default="topLeft" SIZE="10"
+				label="Streetview Pegman Position"
+				description="JMAPS_XML_STREETVIEWPOSITION">
+				<option VALUE="topLeft">Top Left</option>
+				<option VALUE="topCenter">Top Center</option>
+				<option VALUE="topRight">Top Right</option>
+				<option VALUE="rightTop">Right Top</option>
+				<option VALUE="rightCenter">Right Center</option>
+				<option VALUE="rightBottom">Right Bottom</option>
+				<option VALUE="bottomRight">Bottom Right</option>
+				<option VALUE="bottomCenter">Bottom Center</option>
+				<option VALUE="bottomLeft">Bottom Left</option>
+				<option VALUE="leftBottom">Left Bottom</option>
+				<option VALUE="leftCenter">Left Center</option>
+				<option VALUE="leftTop">Left Top</option>
+			</param>
+
+			<param name="JmapScrollWheel" TYPE="list" default='1'
+				label="Zoom Map by Mouse Wheel"
+				description="JMAPS_XML_WHEELZOOM">
+				<option VALUE='1'>Zoom Using Mouse Wheel</option>
+				<option VALUE='0'>Do Not Zoom Using Mouse Wheel</option>
+			</param>
+
+			<param name="JmapZoomControl" TYPE="list" default="1"
+				label="Map Zoom Control"
+				description="JMAPS_XML_ZOOMCONTROL">
+				<option VALUE="1">Show Zoom Control</option>
+				<option VALUE="0">Hide Zoom Control</option>
+			</param>
+
+			<param name="JmapZoomControlPosition" TYPE="list" default="topLeft" SIZE="10"
+				label="Zoom Control Position"
+				description="JMAPS_XML_ZOOMPOSITION">
+				<option VALUE="topLeft">Top Left</option>
+				<option VALUE="topCenter">Top Center</option>
+				<option VALUE="topRight">Top Right</option>
+				<option VALUE="rightTop">Right Top</option>
+				<option VALUE="rightCenter">Right Center</option>
+				<option VALUE="rightBottom">Right Bottom</option>
+				<option VALUE="bottomRight">Bottom Right</option>
+				<option VALUE="bottomCenter">Bottom Center</option>
+				<option VALUE="bottomLeft">Bottom Left</option>
+				<option VALUE="leftBottom">Left Bottom</option>
+				<option VALUE="leftCenter">Left Center</option>
+				<option VALUE="leftTop">Left Top</option>
+			</param>
+
+			<param name="JmapZoomControlStyle" TYPE="list" default='large'
+				label="Zoom Control Size"
+				description="JMAPS_XML_ZOOMCONTROLSTYLE">
+				<option VALUE='small'>Small Control</option>
+				<option VALUE='large'>Large Control</option>
+				<option VALUE='none'>No Controls</option>
+			</param>
+
+			<param name="JmapShowToDirections" TYPE="list" default='1'
+				label="Show Directions TO"
+				description="JMAPS_XML_SHOWTODIRECTIONS">
+				<option VALUE='1'>Show Directions To</option>
+				<option VALUE='0'>Do not Show Directions To</option>
+			</param>
+
+			<param name="JmapShowFromDirections" TYPE="list" default='1'
+				label="Show Directions FROM"
+				description="JMAPS_XML_SHOWFROMDIRECTIONS">
+				<option VALUE='1'>Show Directions From</option>
+				<option VALUE='0'>Do not Show Directions From</option>
+			</param>
+
+			<param name="JmapDirectionsAvoidHighways" TYPE="list" default='0'
+				label="Directions - Avoid Highways"
+				description="JMAPS_XML_DIRECTIONSAVOIDHIGHWAYS">
+				<option VALUE='1'>Avoid Highways</option>
+				<option VALUE='0'>Best Directions</option>
+			</param>
+
+			<param name="JmapDirectionsAvoidTolls" TYPE="list" default='0'
+				label="Directions - Avoid Tolls"
+				description="JMAPS_XML_DIRECTIONSAVOIDTOLLS">
+				<option VALUE='1'>Avoid Tolls</option>
+				<option VALUE='0'>Best Directions</option>
+			</param>
+
+			<param name="JmapDirectionsAlternativeRoutes" TYPE="list" default='0'
+				label="Directions - Alternative Routes"
+				description="JMAPS_XML_DIRECTIONSALTERNATIVEROUTES">
+				<option VALUE='1'>Provide Alternative Routes</option>
+				<option VALUE='0'>Optimal Route Only</option>
+			</param>
+
+			<param name="JmapDirectionsContainer" TYPE="text" default="directionsDiv" SIZE="30"
+				label="Directions Container"
+				description="JMAPS_XML_DIRECTIONSCONTAINER">
+			</param>
+
+			<param name="JmapDirWidth" TYPE="text" default="250" SIZE="5"
+				label="Directions DIV Width"
+				description="JMAPS_XML_DIRECTIONSWIDTH" />
+
+			<param TYPE="spacer" default="&lt;b&gt;Streetview Parameters&lt;/b&gt;" />
+			<param name="JmapShowStreetView" TYPE="list" default='1'
+				label="Allow Street View (if available)"
+				description="JMAPS_XML_SHOWSTREETVIEW">
+				<option VALUE='1'>Allow Street View</option>
+				<option VALUE='0'>Do not allow Street View</option>
+			</param>
+
+			<param name="JmapSVAddressControl" TYPE="list" default="1"
+				label="Show Streetview Address"
+				description="JMAPS_XML_SVADDRESSCONTROL">
+				<option VALUE="1">Show Address</option>
+				<option VALUE="0">Hide Address</option>
+			</param>
+
+			<param name="JmapSVAddressControlPosition" TYPE="list" default="leftTop" SIZE="10"
+				label="Streetview Address Position"
+				description="JMAPS_XML_SVADDRESSPOSITION">
+				<option VALUE="topLeft">Top Left</option>
+				<option VALUE="topCenter">Top Center</option>
+				<option VALUE="topRight">Top Right</option>
+				<option VALUE="rightTop">Right Top</option>
+				<option VALUE="rightCenter">Right Center</option>
+				<option VALUE="rightBottom">Right Bottom</option>
+				<option VALUE="bottomRight">Bottom Right</option>
+				<option VALUE="bottomCenter">Bottom Center</option>
+				<option VALUE="bottomLeft">Bottom Left</option>
+				<option VALUE="leftBottom">Left Bottom</option>
+				<option VALUE="leftCenter">Left Center</option>
+				<option VALUE="leftTop">Left Top</option>
+			</param>
+
+			<param name="JmapSVDisableDoubleClickZoom" TYPE="list" default="0"
+				label="Disable DoubleClick"
+				description="JMAPS_XML_SVDISABLE_DOUBLECLICK_ZOOM">
+				<option VALUE="1">Disable</option>
+				<option VALUE="0">Allow</option>
+			</param>
+
+			<param name="JmapSVPanControl" TYPE="list" default="1"
+				label="Show Pan Control"
+				description="JMAPS_XML_SVPANCONTROL">
+				<option VALUE="1">Show Pan Control</option>
+				<option VALUE="0">Hide Pan Control</option>
+			</param>
+
+			<param name="JmapSVPanControlPosition" TYPE="list" default="topLeft" SIZE="10"
+				label="Pan Control Position"
+				description="JMAPS_XML_SVPANCONTROLPOSITION">
+				<option VALUE="topLeft">Top Left</option>
+				<option VALUE="topCenter">Top Center</option>
+				<option VALUE="topRight">Top Right</option>
+				<option VALUE="rightTop">Right Top</option>
+				<option VALUE="rightCenter">Right Center</option>
+				<option VALUE="rightBottom">Right Bottom</option>
+				<option VALUE="bottomRight">Bottom Right</option>
+				<option VALUE="bottomCenter">Bottom Center</option>
+				<option VALUE="bottomLeft">Bottom Left</option>
+				<option VALUE="leftBottom">Left Bottom</option>
+				<option VALUE="leftCenter">Left Center</option>
+				<option VALUE="leftTop">Left Top</option>
+			</param>
+
+			<param name="JmapSVOverrideContainer" TYPE="list" default="" SIZE="10"
+				label="Override Container"
+				description="JMAPS_XML_SVOVERRIDECONTAINER">
+				<option VALUE="">In Place</option>
+				<option VALUE="#streetview">#streetview</option>
+			</param>
+
+			<param name="JmapSVScrollWheel" TYPE="list" default='1'
+				label="Zoom Streetview by Mouse Wheel"
+				description="JMAPS_XML_SVWHEELZOOM">
+				<option VALUE='1'>Zoom Using Mouse Wheel</option>
+				<option VALUE='0'>Do Not Zoom Using Mouse Wheel</option>
+			</param>
+
+			<param name="JmapSVZoomControl" TYPE="list" default="1"
+				label="Map Zoom Control"
+				description="JMAPS_XML_SVZOOMCONTROL">
+				<option VALUE="1">Show Zoom Control</option>
+				<option VALUE="0">Hide Zoom Control</option>
+			</param>
+
+			<param name="JmapSVZoomControlPosition" TYPE="list" default="topLeft" SIZE="10"
+				label="Zoom Control Position"
+				description="JMAPS_XML_SVZOOMPOSITION">
+				<option VALUE="topLeft">Top Left</option>
+				<option VALUE="topCenter">Top Center</option>
+				<option VALUE="topRight">Top Right</option>
+				<option VALUE="rightTop">Right Top</option>
+				<option VALUE="rightCenter">Right Center</option>
+				<option VALUE="rightBottom">Right Bottom</option>
+				<option VALUE="bottomRight">Bottom Right</option>
+				<option VALUE="bottomCenter">Bottom Center</option>
+				<option VALUE="bottomLeft">Bottom Left</option>
+				<option VALUE="leftBottom">Left Bottom</option>
+				<option VALUE="leftCenter">Left Center</option>
+				<option VALUE="leftTop">Left Top</option>
+			</param>
+
+			<param name="JmapSVZoomControlStyle" TYPE="list" default='small'
+				label="Zoom Control Size"
+				description="JMAPS_XML_SVZOOMCONTROLSTYLE">
+				<option VALUE='small'>Small Control</option>
+				<option VALUE='large'>Large Control</option>
+				<option VALUE='none'>No Controls</option>
+			</param>
+
+			<param TYPE="spacer" default="&lt;b&gt;Standard Map Marker Parameters&lt;/b&gt;" />
+			<param name="JmapMarkerColor" TYPE="text" default="#00FF00" SIZE="10"
+				label="Map Marker Color"
+				description="JMAPS_XML_MARKERCOLOR" />
+
+			<param name="JmapMarkerStroke" TYPE="text" default="#000000" SIZE="10"
+				label="Map Marker Stroke Color"
+				description="JMAPS_XML_MARKERSTROKE" />
+
+			<param name="JmapMarkerWidth" TYPE="text" default="32" SIZE="5"
+				label="Map Marker Width"
+				description="JMAPS_XML_MARKERWIDTH" />
+
+			<param name="JmapMarkerHeight" TYPE="text" default="32" SIZE="5"
+				label="Map Marker Height"
+				description="JMAPS_XML_MARKERHEIGHT" />
+
+			<param name="JmapShowMarkerLabel" TYPE="list" default='1'
+				label="Show Marker Label"
+				description="JMAPS_XML_SHOWMARKERLABEL">
+				<option VALUE='1'>Show Marker Label</option>
+				<option VALUE='0'>Do not Show Marker Label</option>
+			</param>
+
+			<param name="JmapMarkerLabel" TYPE="text" default="#000000" SIZE="10"
+				label="Map Marker Label Color"
+				description="JMAPS_XML_MARKERLABEL" />
+
+			<param TYPE="spacer" default="&lt;b&gt;OR Custom Map Marker (No Label!)&lt;/b&gt;" />
+			<param name="JmapCustomMarker" TYPE="folderlist" default=""
+				label="Custom Map Marker"
+				description="JMAPS_XML_CUSTOM_MARKER_DESC"
+				directory="media/markers"
+				filter=""
+				exclude=""
+				stripext="" >	 
+			</param>
+			
+			<param name="JmapMarkerClass" TYPE="text" default="" SIZE="30"
+				label="Map Marker Class"
+				description="JMAPS_XML_MARKERCLASS" />
+
+			<param TYPE="spacer" default="&lt;b&gt;Featured Map Marker Parameters&lt;/b&gt;" />
+			<param name="JmapFeaturedMarkerColor" TYPE="text" default="#00FF00" SIZE="10"
+				label="Featured Map Marker Color"
+				description="JMAPS_XML_FEATUREDMARKERCOLOR" />
+
+			<param name="JmapFeaturedMarkerStroke" TYPE="text" default="#000000" SIZE="10"
+				label="Featured Map Marker Stroke Color"
+				description="JMAPS_XML_FEATUREDMARKERSTROKE" />
+
+			<param name="JmapFeaturedMarkerLabel" TYPE="text" default="#000000" SIZE="10"
+				label="Featured Map Marker Label Color"
+				description="JMAPS_XML_FEATUREDMARKERLABEL" />
+
+			<param name="JmapShowStar" TYPE="radio" default="0"
+				label="Show Star on Featured"
+				description="JMAPS_XML_SHOWSTAR">
+				<option VALUE="1">Show Star on featured markers</option>
+				<option VALUE="0">Hide Star on featured markers</option>
+			</param>
+
+			<param name="JmapStarStroke" TYPE="text" default="#E2B61D" SIZE="10"
+				label="Star Stroke Color"
+				description="JMAPS_XML_STARSTROKE" />
+
+			<param name="JmapStarColor" TYPE="text" default="#E2B61D" SIZE="10"
+				label="Star Primary Color"
+				description="JMAPS_XML_STARCOLOR" />
+
+			<param TYPE="spacer" default="&lt;b&gt;OR Custom Featured Map Marker (No Label!)&lt;/b&gt;" />
+			<param name="JmapCustomFeaturedMarker" TYPE="folderlist" default=""
+				label="Custom Featured Map Marker"
+				description="JMAPS_XML_CUSTOM_FEATURED_MARKER_DESC"
+				directory="media/markers"
+				filter=""
+				exclude=""
+				stripext="" >	 
+			</param>
+			
+			<param name="JmapMarkerPointAnimation'" TYPE="list" default='null'
+				label="Marker Animation"
+				description="JMAPS_XML_MARKERANIMATION">
+				<option VALUE='bounce'>Bounce</option>
+				<option VALUE='drop'>Drop</option>
+			</param>
+
+			<param name="JmapMarkerPointOpenHTMLEvent'" TYPE="list" default='click'
+				label="Marker Open HTML event"
+				description="JMAPS_XML_OPENHTMLEVENT">
+				<option VALUE='click'>Click</option>
+				<option VALUE='dblclick'>Double Click</option>
+				<option VALUE='rightclick'>Right Click</option>
+				<option VALUE='mouseover'>Mouse Over</option>
+			</param>
+
+			<param name="JmapMarkerDisableAutoPan'" TYPE="list" default='0'
+				label="Disable Auto-Pan Info Window"
+				description="JMAPS_XML_INFOWINDOWAUTOPAN">
+				<option VALUE='1'>Disable Auto-Pan</option>
+				<option VALUE='0'>Auto-Pan on Open</option>
+			</param>
+
+			<param name="JmapMarkerMaxWidth" TYPE="text" default="" SIZE="10"
+				label="Info Window Max Width"
+				description="JMAPS_XML_INFOWINDOWMAX" />
+
+			<param TYPE="spacer" default="&lt;b&gt;Marker Clusterer Parameters&lt;/b&gt;" />
+			<param name="JmapMarkerClusterer" TYPE="list" default="0"
+				label="Add a Marker Clusterer"
+				description="JMAPS_XML_MARKER_CLUSTERER">
+				<option VALUE="1">Add a Marker Clusterer</option>
+				<option VALUE="0">No Marker Clusterer</option>
+			</param>
+
+			<param name="'JmapClustererGridSize" TYPE="text" default="60" SIZE="10"
+				label="Cluster Grid Size"
+				description="JMAPS_XML_CLUSTERERGRIDSIZE" />
+
+			<param name="JmapClustererMinimumClusterSize" TYPE="text" default="2" SIZE="10"
+				label="Minimum Cluster Size"
+				description="JMAPS_XML_CLUSTERERMINSIZE" />
+
+			<param name="JmapClustererZoomOnClick" TYPE="list" default='1'
+				label="Zoom Cluster on Click"
+				description="JMAPS_XML_CLUSTERERZOOM">
+				<option VALUE='1'>Zoom Cluster On Click</option>
+				<option VALUE='0'>Do Not Zoom On Click</option>
+			</param>
+
+			<param name="JmapClustererStyle" TYPE="list" default='default'
+				label="Zoom Streetview by Mouse Wheel"
+				description="JMAPS_XML_CLUSTERERSTYLE">
+				<option VALUE='default'>Use Default Cluster Icons</option>
+				<option VALUE='0'>Use People Cluster Icons</option>
+				<option VALUE='1'>Use Conversation Cluster Icons</option>
+				<option VALUE='2'>Use Heart Cluster Icons</option>
+			</param>
+
+			<param name="JmapSource" TYPE="list" default='other'
+				label="Source of marker XML"
+				description="JMAPS_XML_SOURCE">
+				<option VALUE='cb'>Community Builder Jmap plug-in</option>
+				<option VALUE='SOBI2cat'>SOBI2 Category plug-in</option>
+				<option VALUE='SOBI2ajax'>SOBI2 AJAX Search plug-in</option>
+				<option VALUE='SOBIproCat'>SOBI Pro Category</option>
+				<option VALUE='SOBIproSearch'>SOBIpro Search field</option>
+				<option VALUE='other'>User supplied input XML (see below)</option>
+			</param>
+
+			<param name="JmapCBlist" TYPE="text" default="2" SIZE="10"
+				label="CB List Number (if Community Builder specified above)"
+				description="JMAPS_XML_CBLIST" />
+
+			<param name="JmapCBAll" TYPE="list" default='1'
+				label="Show CB Users Listed or All"
+				description="JMAPS_XML_CBAll">
+				<option VALUE='1'>All Entries for the CB Userlist</option>
+				<option VALUE='0'>User List Entires Shown on Each Page</option>
+			</param>
+
+			<param name="JmapSOBIcat" TYPE="text" default="0" SIZE="10"
+				label="SOBI Category (if SOBI Category plug-in or field specified above)"
+				description="JMAPS_XML_SOBICAT" />
+
+			<param name="JmapSOBIcatAll" TYPE="list" default='1'
+				label="Show Categories Listed or All"
+				description="JMAPS_XML_SOBICATALL">
+				<option VALUE='1'>All Entries for the Category</option>
+				<option VALUE='0'>Category Entires listed on Each Page</option>
+			</param>
+			
+			<param name="JmapCatState" TYPE="text" default="" SIZE="15"
+				label="State or Province"
+				description="JMAPS_XML_CATSTATE" />
+
+			<param name="JmapSOBIcatMarkerColors" TYPE="textarea" COLS="50" ROWS="5" default=""
+				label="Markers by SOBI2 Category (if SOBI2 plug-in is used)"
+				description="JMAPS_XML_SOBICATMARKERCOLORS" />
+
+			<param name="JmapCategoryPriority" TYPE="list" default="0"
+				label="Category Priority"
+				description="JMAPS_XML_CATEGORYPRIORITY">
+				<option VALUE="1">Use category ID to set map marker z-index</option>
+				<option VALUE="0">Use normal Google settings</option>
+			</param>
+
+			<param name="JmapExcludeTasks" TYPE="textarea" default="sobi2Details, addNew, editSobi" COLS="50" ROWS="5"
+				label="Tasks to Exclude"
+				description="JMAPS_XML_EXCLUDETASKS" />
+				
+			<param name="JmapSOBIdetailsBox" TYPE="list" default='1'
+				label="Show SOBI Details in Shadowbox"
+				description="JMAPS_XML_SOBIDETAILSBOX">
+				<option VALUE='1'>Details in Shadowbox</option>
+				<option VALUE='0'>Details Separate Page</option>
+			</param>
+
+			<param name="JmapSOBIdetailsBoxTmpl" TYPE="list" default='1'
+				label="Shadowbox Template Only"
+				description="JMAPS_XML_SOBIDETAILSBOXTMPL">
+				<option VALUE='1'>Shadowbox Details Template Only</option>
+				<option VALUE='0'>Shadowbox Details Full Site</option>
+			</param>
+
+			<param name="JmapSOBIdetailsBoxTmplSEF" TYPE="list" default='1'
+				label="Is SEF inuse on the site?"
+				description="JMAPS_XML_SOBIDETAILSBOXTMPLSEF">
+				<option VALUE='1'>SEF is in use</option>
+				<option VALUE='0'>SEF is NOT in use</option>
+			</param>
+
+			<param name="JmapShadowBoxWidthPCT" TYPE="text" default="95" SIZE="5"
+				label="Shadowbox Width PCT"
+				description="JMAPS_XML_SHADOWBOXWIDTHPCT" />
+
+			<param name="JmapShadowBoxWidthPX" TYPE="text" default="0" SIZE="5"
+				label="Shadowbox Width PX"
+				description="JMAPS_XML_SHADOWBOXWIDTHPX" />
+
+			<param name="JmapShadowBoxHeightPCT" TYPE="text" default="95" SIZE="5"
+				label="Shadowbox Height PCT"
+				description="JMAPS_XML_SHADOWBOXHEIGHTPCT" />
+
+			<param name="JmapShadowBoxHeightPX" TYPE="text" default="0" SIZE="5"
+				label="Shadowbox Height PX"
+				description="JMAPS_XML_SHADOWBOXHEIGHTPX" />
+
+			<param name="JmapOther" TYPE="text" default="Jmap.xml" SIZE="40"
+				label="XML input file name (if User supplied above)"
+				description="JMAPS_XML_OTHER" />
+
+			<param name="JmapFeed" TYPE="text" default="none" SIZE="40"
+				label="RSS or KML feed file."
+				description="JMAPS_XML_FEED" />
+				
+			<param name="JmapSOBIoneLiner" TYPE="list" default='0'
+				label="Is SOBI OneLiner in use on the site?"
+				description="JMAPS_XML_SOBIONELINER">
+				<option VALUE='1'>OneLiner is in use</option>
+				<option VALUE='0'>OneLiner is NOT in use</option>
+			</param>
+
+		</params>
+
+	<!-- J1.7 version of the parameters: -->
+		<config>
+			<fields name="params" addfieldpath="modules/mod_jmaps">
+				<fieldset name="basic" addfieldpath="/modules/mod_jmaps/">
+					
+					<field name="JmapDivID" type="text" default="Jmaps" size="40"
+						label="Google Map Div ID"
+						description="JMAPS_XML_DIVID" />
+		
+					<field name="JmapWidth" type="text" default="400" size="5"
+						label="Google Map Width"
+						description="JMAPS_XML_WIDTH" />
+		
+					<field name="JmapHeight" type="text" default="400" size="5"
+						label="Google Map Height"
+						description="JMAPS_XML_HEIGHT" />
+		
+					<field name="JmapKeepInView" type="list" default="0"
+						label="Float Map down on Scroll"
+						description="JMAPS_XML_KEEPINVIEW">
+						<option value="1">Keep the map in view</option>
+						<option value="0">Allow the map to scroll off the page</option>
+					</field>
+		
+					<field type="spacer" default="&lt;b&gt;Map Parameters&lt;/b&gt;" />
+					<field name="JmapBackgroundColor" type="text" default="#FFFFFF" size="10"
+						label="Map Background Color"
+						description="JMAPS_XML_BACKGROUNDCOLOR" />
+		
+					<field name="JmapCenterLatitude" type="text" default="38.898748" size="10"
+						label="Initial Center Latitude"
+						description="JMAPS_XML_CENTERLATITUDE" />
+		
+					<field name="JmapCenterLongitude" type="text" default="-77.037684" size="10"
+						label="Initial Center Longitude"
+						description="JMAPS_XML_CENTERLONGITUDE" />
+		
+					<field name="JmapOverrideCenter" type="list" default='1'
+						label="Center on Marker 1"
+						description="JMAPS_XML_OVERRIDECENTER">
+						<option value='1'>Center on 1</option>
+						<option value='0'>Do not center on 1</option>
+					</field>
+		
+					<field name="JmapDisableDoubleClickZoom" type="list" default="0"
+						label="Disable DoubleClick"
+						description="JMAPS_XML_DISABLE_DOUBLECLICK_ZOOM">
+						<option value="1">Disable</option>
+						<option value="0">Allow</option>
+					</field>
+		
+					<field name="JmapDraggable" type="list" default="1"
+						label="Allow the map to be dragged"
+						description="JMAPS_XML_DRAGGABLE">
+						<option value="1">Allow dragging</option>
+						<option value="0">Lock map viewport</option>
+					</field>
+		
+					<field name="JmapInitZoom" type="text" default="12" size="3"
+						label="Initial Zoom Level"
+						description="JMAPS_XML_INITZOOM" />
+					
+					<field name="JmapZoom" type="text" default="12" size="3"
+						label="Map Zoom Level"
+						description="JMAPS_XML_ZOOM" />
+		
+					<field name="JmapMinZoom" type="text" default="14" size="3"
+						label="Minimum Auto Zoom"
+						description="JMAPS_XML_MINZOOM" />
+					
+					<field name="JmapMMMinZoom" type="text" default="4" size="3"
+						label="Minimum Zoom Level"
+						description="JMAPS_XML_MM_MIN_ZOOM" />
+		
+					<field name="JmapMMMaxZoom" type="text" default="18" size="3"
+						label="Maximum Zoom Level"
+						description="JMAPS_XML_MM_MAX_ZOOM" />
+		
+					<field name="JmapMapTypeId" type="list" default='roadmap'
+						label="Initial Map Type"
+						description="JMAPS_XML_MAPTYPE">
+						<option value='roadmap'>Road Map</option>
+						<option value='satellite'>Satellite Map</option>
+						<option value='hybrid'>Hybrid Map</option>
+					</field>
+		
+					<field name="JmapMapTypeControl" type="list" default="1"
+						label="Allow Map Type Change"
+						description="JMAPS_XML_MAPTYPECONTROL">
+						<option value="1">Allow Change</option>
+						<option value="0">No Change</option>
+					</field>
+		
+					<field name="JmapMapTypeControlPosition" type="list" default="topRight" size="10"
+						label="Map Type Control Position"
+						description="JMAPS_XML_MAPTYPEPOSITION">
+						<option value="topLeft">Top Left</option>
+						<option value="topCenter">Top Center</option>
+						<option value="topRight">Top Right</option>
+						<option value="rightTop">Right Top</option>
+						<option value="rightCenter">Right Center</option>
+						<option value="rightBottom">Right Bottom</option>
+						<option value="bottomRight">Bottom Right</option>
+						<option value="bottomCenter">Bottom Center</option>
+						<option value="bottomLeft">Bottom Left</option>
+						<option value="leftBottom">Left Bottom</option>
+						<option value="leftCenter">Left Center</option>
+						<option value="leftTop">Left Top</option>
+					</field>
+		
+					<field name="JmapMapTypeControlStyle" type="list" default="bar" size="10"
+						label="Map Type Control Style"
+						description="JMAPS_XML_MAPTYPESTYLE">
+						<option value="bar">Horizontal Bar</option>
+						<option value="menu">Dropdown Menu</option>
+					</field>
+					
+					<field name="JmapOverviewMapControl" type="list" default="0"
+						label="Show Map Overview Window"
+						description="JMAPS_XML_MAPOVERVIEWCONTROL">
+						<option value="1">Show Overview</option>
+						<option value="0">Hide Overview</option>
+					</field>
+		
+					<field name="JmapOverviewMapControlOpened" type="list" default="0"
+						label="Open Overview On Load"
+						description="JMAPS_XML_MAPOVERVIEWOPENED">
+						<option value="1">Open OnLoad</option>
+						<option value="0">Closed OnLoad</option>
+					</field>
+		
+					<field name="JmapPanControl" type="list" default="1"
+						label="Show Pan Control"
+						description="JMAPS_XML_PANCONTROL">
+						<option value="1">Show Pan Control</option>
+						<option value="0">Hide Pan Control</option>
+					</field>
+		
+					<field name="JmapPanControlPosition" type="list" default="topLeft" size="10"
+						label="Pan Control Position"
+						description="JMAPS_XML_PANCONTROLPOSITION">
+						<option value="topLeft">Top Left</option>
+						<option value="topCenter">Top Center</option>
+						<option value="topRight">Top Right</option>
+						<option value="rightTop">Right Top</option>
+						<option value="rightCenter">Right Center</option>
+						<option value="rightBottom">Right Bottom</option>
+						<option value="bottomRight">Bottom Right</option>
+						<option value="bottomCenter">Bottom Center</option>
+						<option value="bottomLeft">Bottom Left</option>
+						<option value="leftBottom">Left Bottom</option>
+						<option value="leftCenter">Left Center</option>
+						<option value="leftTop">Left Top</option>
+					</field>
+		
+					<field name="JmapScaleControl" type="list" default="1"
+						label="Show Map Scale"
+						description="JMAPS_XML_SCALECONTROL">
+						<option value="1">Show Scale</option>
+						<option value="0">Hide Scale</option>
+					</field>
+		
+					<field name="JmapScaleControlPosition" type="list" default="bottomLeft" size="10"
+						label="Map Scale Position"
+						description="JMAPS_XML_SCALEPOSITION">
+						<option value="topLeft">Top Left</option>
+						<option value="topCenter">Top Center</option>
+						<option value="topRight">Top Right</option>
+						<option value="rightTop">Right Top</option>
+						<option value="rightCenter">Right Center</option>
+						<option value="rightBottom">Right Bottom</option>
+						<option value="bottomRight">Bottom Right</option>
+						<option value="bottomCenter">Bottom Center</option>
+						<option value="bottomLeft">Bottom Left</option>
+						<option value="leftBottom">Left Bottom</option>
+						<option value="leftCenter">Left Center</option>
+						<option value="leftTop">Left Top</option>
+					</field>
+		
+					<field name="JmapStreetViewControl" type="list" default="1"
+						label="Streetview Pegman"
+						description="JMAPS_XML_STREETVIEWCONTROL">
+						<option value="1">Show Pegman</option>
+						<option value="0">Hide Pegman</option>
+					</field>
+		
+					<field name="JmapStreetViewControlPosition" type="list" default="topLeft" size="10"
+						label="Streetview Pegman Position"
+						description="JMAPS_XML_STREETVIEWPOSITION">
+						<option value="topLeft">Top Left</option>
+						<option value="topCenter">Top Center</option>
+						<option value="topRight">Top Right</option>
+						<option value="rightTop">Right Top</option>
+						<option value="rightCenter">Right Center</option>
+						<option value="rightBottom">Right Bottom</option>
+						<option value="bottomRight">Bottom Right</option>
+						<option value="bottomCenter">Bottom Center</option>
+						<option value="bottomLeft">Bottom Left</option>
+						<option value="leftBottom">Left Bottom</option>
+						<option value="leftCenter">Left Center</option>
+						<option value="leftTop">Left Top</option>
+					</field>
+		
+					<field name="JmapScrollWheel" type="list" default='1'
+						label="Zoom Map by Mouse Wheel"
+						description="JMAPS_XML_WHEELZOOM">
+						<option value='1'>Zoom Using Mouse Wheel</option>
+						<option value='0'>Do Not Zoom Using Mouse Wheel</option>
+					</field>
+		
+					<field name="JmapZoomControl" type="list" default="1"
+						label="Map Zoom Control"
+						description="JMAPS_XML_ZOOMCONTROL">
+						<option value="1">Show Zoom Control</option>
+						<option value="0">Hide Zoom Control</option>
+					</field>
+		
+					<field name="JmapZoomControlPosition" type="list" default="topLeft" size="10"
+						label="Zoom Control Position"
+						description="JMAPS_XML_ZOOMPOSITION">
+						<option value="topLeft">Top Left</option>
+						<option value="topCenter">Top Center</option>
+						<option value="topRight">Top Right</option>
+						<option value="rightTop">Right Top</option>
+						<option value="rightCenter">Right Center</option>
+						<option value="rightBottom">Right Bottom</option>
+						<option value="bottomRight">Bottom Right</option>
+						<option value="bottomCenter">Bottom Center</option>
+						<option value="bottomLeft">Bottom Left</option>
+						<option value="leftBottom">Left Bottom</option>
+						<option value="leftCenter">Left Center</option>
+						<option value="leftTop">Left Top</option>
+					</field>
+		
+					<field name="JmapZoomControlStyle" type="list" default='large'
+						label="Zoom Control Size"
+						description="JMAPS_XML_ZOOMCONTROLSTYLE">
+						<option value='small'>Small Control</option>
+						<option value='large'>Large Control</option>
+						<option value='none'>No Controls</option>
+					</field>
+		
+					<field name="JmapShowToDirections" type="list" default='1'
+						label="Show Directions TO"
+						description="JMAPS_XML_SHOWTODIRECTIONS">
+						<option value='1'>Show Directions To</option>
+						<option value='0'>Do not Show Directions To</option>
+					</field>
+		
+					<field name="JmapShowFromDirections" type="list" default='1'
+						label="Show Directions FROM"
+						description="JMAPS_XML_SHOWFROMDIRECTIONS">
+						<option value='1'>Show Directions From</option>
+						<option value='0'>Do not Show Directions From</option>
+					</field>
+		
+					<field name="JmapDirectionsAvoidHighways" type="list" default='0'
+						label="Directions - Avoid Highways"
+						description="JMAPS_XML_DIRECTIONSAVOIDHIGHWAYS">
+						<option value='1'>Avoid Highways</option>
+						<option value='0'>Best Directions</option>
+					</field>
+		
+					<field name="JmapDirectionsAvoidTolls" type="list" default='0'
+						label="Directions - Avoid Tolls"
+						description="JMAPS_XML_DIRECTIONSAVOIDTOLLS">
+						<option value='1'>Avoid Tolls</option>
+						<option value='0'>Best Directions</option>
+					</field>
+		
+					<field name="JmapDirectionsAlternativeRoutes" type="list" default='0'
+						label="Directions - Alternative Routes"
+						description="JMAPS_XML_DIRECTIONSALTERNATIVEROUTES">
+						<option value='1'>Provide Alternative Routes</option>
+						<option value='0'>Optimal Route Only</option>
+					</field>
+		
+					<field name="JmapDirectionsContainer" type="text" default="directionsDiv" size="30"
+						label="Directions Container"
+						description="JMAPS_XML_DIRECTIONSCONTAINER">
+					</field>
+		
+					<field name="JmapDirWidth" type="text" default="250" size="5"
+						label="Directions DIV Width"
+						description="JMAPS_XML_DIRECTIONSWIDTH" />
+		
+					<field type="spacer" default="&lt;b&gt;Streetview Parameters&lt;/b&gt;" />
+					<field name="JmapShowStreetView" type="list" default='1'
+						label="Allow Street View (if available)"
+						description="JMAPS_XML_SHOWSTREETVIEW">
+						<option value='1'>Allow Street View</option>
+						<option value='0'>Do not allow Street View</option>
+					</field>
+		
+					<field name="JmapSVAddressControl" type="list" default="1"
+						label="Show Streetview Address"
+						description="JMAPS_XML_SVADDRESSCONTROL">
+						<option value="1">Show Address</option>
+						<option value="0">Hide Address</option>
+					</field>
+		
+					<field name="JmapSVAddressControlPosition" type="list" default="leftTop" size="10"
+						label="Streetview Address Position"
+						description="JMAPS_XML_SVADDRESSPOSITION">
+						<option value="topLeft">Top Left</option>
+						<option value="topCenter">Top Center</option>
+						<option value="topRight">Top Right</option>
+						<option value="rightTop">Right Top</option>
+						<option value="rightCenter">Right Center</option>
+						<option value="rightBottom">Right Bottom</option>
+						<option value="bottomRight">Bottom Right</option>
+						<option value="bottomCenter">Bottom Center</option>
+						<option value="bottomLeft">Bottom Left</option>
+						<option value="leftBottom">Left Bottom</option>
+						<option value="leftCenter">Left Center</option>
+						<option value="leftTop">Left Top</option>
+					</field>
+		
+					<field name="JmapSVDisableDoubleClickZoom" type="list" default="0"
+						label="Disable DoubleClick"
+						description="JMAPS_XML_SVDISABLE_DOUBLECLICK_ZOOM">
+						<option value="1">Disable</option>
+						<option value="0">Allow</option>
+					</field>
+		
+					<field name="JmapSVPanControl" type="list" default="1"
+						label="Show Pan Control"
+						description="JMAPS_XML_SVPANCONTROL">
+						<option value="1">Show Pan Control</option>
+						<option value="0">Hide Pan Control</option>
+					</field>
+		
+					<field name="JmapSVPanControlPosition" type="list" default="topLeft" size="10"
+						label="Pan Control Position"
+						description="JMAPS_XML_SVPANCONTROLPOSITION">
+						<option value="topLeft">Top Left</option>
+						<option value="topCenter">Top Center</option>
+						<option value="topRight">Top Right</option>
+						<option value="rightTop">Right Top</option>
+						<option value="rightCenter">Right Center</option>
+						<option value="rightBottom">Right Bottom</option>
+						<option value="bottomRight">Bottom Right</option>
+						<option value="bottomCenter">Bottom Center</option>
+						<option value="bottomLeft">Bottom Left</option>
+						<option value="leftBottom">Left Bottom</option>
+						<option value="leftCenter">Left Center</option>
+						<option value="leftTop">Left Top</option>
+					</field>
+		
+					<field name="JmapSVOverrideContainer" type="list" default="" size="10"
+						label="Override Container"
+						description="JMAPS_XML_SVOVERRIDECONTAINER">
+						<option value="">In Place</option>
+						<option value="#streetview">#streetview</option>
+					</field>
+		
+					<field name="JmapSVScrollWheel" type="list" default='1'
+						label="Zoom Streetview by Mouse Wheel"
+						description="JMAPS_XML_SVWHEELZOOM">
+						<option value='1'>Zoom Using Mouse Wheel</option>
+						<option value='0'>Do Not Zoom Using Mouse Wheel</option>
+					</field>
+		
+					<field name="JmapSVZoomControl" type="list" default="1"
+						label="Map Zoom Control"
+						description="JMAPS_XML_SVZOOMCONTROL">
+						<option value="1">Show Zoom Control</option>
+						<option value="0">Hide Zoom Control</option>
+					</field>
+		
+					<field name="JmapSVZoomControlPosition" type="list" default="topLeft" size="10"
+						label="Zoom Control Position"
+						description="JMAPS_XML_SVZOOMPOSITION">
+						<option value="topLeft">Top Left</option>
+						<option value="topCenter">Top Center</option>
+						<option value="topRight">Top Right</option>
+						<option value="rightTop">Right Top</option>
+						<option value="rightCenter">Right Center</option>
+						<option value="rightBottom">Right Bottom</option>
+						<option value="bottomRight">Bottom Right</option>
+						<option value="bottomCenter">Bottom Center</option>
+						<option value="bottomLeft">Bottom Left</option>
+						<option value="leftBottom">Left Bottom</option>
+						<option value="leftCenter">Left Center</option>
+						<option value="leftTop">Left Top</option>
+					</field>
+		
+					<field name="JmapSVZoomControlStyle" type="list" default='small'
+						label="Zoom Control Size"
+						description="JMAPS_XML_SVZOOMCONTROLSTYLE">
+						<option value='small'>Small Control</option>
+						<option value='large'>Large Control</option>
+						<option value='none'>No Controls</option>
+					</field>
+		
+					<field type="spacer" default="&lt;b&gt;Standard Map Marker Parameters&lt;/b&gt;" />
+					<field name="JmapMarkerColor" type="text" default="#00FF00" size="10"
+						label="Map Marker Color"
+						description="JMAPS_XML_MARKERCOLOR" />
+		
+					<field name="JmapMarkerStroke" type="text" default="#000000" size="10"
+						label="Map Marker Stroke Color"
+						description="JMAPS_XML_MARKERSTROKE" />
+		
+					<field name="JmapMarkerWidth" type="text" default="32" size="5"
+						label="Map Marker Width"
+						description="JMAPS_XML_MARKERWIDTH" />
+		
+					<field name="JmapMarkerHeight" type="text" default="32" size="5"
+						label="Map Marker Height"
+						description="JMAPS_XML_MARKERHEIGHT" />
+		
+					<field name="JmapShowMarkerLabel" type="list" default='1'
+						label="Show Marker Label"
+						description="JMAPS_XML_SHOWMARKERLABEL">
+						<option value='1'>Show Marker Label</option>
+						<option value='0'>Do not Show Marker Label</option>
+					</field>
+		
+					<field name="JmapMarkerLabel" type="text" default="#000000" size="10"
+						label="Map Marker Label Color"
+						description="JMAPS_XML_MARKERLABEL" />
+		
+					<field type="spacer" default="&lt;b&gt;OR Custom Map Marker (No Label!)&lt;/b&gt;" />
+					<field name="JmapCustomMarker" type="folderlist" default=""
+						label="Custom Map Marker"
+						description="JMAPS_XML_CUSTOM_MARKER_DESC"
+						directory="media/markers"
+						filter=""
+						exclude=""
+						stripext="" >	 
+					</field>
+					
+					<field name="JmapMarkerClass" type="text" default="" size="30"
+						label="Map Marker Class"
+						description="JMAPS_XML_MARKERCLASS" />
+		
+					<field type="spacer" default="&lt;b&gt;Featured Map Marker Parameters&lt;/b&gt;" />
+					<field name="JmapFeaturedMarkerColor" type="text" default="#00FF00" size="10"
+						label="Featured Map Marker Color"
+						description="JMAPS_XML_FEATUREDMARKERCOLOR" />
+		
+					<field name="JmapFeaturedMarkerStroke" type="text" default="#000000" size="10"
+						label="Featured Map Marker Stroke Color"
+						description="JMAPS_XML_FEATUREDMARKERSTROKE" />
+		
+					<field name="JmapFeaturedMarkerLabel" type="text" default="#000000" size="10"
+						label="Featured Map Marker Label Color"
+						description="JMAPS_XML_FEATUREDMARKERLABEL" />
+		
+					<field name="JmapShowStar" type="radio" default="0"
+						label="Show Star on Featured"
+						description="JMAPS_XML_SHOWSTAR">
+						<option value="1">Show Star on featured markers</option>
+						<option value="0">Hide Star on featured markers</option>
+					</field>
+		
+					<field name="JmapStarStroke" type="text" default="#E2B61D" size="10"
+						label="Star Stroke Color"
+						description="JMAPS_XML_STARSTROKE" />
+		
+					<field name="JmapStarColor" type="text" default="#E2B61D" size="10"
+						label="Star Primary Color"
+						description="JMAPS_XML_STARCOLOR" />
+		
+					<field type="spacer" default="&lt;b&gt;OR Custom Featured Map Marker (No Label!)&lt;/b&gt;" />
+					<field name="JmapCustomFeaturedMarker" type="folderlist" default=""
+						label="Custom Featured Map Marker"
+						description="JMAPS_XML_CUSTOM_FEATURED_MARKER_DESC"
+						directory="media/markers"
+						filter=""
+						exclude=""
+						stripext="" >	 
+					</field>
+					
+					<field name="JmapMarkerPointAnimation'" type="list" default='null'
+						label="Marker Animation"
+						description="JMAPS_XML_MARKERANIMATION">
+						<option value='bounce'>Bounce</option>
+						<option value='drop'>Drop</option>
+					</field>
+		
+					<field name="JmapMarkerPointOpenHTMLEvent'" type="list" default='click'
+						label="Marker Open HTML event"
+						description="JMAPS_XML_OPENHTMLEVENT">
+						<option value='click'>Click</option>
+						<option value='dblclick'>Double Click</option>
+						<option value='rightclick'>Right Click</option>
+						<option value='mouseover'>Mouse Over</option>
+					</field>
+		
+					<field name="JmapMarkerDisableAutoPan'" type="list" default='0'
+						label="Disable Auto-Pan Info Window"
+						description="JMAPS_XML_INFOWINDOWAUTOPAN">
+						<option value='1'>Disable Auto-Pan</option>
+						<option value='0'>Auto-Pan on Open</option>
+					</field>
+		
+					<field name="JmapMarkerMaxWidth" type="text" default="" size="10"
+						label="Info Window Max Width"
+						description="JMAPS_XML_INFOWINDOWMAX" />
+		
+					<field type="spacer" default="&lt;b&gt;Marker Clusterer Parameters&lt;/b&gt;" />
+					<field name="JmapMarkerClusterer" type="list" default="0"
+						label="Add a Marker Clusterer"
+						description="JMAPS_XML_MARKER_CLUSTERER">
+						<option value="1">Add a Marker Clusterer</option>
+						<option value="0">No Marker Clusterer</option>
+					</field>
+		
+					<field name="'JmapClustererGridSize" type="text" default="60" size="10"
+						label="Cluster Grid Size"
+						description="JMAPS_XML_CLUSTERERGRIDSIZE" />
+		
+					<field name="JmapClustererMinimumClusterSize" type="text" default="2" size="10"
+						label="Minimum Cluster Size"
+						description="JMAPS_XML_CLUSTERERMINSIZE" />
+		
+					<field name="JmapClustererZoomOnClick" type="list" default='1'
+						label="Zoom Cluster on Click"
+						description="JMAPS_XML_CLUSTERERZOOM">
+						<option value='1'>Zoom Cluster On Click</option>
+						<option value='0'>Do Not Zoom On Click</option>
+					</field>
+		
+					<field name="JmapClustererStyle" type="list" default='default'
+						label="Cluster Icon Style"
+						description="JMAPS_XML_CLUSTERERSTYLE">
+						<option value='default'>Use Default Cluster Icons</option>
+						<option value='0'>Use People Cluster Icons</option>
+						<option value='1'>Use Conversation Cluster Icons</option>
+						<option value='2'>Use Heart Cluster Icons</option>
+					</field>
+
+					<field name="JmapSource" type="list" default='other'
+						label="Source of marker XML"
+						description="JMAPS_XML_SOURCE">
+						<option value='cb'>Community Builder Jmap plug-in</option>
+						<option value='SOBI2cat'>SOBI2 Category plug-in</option>
+						<option value='SOBI2ajax'>SOBI2 AJAX Search plug-in</option>
+						<option value='SOBIproCat'>SOBI Pro Category field</option>
+						<option value='SOBIproSearch'>SOBI Pro Search field</option>
+						<option value='other'>User supplied input XML (see below)</option>
+					</field>
+		
+					<field name="JmapCBlist" type="text" default="2" size="10"
+						label="CB List Number (if Community Builder specified above)"
+						description="JMAPS_XML_CBLIST" />
+		
+					<field name="JmapCBAll" type="list" default='1'
+						label="Show CB Users Listed or All"
+						description="JMAPS_XML_CBAll">
+						<option value='1'>All Entries for the CB Userlist</option>
+						<option value='0'>User List Entires Shown on Each Page</option>
+					</field>
+		
+					<field name="JmapSOBIcat" type="text" default="0" size="10"
+						label="Category (if SOBI Category specified above)"
+						description="JMAPS_XML_SOBICAT" />
+		
+					<field name="JmapSOBIcatAll" type="list" default='1'
+						label="Show Categories Listed or All"
+						description="JMAPS_XML_SOBICATALL">
+						<option value='1'>All Entries for the Category</option>
+						<option value='0'>Category Entires listed on Each Page</option>
+					</field>
+					
+					<field name="JmapCatState" type="text" default="" size="15"
+						label="State or Province"
+						description="JMAPS_XML_CATSTATE" />
+		
+					<field name="JmapSOBIcatMarkerColors" type="textarea" cols="50" rows="5" default=""
+						label="Markers by SOBI Category (if SOBI plug-in or field is used)"
+						description="JMAPS_XML_SOBICATMARKERCOLORS" />
+		
+					<field name="JmapCategoryPriority" type="list" default="0"
+						label="Category Priority"
+						description="JMAPS_XML_CATEGORYPRIORITY">
+						<option value="1">Use category ID to set map marker z-index</option>
+						<option value="0">Use normal Google settings</option>
+					</field>
+		
+					<field name="JmapExcludeTasks" type="textarea" default="sobi2Details, addNew, editSobi" cols="50" rows="5"
+						label="Tasks to Exclude"
+						description="JMAPS_XML_EXCLUDETASKS" />
+						
+					<field name="JmapSOBIdetailsBox" type="list" default='1'
+						label="Show SOBI Details in Shadowbox"
+						description="JMAPS_XML_SOBIDETAILSBOX">
+						<option value='1'>Details in Shadowbox</option>
+						<option value='0'>Details Separate Page</option>
+					</field>
+		
+					<field name="JmapSOBIdetailsBoxTmpl" type="list" default='1'
+						label="Shadowbox Template Only"
+						description="JMAPS_XML_SOBIDETAILSBOXTMPL">
+						<option value='1'>Shadowbox Details Template Only</option>
+						<option value='0'>Shadowbox Details Full Site</option>
+					</field>
+		
+					<field name="JmapSOBIdetailsBoxTmplSEF" type="list" default='1'
+						label="Is SEF inuse on the site?"
+						description="JMAPS_XML_SOBIDETAILSBOXTMPLSEF">
+						<option value='1'>SEF is in use</option>
+						<option value='0'>SEF is NOT in use</option>
+					</field>
+		
+					<field name="JmapShadowBoxWidthPCT" type="text" default="95" size="5"
+						label="Shadowbox Width PCT"
+						description="JMAPS_XML_SHADOWBOXWIDTHPCT" />
+		
+					<field name="JmapShadowBoxWidthPX" type="text" default="0" size="5"
+						label="Shadowbox Width PX"
+						description="JMAPS_XML_SHADOWBOXWIDTHPX" />
+		
+					<field name="JmapShadowBoxHeightPCT" type="text" default="95" size="5"
+						label="Shadowbox Height PCT"
+						description="JMAPS_XML_SHADOWBOXHEIGHTPCT" />
+		
+					<field name="JmapShadowBoxHeightPX" type="text" default="0" size="5"
+						label="Shadowbox Height PX"
+						description="JMAPS_XML_SHADOWBOXHEIGHTPX" />
+		
+					<field name="JmapOther" type="text" default="Jmap.xml" size="40"
+						label="XML input file name (if User supplied above)"
+						description="JMAPS_XML_OTHER" />
+		
+					<field name="JmapFeed" type="text" default="none" size="40"
+						label="RSS or KML feed file."
+						description="JMAPS_XML_FEED" />
+						
+					<field name="JmapSOBIoneLiner" type="list" default='0'
+						label="Is SOBI OneLiner in use on the site?"
+						description="JMAPS_XML_SOBIONELINER">
+						<option value='1'>OneLiner is in use</option>
+						<option value='0'>OneLiner is NOT in use</option>
+					</field>
+				</fieldset>
+			</fields>
+		</config>
+		
+	</install>

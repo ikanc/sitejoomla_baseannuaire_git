@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SobiProApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://xml.sigsiu.net/SobiPro/application.xsd">
+  <name>Notifications</name>
+  <id>notifications</id>
+  <authorName>Sigsiu.NET GmbH</authorName>
+  <authorEmail>sobi@sigsiu.net</authorEmail>
+  <authorUrl>http://www.Sigsiu.NET</authorUrl>
+  <copyright>Copyright (C) 2009-2012 Sigsiu.NET GmbH</copyright>
+  <license>GNU General Public License v3</license>
+  <creationDate>2012-07-02</creationDate>
+  <type>application</type>
+  <version>1.0.1</version>
+  <description>Message manager for notification emails</description>
+  <sql>install.sql</sql>
+  <exec>install.php</exec>
+  <language folder="Languages">
+    <file lang="bg_BG">bg-BG.SpApp.notifications.ini</file>
+    <file lang="da_DK">da-DK.SpApp.notifications.ini</file>
+    <file lang="de_DE">de-DE.SpApp.notifications.ini</file>
+    <file lang="el_GR">el-GR.SpApp.notifications.ini</file>
+    <file lang="en_GB">en-GB.SpApp.notifications.ini</file>
+    <file lang="es_ES">es-ES.SpApp.notifications.ini</file>
+    <file lang="fi_FI">fi-FI.SpApp.notifications.ini</file>
+    <file lang="fr_FR">fr-FR.SpApp.notifications.ini</file>
+    <file lang="hr_HR">hr-HR.SpApp.notifications.ini</file>
+    <file lang="nl_NL">nl-NL.SpApp.notifications.ini</file>
+    <file lang="pl_PL">pl-PL.SpApp.notifications.ini</file>
+    <file lang="ru_RU">ru-RU.SpApp.notifications.ini</file>
+    <file lang="sv_SE">sv-SE.SpApp.notifications.ini</file>
+    <file lang="tr_TR">tr-TR.SpApp.notifications.ini</file>
+    <file lang="zh_CN">zh-CN.SpApp.notifications.ini</file>
+  </language>
+  <files path="home:.">
+    <file>init.php</file>
+    <file>helper.php</file>
+    <file>changelog.txt</file>
+  </files>
+  <files path="ctrl:adm">
+    <file>Ctrl/notifications.php</file>
+  </files>
+  <files path="config:">
+    <file>Cfg/notifications.ini</file>
+  </files>
+  <files path="adm:config">
+    <folder>Adm/</folder>
+  </files>
+  <actions>
+    <action>*</action>
+    <action>adm.*</action>
+    <action>adm_menu</action>
+  </actions>
+  <requirements>
+    <core version="1.0.7"/>
+  </requirements>
+  <installLog>
+    <actions>
+      <action>*</action>
+      <action>adm.*</action>
+      <action>adm_menu</action>
+    </actions>
+    <modified/>
+    <files>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/opt/plugins/notifications/</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/opt/plugins/notifications/init.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/opt/plugins/notifications/helper.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/opt/plugins/notifications/changelog.txt</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/lib/ctrl/adm/notifications.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/etc/notifications.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/config/message.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/config/message.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/config/messages.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/config/messages.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/config/notification.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/config/notification.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/config/notifications.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/config/notifications.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/language/en-GB/en-GB.SpApp.notifications.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/language/fr-FR/fr-FR.SpApp.notifications.ini</file>
+    </files>
+    <sql>
+      <tables>
+        <table>spdb_notifications</table>
+      </tables>
+    </sql>
+  </installLog>
+</SobiProApp>

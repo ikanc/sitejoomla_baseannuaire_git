@@ -1,0 +1,36 @@
+<!--
+; @version: $Id: description_en-GB.html 1184 2011-04-14 18:02:23Z Sigrid Suski $
+; @package: Disqus Application for SobiPro Component
+; ===================================================
+; @author
+; Name: Sigrid Suski & Radek Suski, Sigsiu.NET GmbH
+; Email: sobi[at]sigsiu.net
+; Url: http://www.Sigsiu.NET
+; ===================================================
+; @copyright Copyright (C) 2006 - 2011 Sigsiu.NET GmbH (http://www.sigsiu.net). All rights reserved.
+; @license see http://www.gnu.org/licenses/gpl.html GNU/GPL Version 3.
+; You can use, redistribute this file and/or modify it under the terms of the GNU General Public License version 3
+; ===================================================
+; $Date: 2011-04-14 20:02:23 +0200 (Do, 14 Apr 2011) $
+; $Revision: 1184 $
+; $Author: Sigrid Suski
+-->
+
+<div style="margin: 20px; font-size: 14px;">
+	<hr>
+	<p><b>Categories Restriction Addon</b> allows to apply a restriction ("sid_list" url param) to the search results list.
+	It uses a "sid_list" url parameter to enforce a list of categories IDs. Example:</br>
+	http://demo.prieco.com/index.php?option=com_sobipro&amp;task=search.results&amp;sid=1&amp;<b>sid_list=2,4</b></p>	
+	<p></p>
+	<p><b>Restriction Mode</b>: an entry has a main category, a list of related categories, and all parent categories in the tree. This setting allows to customize the restriction.</p>	
+	<dl style="padding:16px;">
+		<dt><i>Direct category only</i></dt>
+		<dd>Entries whose main category is in the categories list</dd>
+		<dt><i>All assigned categories</i></dt>
+		<dd>Entries whose any of their categories are in the categories list.</dd>
+		<dt><i>All N-Parents categories</i></dt>
+		<dd>Entries whose any of their parent categories are in the categories list (It requires <a target="_blank" href="http://www.prieco.com/en/extensions/sobipro/sobipro-search-plugin-plus.html">Search Plugin+ (Plus)</a> to pre-compute the search tree).</dd>
+	</dl>
+	<p><b>Only allowed categories</b>: When there's no category list, results list is empty (results must match a sid_list).</p>
+	<p><b>Forced Category List</b>: A list of categories to be enforced, even when the sid_list is not present.  Please, note in this list are included all categories beyond the current section (there's no easy eay to filter the categories in the backend). So, select only categories from the current section.</p>	
+</div>

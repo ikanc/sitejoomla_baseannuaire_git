@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extensionslist>
+  <created>1355432041</created>
+  <createdby>
+    <id>728</id>
+    <name>Super User</name>
+  </createdby>
+  <repositories>
+    <sobipro_core>https://repository.sobi-pro.eu/repository.php</sobipro_core>
+  </repositories>
+  <extensions>
+    <disqus>
+      <name>Disqus Integration</name>
+      <type>application</type>
+      <version>0.9.1</version>
+      <description>This application integrates the Disqus service into SobiPro and allows adding comments to SobiPro entries.</description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/download/applications/96-Disqus-Integration</description_url>
+      <license>GNU GPL v3</license>
+      <availability>SobiPro Club Members</availability>
+      <availability_expl>This application is available for SobiPro Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </disqus>
+    <im_ex>
+      <name>Import/Export</name>
+      <type>application</type>
+      <version>0.6</version>
+      <description>With the SobiPro Import/Export Application it is possible to import entries to a SobiPro section from a CSV File and to export entries from a SobiPro section to a CSV or XML file.</description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/download/applications/300-ImportExport</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Silver SobiPro Club subscription</availability>
+      <availability_expl>This application is available for SobiPro Silver and Gold Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </im_ex>
+    <jcomments>
+      <name>jComments Integration</name>
+      <type>application</type>
+      <version>1.0</version>
+      <description>This application integrates JComments component into SobiPro and allows adding comments to SobiPro entries.</description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/download/applications/97-JComments-Integration</description_url>
+      <license>GNU GPL v3</license>
+      <availability>SobiPro Club Members</availability>
+      <availability_expl>This application is available for SobiPro Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </jcomments>
+    <jupgrade>
+      <name>jUpgrade Adapter</name>
+      <type>application</type>
+      <version>0.5.0</version>
+      <description>Adapter for jUpgrade component to allow to migrate your SobiPro data from Joomla! 1.5 to Joomla! 2.5.</description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/download/applications/302-jUpgrade-Adapter</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </jupgrade>
+    <mod_sobipro_entries>
+      <name>SobiPro Entries Module</name>
+      <type>application</type>
+      <version>1.0</version>
+      <description>Use this module to show entries of a SobiPro section. The sorting order for the entries can be set to different values, so you can use the module as a Most Popular Entries Module, Latest Entries Module, Last Updated Module, Module for Entries Expiring soon.&#13;
+Additionally the sorting order can be set to every text field (input box) of your directory, so you can use the module as a Sort Entries by Field Module.&#13;
+</description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/download/modules/162-Entries-Module</description_url>
+      <license>GNU GPL v3</license>
+      <availability>SobiPro Club Members</availability>
+      <availability_expl>This application is available for SobiPro Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </mod_sobipro_entries>
+    <mod_sobipro_geomap>
+      <name>SP-GeoMap Module</name>
+      <type>application</type>
+      <version>0.5.1</version>
+      <description>The SobiPro GeoMap Module allows you to show entries in a Joomla! module position from a specific SobiPro section on a Google Map.</description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/download/modules/275-SP-GeoMap-Module</description_url>
+      <license>GNU GPL v3</license>
+      <availability>SobiPro Club Members</availability>
+      <availability_expl>This application is available for SobiPro Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </mod_sobipro_geomap>
+    <notifications>
+      <name>Notifications</name>
+      <type>application</type>
+      <version>1.0.1</version>
+      <description>The Notifications application for SobiPro is the central email messenger for all emails send by SobiPro or a SobiPro app.&#13;
+It sends emails to users/authors and/or administrators on events like add, edit, publish, approve and payment. It also sends the emails for the Review &amp; Rating App or the Contact Form Field (for Contact, Report or Claim Listings) if they are installed.&#13;
+The Notifications app let you manage all those sent emails. You can edit and resend them e.g. for payment reminder. </description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/download/applications/56-Notifications</description_url>
+      <license>GNU GPL v3</license>
+      <availability>SobiPro Club Members</availability>
+      <availability_expl>This application is available for SobiPro Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </notifications>
+    <review_rating>
+      <name>Review and Rating</name>
+      <type>application</type>
+      <version>0.6</version>
+      <description>The SobiPro Review and Rating Application allows you to extend your SobiPro directory to a fully featured Review site. It will allow you to set up Ratings for several different Criteria, as well as allow Visitors to list Likes and Dislikes along with the Review.</description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/download/applications/184-Review-and-Rating</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Silver SobiPro Club subscription</availability>
+      <availability_expl>This application is available for Silver and Gold SobiPro Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </review_rating>
+    <router>
+      <name>Router</name>
+      <type>application</type>
+      <version>1.0</version>
+      <description>The SobiPro Router creates search engine friendly URLs for SobiPro to be used with Joomla! core SEF function.</description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/download/applications/128-Router</description_url>
+      <license>GNU GPL v3</license>
+      <availability>SobiPro Club Members</availability>
+      <availability_expl>This application is available for SobiPro Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </router>
+    <aggregation_field>
+      <name>Aggregation Field</name>
+      <type>field</type>
+      <version>1.0</version>
+      <description>The SobiPro Aggregation Field allows Users to add tags to an entry that will create a hyper-linked keyword in the front-end output that site visitors can click to view all related entries that have been tagged with the same keyword.</description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/download/fields/154-Aggregation-Field</description_url>
+      <license>GNU GPL v3</license>
+      <availability>SobiPro Club Members</availability>
+      <availability_expl>This application is available for SobiPro Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </aggregation_field>
+    <calendar_field>
+      <name>Calendar Field</name>
+      <type>field</type>
+      <version>0.9.2</version>
+      <description>The SobiPro Calendar Field lets you create a date field that features a popup calendar in the Entry Form that lets users easily select a date. In addition, there are sliders that allow you to choose a specific time as well.&#13;
+It is possible to make the calendar field become the Setting to Specify Entry Start Publishing Date or Specify Entry Stop Publishing Date.</description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/download/fields/218-Calendar-Field</description_url>
+      <license>GNU GPL v3</license>
+      <availability>SobiPro Club Members</availability>
+      <availability_expl>This application is available for SobiPro Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </calendar_field>
+    <contact_field>
+      <name>Contact Form Field</name>
+      <type>field</type>
+      <version>0.5</version>
+      <description>The Contact Form Field is an application which adds any kind of contact form to an entry.&#13;
+With this field you can add e.g. a 'Contact Author', 'Claim Listing', 'Report Listing' or any other form to send an email, to the details view of the entries in your SobiPro directory.</description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/download/fields/333-Contact-Form-Field</description_url>
+      <license>GNU GPL v3</license>
+      <availability>SobiPro Club Members</availability>
+      <availability_expl>This application is available for SobiPro Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </contact_field>
+    <download_field>
+      <name>Download Field</name>
+      <type>field</type>
+      <version>0.9.4</version>
+      <description>The Download Field extends the types of possible custom fields with a field type for downloads. With this field type you can upload (add entry) and download (details view) files for an entry.</description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/download/fields/114-Download-Field</description_url>
+      <license>GNU GPL v3</license>
+      <availability>SobiPro Club Members</availability>
+      <availability_expl>This application is available for SobiPro Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </download_field>
+    <geomap_field>
+      <name>SP-GeoMap Field</name>
+      <type>field</type>
+      <version>1.0</version>
+      <description>The Geo Map Field extends the types of possible custom fields with a field type for showing the location of an entry on a Google Map.&#13;
+The Add/Edit Entry form will be expanded by a map and the possibility to enter geographical coordinates. The details view or vcard of en entry will get a map with a marker for this entry. &#13;
+Following languages are available for this app and included in the package: English, German, Polish, Swedish</description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/download/fields/129-SP-GeoMap-Field</description_url>
+      <license>GNU GPL v3</license>
+      <availability>SobiPro Club Members</availability>
+      <availability_expl>This application is available for SobiPro Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </geomap_field>
+    <profile_field>
+      <name>Profile Field</name>
+      <type>field</type>
+      <version>0.7</version>
+      <description>The SobiPro Profile Field has been created to allow Users to register on your Joomla! powered website during the process of adding an Entry to your SobiPro directory, or allow you to create a directory Section where User Profiles can be displayed with all the related entries of that Author from any or all of the SobiPro Sections on your site. The Profile Field also let you show a link and selected data within Entries that links back to the Author profile.</description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/download/fields/244-Profile-Field</description_url>
+      <license>GNU GPL v3</license>
+      <availability>SobiPro Club Members</availability>
+      <availability_expl>This application is available for SobiPro Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </profile_field>
+    <qrcode_field>
+      <name>QR-Code Field</name>
+      <type>field</type>
+      <version>0.5</version>
+      <description>The SobiPro QR-Code Field shows a QR Code within a SobiPro entry.</description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/download/fields/221-QR-Code-Field</description_url>
+      <license>GNU GPL v3</license>
+      <availability>SobiPro Club Members</availability>
+      <availability_expl>This application is available for SobiPro Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </qrcode_field>
+    <rc5upd>
+      <name>SobiPro 1.0 Update from RC4 to RC5</name>
+      <type>update</type>
+      <version>1.0.0.1805</version>
+      <description>Update package for SobiPro 1.0 RC4 to 1.0 RC5</description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/download/sobipro/53-SobiPro-Update-10-RC3-to-RC5</description_url>
+      <license>GNU GPL v3</license>
+      <availability>SobiPro Club Members</availability>
+      <availability_expl>This application is available for SobiPro Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </rc5upd>
+    <stable108upd>
+      <name>SobiPro 1.0 Update from 1.0 stable to 1.0.8 stable</name>
+      <type>update</type>
+      <version>1.0.8.2626</version>
+      <description>SobiPro 1.0 Update from 1.0/1.0.1/1.0.2/1.0.3/1.0.4/1.0.5/1.0.6/1.0.7 stable to 1.0.8 stable</description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/download/sobipro/266-SobiPro-Update-10-to-108</description_url>
+      <license>GNU GPL v3</license>
+      <availability>SobiPro Club Members</availability>
+      <availability_expl>This application is available for SobiPro Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </stable108upd>
+    <stableupd>
+      <name>SobiPro 1.0 Update from RC5 to stable</name>
+      <type>update</type>
+      <version>1.0.0.1912</version>
+      <description>Update package for SobiPro 1.0 RC5 to 1.0 stable.</description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/download/sobipro/238-SobiPro-Update-10-RC5-to-stable</description_url>
+      <license>GNU GPL v3</license>
+      <availability>SobiPro Club Members</availability>
+      <availability_expl>This application is available for SobiPro Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </stableupd>
+    <sobimmo>
+      <name>SobImmo - Real Estate Template</name>
+      <type>template</type>
+      <version>1.0</version>
+      <description>SobImmo is a SobiPro template which allows you easily create a professional Real Estate directory. It should give an idea what can be made with SobiPro. Feel free to adapt it to your needs.&#13;
+&#13;
+The Installation Package creates a section Real Estate, three categories 'Apartment', 'Home' and 'Office' and all necessary fields and template files.&#13;
+You can just start with adding entries.&#13;
+</description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/documentation/applications/277-SobImmo-Installation-Guide</description_url>
+      <license>Sigsiu.NET Template License V1</license>
+      <availability>SobiPro Club Members</availability>
+      <availability_expl>This application is available for SobiPro Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </sobimmo>
+    <sobirestara>
+      <name>SobiRestara - Restaurants Guide Template</name>
+      <type>template</type>
+      <version>1.1</version>
+      <description>SobiRestara is a SobiPro Template designed to be used as a Restaurants Guide. It should give an idea what can be made with SobiPro.&lt;br /&gt;&#13;
+&lt;br /&gt;&#13;
+The Installation Package creates the section Restaurant Guide and all necessary Fields and Template files. You can just start with adding categories and entries.&#13;
+&lt;br /&gt;&#13;
+&lt;br /&gt;&#13;
+Do not install the Template Package if you already have it installed. Updating a template package is not possible!</description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/documentation/applications/157-SobiRestara-Installation-Guide</description_url>
+      <license>Sigsiu.NET Template License V1</license>
+      <availability>SobiPro Club Members</availability>
+      <availability_expl>This application is available for SobiPro Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </sobirestara>
+    <sobisort>
+      <name>SobiSort - Sortable Table Template</name>
+      <type>template</type>
+      <version>1.0</version>
+      <description>SobiSort is a SobiPro template which allows you to easily create a products directory which lists the items in a sortable table. It should give an idea what can be made with SobiPro. Feel free to adapt it to your needs.&lt;br /&gt;&#13;
+&lt;br /&gt;&#13;
+The Installation Package creates a section Cell Phones, two categories Smartphones and Tablets and all necessary fields and template files.&lt;br /&gt;&#13;
+You can just start with adding entries. </description>
+      <author>Sigsiu.NET GmbH</author>
+      <description_url>http://sobipro.sigsiu.net/download/templates/341-SobiSort</description_url>
+      <license>Sigsiu.NET Template License V1</license>
+      <availability>SobiPro Club Members</availability>
+      <availability_expl>This application is available for SobiPro Club members only!</availability_expl>
+      <availability_link>http://sobipro.sigsiu.net/subscriptions</availability_link>
+      <repository>sobipro_core</repository>
+    </sobisort>
+    <bg_bg>
+      <name>Bulgarian Language</name>
+      <type>language</type>
+      <version>1.0</version>
+      <description>Bulgarian (bg-BG) Language Package for SobiPro.&#13;
+Join the Bulgarian Translation Team at https://www.transifex.net/projects/p/SobiPro/language/bg_BG/.</description>
+      <author>Bulgarian Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/256-Bulgarian-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </bg_bg>
+    <cs_cz>
+      <name>Czech Language</name>
+      <type>language</type>
+      <version>1.0</version>
+      <description>Czech (cs-CZ) Language Package for SobiPro.</description>
+      <author>Czech Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/336-Czech-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </cs_cz>
+    <da_dk>
+      <name>Danish Language</name>
+      <type>language</type>
+      <version>1.1</version>
+      <description>Danish Language Package for SobiPro (da-DK). &#13;
+Join the Danish Translation Team at https://www.transifex.net/projects/p/SobiPro/language/da_DK/.</description>
+      <author>Danish Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/311-Danish-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </da_dk>
+    <de_de>
+      <name>German Language</name>
+      <type>language</type>
+      <version>1.4</version>
+      <description>German (de-DE) Language Package for SobiPro.</description>
+      <author>German Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/94-German-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </de_de>
+    <el_gr>
+      <name>Greek Language</name>
+      <type>language</type>
+      <version>1.2</version>
+      <description>Greek (el-GR) Language Package for SobiPro.&#13;
+Join the Greek Translation Team at https://www.transifex.net/projects/p/SobiPro/language/el_GR/.</description>
+      <author>Greek Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/98-Greek-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </el_gr>
+    <es_es>
+      <name>Spanish Language</name>
+      <type>language</type>
+      <version>1.5</version>
+      <description>Spanish (es-ES) Language Package for SobiPro. &#13;
+Join the Spanish Translation Team at https://www.transifex.net/projects/p/SobiPro/language/es_ES/.&#13;
+</description>
+      <author>Spanish Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/87-Spanish-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </es_es>
+    <fa_ir>
+      <name>Persian/Farsi Language</name>
+      <type>language</type>
+      <version>1.0</version>
+      <description>Persian/Farsi Language Package for SobiPro (fa-IR).&#13;
+Join the Persian Translation Team at https://www.transifex.net/projects/p/SobiPro/language/fa_IR/.</description>
+      <author>Persian Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/237-PersianFarsi-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </fa_ir>
+    <fi_fi>
+      <name>Finnish Language</name>
+      <type>language</type>
+      <version>1.2</version>
+      <description>Finnish (fi-FI) Language Package for SobiPro.&#13;
+Join the Finnish Translation Team at https://www.transifex.net/projects/p/SobiPro/language/fi_FI/.</description>
+      <author>Finnish Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/126-Finnish-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </fi_fi>
+    <fr_fr>
+      <name>French Language</name>
+      <type>language</type>
+      <version>1.3</version>
+      <description>French (fr-FR) Language Package for SobiPro.&#13;
+Join the French Translation Team at https://www.transifex.net/projects/p/SobiPro/language/fr_FR/.</description>
+      <author>French Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/92-French-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </fr_fr>
+    <hr_hr>
+      <name>Croatian Language</name>
+      <type>language</type>
+      <version>1.6</version>
+      <description>Croatian (hr-HR) Language Package for SobiPro. &#13;
+Join the Croatian Translation Team at https://www.transifex.net/projects/p/SobiPro/language/hr_HR/.</description>
+      <author>Croatian Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/88-Croatian-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </hr_hr>
+    <hu_hu>
+      <name>Hungarian Language</name>
+      <type>language</type>
+      <version>1.0</version>
+      <description>Hungarian (hu-HU) Language Package for SobiPro.</description>
+      <author>Hungarian Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/335-Hungarian-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </hu_hu>
+    <id_id>
+      <name>Bahasia Indonesia Language</name>
+      <type>language</type>
+      <version>1.0</version>
+      <description>Bahasia Indonesia (id-ID) Language Package for SobiPro.&#13;
+Join the Indonesian Translation Team at https://www.transifex.net/projects/p/SobiPro/language/id_ID/.</description>
+      <author>Indonesian Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/219-Bahasia-Indonesia-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </id_id>
+    <it_it>
+      <name>Italian Language</name>
+      <type>language</type>
+      <version>1.1</version>
+      <description>Italian (it-IT) Language Package for SobiPro.&#13;
+Join the Italian Translation Team at https://www.transifex.net/projects/p/SobiPro/language/it_IT/.</description>
+      <author>Italian Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/201-Italian-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </it_it>
+    <ja_jp>
+      <name>Japanese Language</name>
+      <type>language</type>
+      <version>1.0</version>
+      <description>Japanese (ja-JP) Language Package for SobiPro.</description>
+      <author>Japanese Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/339-Japanese-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </ja_jp>
+    <nb_no>
+      <name>Norwegian Language</name>
+      <type>language</type>
+      <version>1.0</version>
+      <description>Norwegian Bokmål (nb-NO) Language Package for SobiPro.&#13;
+Join the Norwegian Translation Team at https://www.transifex.net/projects/p/SobiPro/language/nb_NO/.</description>
+      <author>Norwegian Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/127-Norwegian-Bokmal-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </nb_no>
+    <nl_nl>
+      <name>Dutch Language</name>
+      <type>language</type>
+      <version>1.2</version>
+      <description>Dutch (nl-NL) Language Package for SobiPro.&#13;
+Join the Dutch Translation Team at https://www.transifex.net/projects/p/SobiPro/language/nl_NL/.</description>
+      <author>Dutch Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/257-Dutch-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </nl_nl>
+    <pl_pl>
+      <name>Polish Language</name>
+      <type>language</type>
+      <version>1.5</version>
+      <description>Polish (pl-PL) Language Package for SobiPro.&#13;
+Join the Polish Translation Team at https://www.transifex.net/projects/p/SobiPro/language/pl_PL/.</description>
+      <author>Polish Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/101-Polish-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </pl_pl>
+    <pt_br>
+      <name>Brazilian Portuguese Language</name>
+      <type>language</type>
+      <version>1.1</version>
+      <description>Português (Brasileiro)(pt-BR) Language Package for SobiPro.&#13;
+Join the Brazilian Portuguese Translation Team at https://www.transifex.net/projects/p/SobiPro/language/pt_BR/.</description>
+      <author>Brazilian Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/224-Brazilian-Portuguese-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </pt_br>
+    <pt_pt>
+      <name>Portuguese Language</name>
+      <type>language</type>
+      <version>1.0</version>
+      <description>Portuguese (pt-PT) Language Package for SobiPro.</description>
+      <author>Portuguese Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/315-Portuguese-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </pt_pt>
+    <ro_ro>
+      <name>Romanian Language</name>
+      <type>language</type>
+      <version>1.1</version>
+      <description>Romanian (ro-RO) Language Package for SobiPro.&#13;
+Join the Romanian Translation Team at https://www.transifex.net/projects/p/SobiPro/language/ro_RO/.</description>
+      <author>Romanian Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/200-Romanian-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </ro_ro>
+    <ru_ru>
+      <name>Russian Language</name>
+      <type>language</type>
+      <version>1.8</version>
+      <description>Russian (ru-RU) Language Package for SobiPro.&#13;
+Join the Russian Translation Team at https://www.transifex.net/projects/p/SobiPro/language/ru_RU/.</description>
+      <author>Russian Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/93-Russian-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </ru_ru>
+    <sk_sk>
+      <name>Slovak Language</name>
+      <type>language</type>
+      <version>1.0</version>
+      <description>Slovak Language Package for SobiPro (sk-SK).&#13;
+Join the Slovak Translation Team at https://www.transifex.net/projects/p/SobiPro/language/sk_SK/.</description>
+      <author>Slovak Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/164-Slovak-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </sk_sk>
+    <sv_se>
+      <name>Swedish Language</name>
+      <type>language</type>
+      <version>1.6</version>
+      <description>Swedish (sv-SE) Language Package for SobiPro.&#13;
+Join the Swedish Translation Team at https://www.transifex.net/projects/p/SobiPro/language/sv_SE/.</description>
+      <author>Swedish Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/86-Swedish-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </sv_se>
+    <tr_tr>
+      <name>Turkish Language</name>
+      <type>language</type>
+      <version>1.0</version>
+      <description>Turkish (tr-TR) Language Package for SobiPro.</description>
+      <author>Turkish Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/314-Turkish-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </tr_tr>
+    <uk_ua>
+      <name>Ukrainian Language</name>
+      <type>language</type>
+      <version>1.0</version>
+      <description>Ukrainian (uk-UA) Language Package for SobiPro.</description>
+      <author>Ukrainian Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/337-Ukrainian-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </uk_ua>
+    <vi_vn>
+      <name>Vietnamese Language</name>
+      <type>language</type>
+      <version>1.0</version>
+      <description>Vietnamese (vi-VN) Language Package for SobiPro.</description>
+      <author>Vietnamese Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/338-Vietnamese-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </vi_vn>
+    <zh_cn>
+      <name>Simplified Chinese Language</name>
+      <type>language</type>
+      <version>1.2</version>
+      <description>Simplified Chinese (zh-CN) Language Package for SobiPro.&#13;
+Join the Chinese Translation Team at https://www.transifex.net/projects/p/SobiPro/language/zh_CN/.</description>
+      <author>Chinese Translation Team</author>
+      <description_url>http://sobipro.sigsiu.net/download/languages/203-Simplified-Chinese-Language</description_url>
+      <license>GNU GPL v3</license>
+      <availability>Free</availability>
+      <availability_expl></availability_expl>
+      <availability_link></availability_link>
+      <repository>sobipro_core</repository>
+    </zh_cn>
+  </extensions>
+</extensionslist>

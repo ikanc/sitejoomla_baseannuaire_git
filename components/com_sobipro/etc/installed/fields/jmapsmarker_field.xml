@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SobiProApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://xml.websolutionware.com/SobiPro/application.xsd">
+  <name>Jmaps Marker Field</name>
+  <id>jmapsmarker_field</id>
+  <authorName>websolutionware.com</authorName>
+  <authorEmail>cindy@websolutionware.com</authorEmail>
+  <authorUrl>http://www.websolutionware.com/</authorUrl>
+  <copyright>Copyright (C) 2009-2012 websolutionware.com</copyright>
+  <license>GNU General Public License v3</license>
+  <creationDate>2012-06-09</creationDate>
+  <fieldType typeId="jmapsmarker" fieldGroup="special">Jmaps Marker Field</fieldType>
+  <version>1.1</version>
+  <description>Field used to place a map marker on a google map for each entry in a SOBIpro listing.</description>
+  <sql>install.sql</sql>
+  <language>
+    <file lang="en_GB">en-GB.SpApp.jmapsmarker.ini</file>
+  </language>
+  <files path="adm:field">
+    <folder>Adm/</folder>
+  </files>
+  <files path="js:">
+    <file>jmapsmarker.js</file>
+  </files>
+  <files path="fields:">
+    <file>jmapsmarker.php</file>
+  </files>
+  <requirements>
+    <core version="1.0.0.1749"/>
+    <field>inbox</field>
+  </requirements>
+  <installLog>
+    <modified/>
+    <files>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/field/edit/jmapsmarker.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/field/edit/jmapsmarker.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/lib/js/jmapsmarker.js</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/opt/fields/jmapsmarker.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/language/en-GB/en-GB.SpApp.jmapsmarker.ini</file>
+    </files>
+    <sql>
+      <tables>
+        <table>spdb_field_jmapsmarker</table>
+      </tables>
+    </sql>
+    <field>jmapsmarker</field>
+  </installLog>
+</SobiProApp>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SobiProApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://xml.sigsiu.net/SobiPro/application.xsd">
+  <name>Contact Form Field</name>
+  <id>contact_field</id>
+  <authorName>Sigsiu.NET GmbH</authorName>
+  <authorEmail>sobi@sigsiu.net</authorEmail>
+  <authorUrl>http://www.Sigsiu.NET/</authorUrl>
+  <copyright>Copyright (C) 2009-2012 Sigsiu.NET GmbH</copyright>
+  <license>GNU General Public License v3</license>
+  <creationDate>2012-07-10</creationDate>
+  <fieldType typeId="contact" fieldGroup="special">Contact Form</fieldType>
+  <version>0.5</version>
+  <description>Contact Form Field for SobiPro</description>
+  <language folder="Languages">
+    <file lang="de_DE">de-DE.SpApp.contact.ini</file>
+    <file lang="en_GB">en-GB.SpApp.contact.ini</file>
+    <file lang="es_ES">es-ES.SpApp.contact.ini</file>
+    <file lang="hu_HU">hu-HU.SpApp.contact.ini</file>
+    <file lang="pl_PL">pl-PL.SpApp.contact.ini</file>
+    <file lang="ru_RU">ru-RU.SpApp.contact.ini</file>
+    <file lang="sv_SE">sv-SE.SpApp.contact.ini</file>
+  </language>
+  <files path="adm:field">
+    <folder>Adm/</folder>
+  </files>
+  <files path="fields:">
+    <file>contact.php</file>
+    <file>contact_helper.php</file>
+  </files>
+  <files path="fields:adm">
+    <folder>FieldAdm/</folder>
+  </files>
+  <files path="ctrl:">
+    <folder>Ctrl/</folder>
+  </files>
+  <files path="js:">
+    <file>contact_form.js</file>
+    <file>contact_form_uncompressed.js</file>
+  </files>
+  <files path="css:">
+    <file>contact_form.css</file>
+  </files>
+  <files path="templates:default.contact_form">
+    <file>Templates/contact.xsl</file>
+    <file>Templates/claim.xsl</file>
+    <file>Templates/report.xsl</file>
+  </files>
+  <files path="config:napp_cfg">
+    <file>contact.ini</file>
+  </files>
+  <requirements>
+    <core version="1.0.7"/>
+    <application version="1.0.0">notifications</application>
+  </requirements>
+  <installLog>
+    <modified/>
+    <files>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/field/edit/contact.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/field/edit/contact.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/opt/fields/contact.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/opt/fields/contact_helper.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/opt/fields/adm/contact(2).php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/lib/ctrl/contact(1).php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/lib/js/contact_form.js</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/lib/js/contact_form_uncompressed.js</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/media/sobipro/css/contact_form.css</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/usr/templates/default/contact_form/</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/usr/templates/default/contact_form/contact.xsl</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/usr/templates/default/contact_form/claim.xsl</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/usr/templates/default/contact_form/report.xsl</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/etc/napp_cfg/</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/etc/napp_cfg/contact.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/language/en-GB/en-GB.SpApp.contact.ini</file>
+    </files>
+    <field>contact</field>
+  </installLog>
+</SobiProApp>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<SobiProApp>
+  <id>fr-FR</id>
+  <type>language</type>
+  <name>Fran&#xE7;ais</name>
+  <installLog>
+    <files>
+      <file>\administrator\language\fr-FR\fr-FR.com_sobipro.ini</file>
+      <file>\administrator\language\fr-FR\fr-FR.com_sobipro.sys.ini</file>
+      <file>\administrator\language\fr-FR\fr-FR.com_sobipro.js.ini</file>
+      <file>\administrator\language\fr-FR\fr-FR.com_sobipro.about.ini</file>
+      <file>\language\fr-FR\fr-FR.com_sobipro.ini</file>
+      <file>\language\fr-FR\fr-FR.com_sobipro.err.ini</file>
+      <file>\language\fr-FR\fr-FR.com_sobipro.js.ini</file>
+    </files>
+  </installLog>
+</SobiProApp>

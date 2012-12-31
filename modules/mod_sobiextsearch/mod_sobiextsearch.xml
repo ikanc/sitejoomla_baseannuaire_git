@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="module" client="site" method="upgrade">
+	<name>SobiPro Extended Search</name>
+	<creationDate>November 2011</creationDate>
+
+	<author>Extly.com</author>
+	<authorEmail>support@extly.com</authorEmail>
+	<authorUrl>http://www.extly.com</authorUrl>
+	<copyright>Copyright (C) 2007 - 2012 Prieco, S.A. All rights reserved.</copyright>
+	<license>GNU/GPLv3 www.gnu.org/licenses/gpl-3.0.html</license>
+
+	<version>3.7.1</version>
+	<description>
+<![CDATA[
+		<h2>SobiPro Extended Search - Module</h2>
+
+		<p>SobiPro has a Search Box and an Extended Search. To empower this feature, we publish a module to show this search form in any page position.</p>
+
+		<ul>
+			<li>Category Filter AddOn is required to show the category filter in the SobiPro component search.</li>
+			<li>Category Restriction AddOn is required to apply category restriction in SobiPro results list.</li>
+		</ul>  
+
+		<h3>Installation</h3>
+
+		<ol>
+			<li>Unzip package. It will contain the required module and the add-ons.</li>
+			<li>Install “mod_sobiextsearch.zip” in the Joomla extension installer, then enable and configure the new module in the module manager.</li>
+			<li>Optional - Category Navigator Addon: Install “categories-restriction-addon.zip” in the Sobipro application Manager.</li>
+			<li>Optional - Category Filter Addon: Install “categories-filter-addon.zip” in the Sobipro application Manager.</li>
+			<li>The addons have to be enabled in each section. Please, go to the individual section application control panel and enable each add-on application in each section you want to search with categories.</li>
+		</ol>  
+
+		<p>If you have any question, please, don't hesitate to contact us. Technical Support:  <a href="http://support.extly.com" target="_blank">http://support.extly.com</a></p>
+]]>
+	</description>
+	<files>
+		<filename module="mod_sobiextsearch">mod_sobiextsearch.php</filename>
+		<filename module="mod_sobiextsearch">helper.php</filename>
+		<filename module="mod_sobiextsearch">helper_category.php</filename>
+		<filename module="mod_sobiextsearch">load_component.php</filename>
+		<filename>index.html</filename>
+		<folder>tmpl</folder>
+		<folder>js</folder>
+		<!-- folder>tests</folder -->
+	</files>
+
+	<languages>
+		<language tag="en-GB">en-GB.mod_sobiextsearch.ini</language>
+	</languages>
+
+	<params>
+		<param name="smode" type="radio" default="0" label="Search Mode" description="Choose between SobiPro native search, or Joomla Search (requires plugin)">
+			<option value="0">SobiPro Native Search</option>
+			<option value="1">Joomla Search</option>
+		</param>
+
+		<param name="sectionid" type="sql" default="" label="Section" description="Section to show the extended form." 
+			   size="7"
+			   query="SELECT id, CONCAT(name, ' (', id, ')') name FROM #__sobipro_object WHERE oType='section' AND state=1 ORDER BY name"
+			   key_field="id" value_field="name"
+			   multiple="false"
+				/>
+
+		<param name="categorymode" type="list" default="0" label="Category List Mode - End Level" description="Mode to show category lists - valid for Joomla Search only." >
+			<option value="0">Default - None</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+		</param>
+
+		<param name="sorder" type="list" default="0" label="Categories Order" description="Select the list order - valid for Joomla Search only">
+			<option value="0">Default - no order</option>
+			<option value="1">Alphabetically</option>
+			<option value="4">Alphabetically (nid)</option>
+			<option value="2">Id</option>
+			<option value="3">Hit Counter Desc</option>
+			<option value="5">Position</option>
+		</param>
+
+		<param name="catlist" type="sql" default="" label="Category List Filter" description="List of categories to be shown" 
+			   size="7"
+			   query="SELECT c.id id, CONCAT(c.name, ' (', c.id, ')') name FROM #__sobipro_object c
+                                              WHERE 
+                                                c.oType = 'category' AND c.state=1
+                                              ORDER BY c.name, c.parent"
+			   key_field="id" value_field="name"
+			   multiple="true">
+		</param>
+
+		<param
+			name="width"
+			type="text"
+			default="20"
+			label="MOD_SOBIEXTSEARCH_FIELD_BOXWIDTH_LABEL"
+			description="MOD_SOBIEXTSEARCH_FIELD_BOXWIDTH_DESC" />
+		<param
+			name="text"
+			type="text"
+			label="MOD_SOBIEXTSEARCH_FIELD_TEXT_LABEL"
+			description="MOD_SOBIEXTSEARCH_FIELD_TEXT_DESC" />
+		<param
+			name="button"
+			type="radio"
+			default="1"
+			label="MOD_SOBIEXTSEARCH_FIELD_BUTTON_LABEL"
+			description="MOD_SOBIEXTSEARCH_FIELD_BUTTON_DESC">
+			<option
+				value="">JNO
+			</option>
+			<option
+				value="1">JYES
+			</option>
+		</param>
+		<param
+			name="imagebutton"
+			type="radio"
+			label="MOD_SOBIEXTSEARCH_FIELD_IMAGEBUTTON_LABEL"
+			description="MOD_SOBIEXTSEARCH_FIELD_IMAGEBUTTON_DESC">
+			<option
+				value="">JNO
+			</option>
+			<option
+				value="1">JYES
+			</option>
+		</param>
+		<param
+			name="button_text"
+			type="text"
+			label="MOD_SOBIEXTSEARCH_FIELD_BUTTONTEXT_LABEL"
+			description="MOD_SOBIEXTSEARCH_FIELD_BUTTONTEXT_DESC" />
+
+		<param
+			name="set_itemid"
+			type="menuitem"
+			label="MOD_SOBIEXTSEARCH_FIELD_SETITEMID_LABEL"
+			description="MOD_SOBIEXTSEARCH_FIELD_SETITEMID_DESC">
+			<option value="">-- None --</option>
+		</param>
+
+		<param name="autocomplete" type="radio" default="1" label="Autocomplete" description="Add SobiPro autocompletion.">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+	</params>
+	<params group="advanced">
+		<param name="categorystartlevel" type="list" default="1" label="Category List Mode - Start Level" description="Mode to show category lists - valid for Joomla Search only." >
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+		</param>
+
+		<param name="loader" type="radio"
+			   default="1"
+			   description="MOD_SOBIEXTSEARCH_LOADER_DESC"
+			   label="MOD_SOBIEXTSEARCH_LOADER_LABEL">
+			<option value="0">Curl</option>
+			<option value="1">Internal MVC</option>
+		</param>
+
+		<!-- param name="allow_empty" type="radio"
+			   default="0"
+			   description="MOD_SOBIEXTSEARCH_ALLOWEMPTY_DESC"
+			   label="MOD_SOBIEXTSEARCH_ALLOWEMPTY_LABEL">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</param -->
+
+		<param
+			name="jqueryjs"
+			type="radio"
+			label="JQuery Lib (No, for SobiPro Pages)"
+			description="Add JQuery Library for 3-Level Chained Select."
+			default="1">
+			<option
+				value="0">JNO
+			</option>
+			<option
+				value="1">JYES
+			</option>
+		</param>
+
+		<param
+			name="mj_rs"
+			type="radio"
+			label="Enable myJoom's Radius App"
+			description="Enable myJoom's Radius Search Application support."
+			default="0">
+			<option
+				value="0">JNO
+			</option>
+			<option
+				value="1">JYES
+			</option>
+		</param>
+
+		<param
+			name="gsensorjs"
+			type="radio"
+			label="Google Maps Lib (No, for SobiPro Pages)"
+			description="Add Google Maps Lib Library, required for myJoom's Radius App in pages where SobiPro is not loaded."
+			default="0">
+			<option
+				value="0">JNO
+			</option>
+			<option
+				value="1">JYES
+			</option>
+		</param>
+
+		<param
+			name="opensearch"
+			type="radio"
+			label="MOD_SOBIEXTSEARCH_FIELD_OPENSEARCH_LABEL"
+			description="MOD_SOBIEXTSEARCH_FIELD_OPENSEARCH_DESC"
+			default="1">
+			<option
+				value="0">JNO
+			</option>
+			<option
+				value="1">JYES
+			</option>
+		</param>
+		<param
+			name="opensearch_title"
+			type="text"
+			label="MOD_SOBIEXTSEARCH_FIELD_OPENSEARCH_TEXT_LABEL"
+			description="MOD_SOBIEXTSEARCH_FIELD_OPENSEARCH_TEXT_DESC" />
+
+		<param
+			name="mdebug"
+			type="radio"
+			label="Debug"
+			description="Show debug information"
+			default="0">
+			<option
+				value="0">JNO
+			</option>
+			<option
+				value="1">JYES
+			</option>
+		</param>
+		<param
+			name="moduleclass_sfx"
+			type="text"
+			label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+			description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+		<param
+			name="cache"
+			type="list"
+			default="1"
+			label="COM_MODULES_FIELD_CACHING_LABEL"
+			description="COM_MODULES_FIELD_CACHING_DESC">
+			<option
+				value="1">JGLOBAL_USE_GLOBAL
+			</option>
+			<option
+				value="0">COM_MODULES_FIELD_VALUE_NOCACHING
+			</option>
+		</param>
+		<param
+			name="cache_time"
+			type="text"
+			default="900"
+			label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+			description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+	</params>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="smode" type="radio" default="0" label="Search Mode" description="Choose between SobiPro native search, or Joomla Search (requires plugin)">
+					<option value="0">SobiPro Native Search</option>
+					<option value="1">Joomla Search</option>
+				</field>
+
+				<field name="sectionid" type="sql" default="" label="Section" description="Section to show the extended form." 
+					   size="7"
+					   query="SELECT id, CONCAT(name, ' (', id, ')') name FROM #__sobipro_object WHERE oType='section' AND state=1 ORDER BY name"
+					   key_field="id" value_field="name"
+					   multiple="false"
+				/>
+
+				<field name="categorymode" type="list" default="0" label="Category List Mode - End Level" description="Mode to show category lists - valid for Joomla Search only." >
+					<option value="0">Default - None</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+				</field>
+
+				<field name="sorder" type="list" default="0" label="Categories Order" description="Select the list order - valid for Joomla Search only">
+					<option value="0">Default - no order</option>
+					<option value="1">Alphabetically</option>
+					<option value="4">Alphabetically (nid)</option>
+					<option value="2">Id</option>
+					<option value="3">Hit Counter Desc</option>
+					<option value="5">Position</option>
+				</field>
+
+				<field name="catlist" type="sql" default="" label="Category List Filter" description="List of categories to be shown"
+					   size="7"
+					   query="SELECT c.id id, CONCAT(c.name, ' (', c.id, ')') name FROM #__sobipro_object c
+                                              WHERE 
+                                                c.oType = 'category' AND c.state=1
+                                              ORDER BY c.name, c.parent"
+					   key_field="id" value_field="name"
+					   multiple="true">
+				</field>
+
+				<field
+					name="width"
+					type="text"
+					default="20"
+					label="MOD_SOBIEXTSEARCH_FIELD_BOXWIDTH_LABEL"
+					description="MOD_SOBIEXTSEARCH_FIELD_BOXWIDTH_DESC" />
+				<field
+					name="text"
+					type="text"
+					label="MOD_SOBIEXTSEARCH_FIELD_TEXT_LABEL"
+					description="MOD_SOBIEXTSEARCH_FIELD_TEXT_DESC" />
+				<field
+					name="button"
+					type="radio"
+					default="1"
+					label="MOD_SOBIEXTSEARCH_FIELD_BUTTON_LABEL"
+					description="MOD_SOBIEXTSEARCH_FIELD_BUTTON_DESC">
+					<option
+						value="">JNO
+					</option>
+					<option
+						value="1">JYES
+					</option>
+				</field>
+				<field
+					name="imagebutton"
+					type="radio"
+					label="MOD_SOBIEXTSEARCH_FIELD_IMAGEBUTTON_LABEL"
+					description="MOD_SOBIEXTSEARCH_FIELD_IMAGEBUTTON_DESC">
+					<option
+						value="">JNO
+					</option>
+					<option
+						value="1">JYES
+					</option>
+				</field>
+				<field
+					name="button_text"
+					type="text"
+					label="MOD_SOBIEXTSEARCH_FIELD_BUTTONTEXT_LABEL"
+					description="MOD_SOBIEXTSEARCH_FIELD_BUTTONTEXT_DESC" />
+				<field
+					name="set_itemid"
+					type="menuitem"
+					label="MOD_SOBIEXTSEARCH_FIELD_SETITEMID_LABEL"
+					description="MOD_SOBIEXTSEARCH_FIELD_SETITEMID_DESC" >
+					>
+					<option value="">-- None --</option>
+				</field>
+
+				<field name="autocomplete" type="radio" default="1" label="Autocomplete" description="Add SobiPro autocompletion.">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+			</fieldset>
+			<fieldset name="advanced">
+				<field name="categorystartlevel" type="list" default="1" label="Category List Mode - Start Level" description="Mode to show category lists - valid for Joomla Search only." >
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+				</field>
+
+				<field name="loader" type="radio"
+					   default="1"
+					   description="MOD_SOBIEXTSEARCH_LOADER_DESC"
+					   label="MOD_SOBIEXTSEARCH_LOADER_LABEL">
+					<option value="0">Curl</option>
+					<option value="1">Internal MVC</option>
+				</field>
+
+				<!-- field name="allow_empty" type="radio"
+					   default="0"
+					   description="MOD_SOBIEXTSEARCH_ALLOWEMPTY_DESC"
+					   label="MOD_SOBIEXTSEARCH_ALLOWEMPTY_LABEL">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field -->
+
+				<field
+					name="jqueryjs"
+					type="radio"
+					label="JQuery Lib (No, for SobiPro Pages)"
+					description="Add JQuery Library for 3-Level Chained Select."
+					default="1">
+					<option
+						value="0">JNO
+					</option>
+					<option
+						value="1">JYES
+					</option>
+				</field>
+
+				<field
+					name="mj_rs"
+					type="radio"
+					label="Enable myJoom's Radius App"
+					description="Enable myJoom's Radius Search Application support."
+					default="0">
+					<option
+						value="0">JNO
+					</option>
+					<option
+						value="1">JYES
+					</option>
+				</field>
+
+				<field
+					name="gsensorjs"
+					type="radio"
+					label="Google Maps Lib (No, for SobiPro Pages)"
+					description="Add Google Maps Lib Library, required for myJoom's Radius App in pages where SobiPro is not loaded."
+					default="0">
+					<option
+						value="0">JNO
+					</option>
+					<option
+						value="1">JYES
+					</option>
+				</field>
+
+				<field
+					name="opensearch"
+					type="radio"
+					label="MOD_SOBIEXTSEARCH_FIELD_OPENSEARCH_LABEL"
+					description="MOD_SOBIEXTSEARCH_FIELD_OPENSEARCH_DESC"
+					default="1">
+					<option
+						value="0">JNO
+					</option>
+					<option
+						value="1">JYES
+					</option>
+				</field>
+				<field
+					name="opensearch_title"
+					type="text"
+					label="MOD_SOBIEXTSEARCH_FIELD_OPENSEARCH_TEXT_LABEL"
+					description="MOD_SOBIEXTSEARCH_FIELD_OPENSEARCH_TEXT_DESC" />
+
+				<field
+					name="mdebug"
+					type="radio"
+					label="Debug"
+					description="Show debug information"
+					default="0">
+					<option
+						value="0">JNO
+					</option>
+					<option
+						value="1">JYES
+					</option>
+				</field>
+				<field
+					name="moduleclass_sfx"
+					type="text"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+				<field
+					name="cache"
+					type="list"
+					default="1"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC">
+					<option
+						value="1">JGLOBAL_USE_GLOBAL
+					</option>
+					<option
+						value="0">COM_MODULES_FIELD_VALUE_NOCACHING
+					</option>
+				</field>
+				<field
+					name="cache_time"
+					type="text"
+					default="900"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+</install>

@@ -1,0 +1,69 @@
+===================================================
+  Changelog for SobiPro Notifications Application
+===================================================
+ * @version: $Id: changelog.txt 2525 2012-07-02 10:57:21Z Radek Suski $
+ * @author
+ * Name: Sigrid Suski & Radek Suski, Sigsiu.NET GmbH
+ * Email: sobi[at]sigsiu.net
+ * Url: http://www.Sigsiu.NET
+ * ===================================================
+ * @copyright Copyright (C) 2006 - 2012 Sigsiu.NET GmbH (http://www.sigsiu.net). All rights reserved.
+ * @license see http://www.gnu.org/licenses/gpl.html GNU/GPL Version 3.
+ * You can use, redistribute this file and/or modify it under the terms of the GNU General Public License version 3
+ * ===================================================
+ * $Date: 2012-07-02 12:57:21 +0200 (Mo, 02 Jul 2012) $
+===================================================
+
+===================================================
+ * Legend
+===================================================
+   (*) - Security Fix
+   (#) - Bug Fix
+   (+) - Addition
+   (-) - Removed
+   (!) - Change
+===================================================
+
+-------------------
+  1.0.1 (02 July 2012)
+-------------------
+   (#) Fixed error in installation routine
+
+-------------------
+  1.0 (29 June 2012)
+-------------------
+   (+) Notifications Manager in administrator area
+   (+) Possibility to re-send emails
+   (+) Silent trigger for external Apps
+   (+) Danish, Greek, Spanish, Dutch, Russian, Turkish and Chinese Languages added (thanks to our translation teams)
+
+   (!) Default notifications status set to disabled
+
+   (#) Removed junk output
+   (#) Disabled notifications are shown as disabled in the list
+   (#) Typo in predefined messages
+
+-------------------
+  0.9.2 (6 December 2011)
+-------------------
+   (+) State is shown in list of notification triggers
+   (+) Swedish language (thanks to JOKR Solutions)
+   (+) Additional action triggers for other SobiPro applications
+   (+) Croatian language (thanks to Tanja Dragisic)
+   (+) Bulgarian language (thanks to Stefan Ilivanov)
+   (+) Finnish language (thanks to Jani Mattila)
+
+   (!) Switched back to use SobiPro mailer
+
+   (#) Typo in example data
+
+-------------------
+  0.9.1 (14 April 2011)
+-------------------
+   (+) German, Polish and French languages added
+   (!) Headers corrected
+   (#) Typo fixed
+
+-------------------
+  0.9.0 - first release  (March 7, 2011)
+-------------------

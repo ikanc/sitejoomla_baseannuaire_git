@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SobiProApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://xml.sigsiu.net/SobiPro/application.xsd">
+  <name>Categories Restriction Addon</name>
+  <id>categoriesrestrictionapp</id>
+  <authorName>Extly.com</authorName>
+  <authorEmail>support@extly.com</authorEmail>
+  <authorUrl>http://www.extly.com</authorUrl>
+  <copyright>Copyright (C) 2007 - 2012 Prieco, S.A. All rights reserved.</copyright>
+  <license>GNU/GPLv3 www.gnu.org/licenses/gpl-3.0.html</license>
+  <creationDate>2012-07-18</creationDate>
+  <type>application</type>
+  <version>1.1.0</version>
+  <description>
+		Categories Restriction Addon allows to apply a restriction (sid_list url param) to the search results list.
+	</description>
+  <sql>install.sql</sql>
+  <language>
+    <file lang="en_GB">en-GB.SpApp.categoriesrestrictionapp.ini</file>
+  </language>
+  <files path="home:.">
+    <file>init.php</file>
+    <file>helper.php</file>
+    <file>index.html</file>
+    <file>description_en-GB.html</file>
+  </files>
+  <files path="config:">
+    <file>Cfg/categoriesrestrictionapp.ini</file>
+    <file>Cfg/index.html</file>
+  </files>
+  <files path="ctrl:adm">
+    <file>Ctrl/categoriesrestrictionapp.php</file>
+  </files>
+  <files path="adm:extensions">
+    <file>Adm/categoriesrestrictionapp.php</file>
+    <file>Adm/categoriesrestrictionapp.ini</file>
+  </files>
+  <actions>
+    <action>*</action>
+    <action>adm.*</action>
+    <action>adm_menu</action>
+  </actions>
+  <requirements>
+    <core version="1.0.1.2017"/>
+  </requirements>
+  <installLog>
+    <actions>
+      <action>*</action>
+      <action>adm.*</action>
+      <action>adm_menu</action>
+    </actions>
+    <modified>
+      <file>
+        <path>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/etc/index.html</path>
+        <size>0</size>
+        <checksum>d41d8cd98f00b204e9800998ecf8427e</checksum>
+        <backup>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/etc/installed/applications/categoriesrestrictionapp/backup/Cfg/index.html</backup>
+      </file>
+    </modified>
+    <files>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/opt/plugins/categoriesrestrictionapp/</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/opt/plugins/categoriesrestrictionapp/init.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/opt/plugins/categoriesrestrictionapp/helper.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/opt/plugins/categoriesrestrictionapp/index.html</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/opt/plugins/categoriesrestrictionapp/description_en-GB.html</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/etc/categoriesrestrictionapp.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/lib/ctrl/adm/categoriesrestrictionapp.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/extensions/categoriesrestrictionapp.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/extensions/categoriesrestrictionapp.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/language/en-GB/en-GB.SpApp.categoriesrestrictionapp.ini</file>
+    </files>
+  </installLog>
+</SobiProApp>

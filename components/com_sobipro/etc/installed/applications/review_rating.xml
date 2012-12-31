@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SobiProApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://xml.sigsiu.net/SobiPro/application.xsd">
+  <name>Review and Rating</name>
+  <id>review_rating</id>
+  <authorName>Sigsiu.NET GmbH</authorName>
+  <authorEmail>sobi@sigsiu.net</authorEmail>
+  <authorUrl>http://www.Sigsiu.NET</authorUrl>
+  <copyright>Copyright (C) 2009-2011 Sigsiu.NET GmbH</copyright>
+  <license>GNU General Public License v3</license>
+  <creationDate>2012-01-24</creationDate>
+  <type>application</type>
+  <version>0.6</version>
+  <description>Review and Rating Application for SobiPro</description>
+  <sql>install.sql</sql>
+  <language folder="Languages">
+    <file lang="en_GB">en-GB.SpApp.review_rating.ini</file>
+    <file lang="en_GB">en-GB.SpApp.review_rating_notifications.ini</file>
+    <file lang="pl_PL">pl-PL.SpApp.review_rating.ini</file>
+    <file lang="en_GB">pl-PL.SpApp.review_rating_notifications.ini</file>
+    <file lang="de_DE">de-DE.SpApp.review_rating.ini</file>
+    <file lang="en_GB">de-DE.SpApp.review_rating_notifications.ini</file>
+    <file lang="fr_FR">fr-FR.SpApp.review_rating.ini</file>
+    <file lang="sv_SE">sv-SE.SpApp.review_rating.ini</file>
+    <file lang="es_ES">es-ES.SpApp.review_rating.ini</file>
+    <file lang="hr_HR">hr-HR.SpApp.review_rating.ini</file>
+    <file lang="fi_FI">fi-FI.SpApp.review_rating.ini</file>
+    <file lang="bg_BG">bg-BG.SpApp.review_rating.ini</file>
+  </language>
+  <files path="adm:extensions">
+    <folder>Adm/</folder>
+  </files>
+  <files path="img:icons">
+    <folder>Media/icons/</folder>
+  </files>
+  <files path="css:">
+    <folder>Media/css/</folder>
+  </files>
+  <files path="ctrl:.">
+    <folder>Site/ctrl/</folder>
+  </files>
+  <files path="js:.">
+    <folder>Site/js/</folder>
+  </files>
+  <files path="models:.">
+    <folder>Site/models/</folder>
+  </files>
+  <files path="templates:default.common">
+    <file>review.xsl</file>
+  </files>
+  <files path="home:.">
+    <file>init.php</file>
+    <file>notifications.php</file>
+  </files>
+  <files path="config:">
+    <folder>Site/etc/</folder>
+  </files>
+  <actions>
+    <action>adm.*</action>
+    <action>entry.details</action>
+    <action>category.view</action>
+    <action>section.view</action>
+    <action>list.*</action>
+  </actions>
+  <permissions>
+    <permission>review.add.own</permission>
+    <permission>review.see.valid</permission>
+    <permission>review.autopublish.own</permission>
+  </permissions>
+  <requirements>
+    <core version="1.0.3.2000"/>
+  </requirements>
+  <installLog>
+    <permissions>
+      <permission>review.add.own</permission>
+      <permission>review.see.valid</permission>
+      <permission>review.autopublish.own</permission>
+    </permissions>
+    <actions>
+      <action>adm.*</action>
+      <action>entry.details</action>
+      <action>category.view</action>
+      <action>section.view</action>
+      <action>list.*</action>
+    </actions>
+    <modified/>
+    <files>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/extensions/sprr.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/extensions/sprr.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/extensions/sprredit.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/extensions/sprredit.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/extensions/sprrfield.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/extensions/sprrlist.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/administrator/components/com_sobipro/extensions/sprrlist.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/media/sobipro/icons/delete.gif</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/media/sobipro/icons/star.gif</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/media/sobipro/css/review.css</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/lib/ctrl/adm/review.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/lib/ctrl/review.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/lib/js/rating.js</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/lib/js/review.js</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/lib/js/review_uncompressed.js</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/lib/models/review.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/usr/templates/default/common/review.xsl</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/opt/plugins/review_rating/</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/opt/plugins/review_rating/init.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/opt/plugins/review_rating/notifications.php</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/etc/napp_cfg/review.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/components/com_sobipro/etc/rra_msg.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/language/en-GB/en-GB.SpApp.review_rating.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/language/en-GB/en-GB.SpApp.review_rating_notifications.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/language/en-GB/pl-PL.SpApp.review_rating_notifications.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/language/en-GB/de-DE.SpApp.review_rating_notifications.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_annuairegueret2/language/fr-FR/fr-FR.SpApp.review_rating.ini</file>
+    </files>
+    <sql>
+      <tables>
+        <table>spdb_sprr_fields</table>
+        <table>spdb_sprr_rating</table>
+        <table>spdb_sprr_review</table>
+      </tables>
+    </sql>
+  </installLog>
+</SobiProApp>

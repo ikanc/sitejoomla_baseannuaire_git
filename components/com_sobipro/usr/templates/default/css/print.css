@@ -1,0 +1,11 @@
+@media print {
+	
+	.SPDE-Galery, .SPDE-Print,
+	.moduletable_social {display:none;} 
+
+	.SPDetailEntry-Left {width:60%!important;}
+	.SPDetailEntry-Sidebar {float:right!important;}
+
+	.SPDetailEntry-Center {clear:both;width:100%;}
+}
+ 

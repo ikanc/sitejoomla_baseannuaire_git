@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<translation>
+  <term value="Disable Entry">
+    <value lang="fr-FR">Désactiver l'entrée</value>
+  </term>  
+  <term value="Enable Entry">
+    <value lang="fr-FR">Activer l'entrée</value>
+  </term>  
+  <term value="Approve Entry">
+    <value lang="fr-FR">Approuver l'entrée</value>
+  </term>  
+  <term value="Edit Entry">
+   <value lang="fr-FR">Editer l'entrée</value>
+  </term>  
+  <term value="Located in:">
+    <value lang="fr-FR">Catégorie :</value>
+  </term>  
+  <term value="Extended Search">
+    <value lang="fr-FR">Recherche avancée</value>
+  </term>  
+  <term value="You have chosen following non-free options">
+    <value lang="fr-FR">Vous avez choisis les options payantes suivantes</value>
+  </term>  
+  <term value="Name">
+    <value lang="fr-FR">Nom</value>
+  </term>  
+  <term value="Netto">
+    <value lang="fr-FR">Net</value>
+  </term>  
+  <term value="Brutto">
+    <value lang="fr-FR">Brut</value>
+  </term>  
+  <term value="Discount">
+    <value lang="fr-FR"></value>
+  </term>  
+  <term value="Summary">
+    <value lang="fr-FR">Total</value>
+  </term>  
+  <term value="VAT">
+    <value lang="fr-FR">TVA</value>
+  </term>  
+  <term value="What do you like to do">
+    <value lang="fr-FR">Que voulez-vous faire</value>
+  </term>  
+  <term value="Please select payment method below">
+    <value lang="fr-FR">Selectionnez un mode de piement ci-dessous</value>
+  </term>  
+</translation>
