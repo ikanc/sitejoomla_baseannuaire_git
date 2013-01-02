@@ -1,0 +1,12 @@
+<div style="margin: 20px; font-size: 15px;">
+<p>This plugin integrates a <a href="http://www.myjoom.com/products/25-sobipro-extensions/sobipro-radius-search-application" target="_blank"> Radius Search field</a> into the SobiPro component's search form.</p>
+<p>To display the search fields into the search form, add following code into your search form view template:</p>
+<pre>
+        <b>&lt;</b><b><span style='color:#000080;'>xsl:value-of</span></b><span style='color:#006e28;'> select=</span><span style='color:#008080;'>&quot;mjradius&quot;</span><span style='color:#006e28;'> disable-output-escaping=</span><span style='color:#800000;'>&quot;yes&quot;</span><span style='color:#006e28;'> </span><b>/&gt;</b>
+</pre>
+To show the distances into the search results vCards, add this code into your V-Card template:
+<pre>
+        <b>&lt;</b><b><span style='color:#000080;'>xsl:value-of</span></b><span style='color:#006e28;'> select=</span><span style='color:#008080;'>&quot;mjradius&quot;</span><b>/&gt;</b>
+</pre>
+<p>For any further help, please consult the <a href="http://www.myjoom.com/support-center/documentation/sobipro-extensions" target="_blank">support section of Radius Search field</a>.</p>
+</div>

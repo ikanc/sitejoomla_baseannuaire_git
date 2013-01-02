@@ -21,6 +21,7 @@
 
       </a>
     </span>
+    <xsl:value-of select="mjradius" disable-output-escaping="yes" />
 
     <xsl:for-each select="fields/*">
       <div>

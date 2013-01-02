@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SobiProApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://xml.sigsiu.net/SobiPro/application.xsd">
+  <name>Radius Search Application</name>
+  <id>mjradius</id>
+  <authorName>www.myjoom.com Quality Joomla Extensions</authorName>
+  <authorEmail>info@myjoom.com</authorEmail>
+  <authorUrl>http://www.myjoom.com/</authorUrl>
+  <copyright>Copyright (C) 2009-2012 myJoom.com</copyright>
+  <license>GNU General Public License v3</license>
+  <creationDate>2012-02-13</creationDate>
+  <type>application</type>
+  <version>1.5.0</version>
+  <description>This application add a radius field into the search form, and the distance into the results vCards</description>
+  <language>
+    <file lang="en_GB">en-GB.SpApp.mjradius.ini</file>
+    <file lang="fr_FR">fr-FR.SpApp.mjradius.ini</file>
+    <file lang="de_DE">de-DE.SpApp.mjradius.ini</file>
+  </language>
+  <files path="home:.">
+    <file>init.php</file>
+    <file>description_en-GB.html</file>
+  </files>
+  <files path="ctrl:adm">
+    <file>Ctrl/mjradius.php</file>
+  </files>
+  <files path="adm:extensions">
+    <file>Adm/mjradius.php</file>
+    <file>Adm/mjradius.ini</file>
+  </files>
+  <files path="img:">
+    <file>locateme.png</file>
+  </files>
+  <actions>
+    <action>*</action>
+    <action>search.view</action>
+    <action>search.form</action>
+    <action>search</action>
+    <action>category.view</action>
+    <action>section.view</action>
+    <action>list.*</action>
+    <action>adm_menu</action>
+  </actions>
+  <requirements>
+    <core version="0.6.0"/>
+  </requirements>
+  <installLog>
+    <actions>
+      <action>*</action>
+      <action>search.view</action>
+      <action>search.form</action>
+      <action>search</action>
+      <action>category.view</action>
+      <action>section.view</action>
+      <action>list.*</action>
+      <action>adm_menu</action>
+    </actions>
+    <modified/>
+    <files>
+      <file>D:/wamp21e/www/sitejoomla_baseannuairethematique/components/com_sobipro/opt/plugins/mjradius/</file>
+      <file>D:/wamp21e/www/sitejoomla_baseannuairethematique/components/com_sobipro/opt/plugins/mjradius/init.php</file>
+      <file>D:/wamp21e/www/sitejoomla_baseannuairethematique/components/com_sobipro/opt/plugins/mjradius/description_en-GB.html</file>
+      <file>D:/wamp21e/www/sitejoomla_baseannuairethematique/components/com_sobipro/lib/ctrl/adm/mjradius.php</file>
+      <file>D:/wamp21e/www/sitejoomla_baseannuairethematique/administrator/components/com_sobipro/extensions/mjradius.php</file>
+      <file>D:/wamp21e/www/sitejoomla_baseannuairethematique/administrator/components/com_sobipro/extensions/mjradius.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_baseannuairethematique/media/sobipro/locateme.png</file>
+      <file>D:/wamp21e/www/sitejoomla_baseannuairethematique/language/en-GB/en-GB.SpApp.mjradius.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_baseannuairethematique/language/fr-FR/fr-FR.SpApp.mjradius.ini</file>
+    </files>
+  </installLog>
+</SobiProApp>
