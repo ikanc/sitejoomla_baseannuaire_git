@@ -24,7 +24,7 @@ div#SPSearchForm {
 
 #SPSearchForm label {display:inline;}
 #SPSearchForm div.SPSearchLabel{width:auto; margin-right:2%;}
-#SPSearchForm  > .SPSearchCell:first-child > .SPSearchLabel {display:none;}
+/*#SPSearchForm  > .SPSearchCell:first-child > .SPSearchLabel {display:none;}*/
 
 #SPSearchForm input,
 #SPSearchForm textarea,
@@ -41,6 +41,7 @@ div#SPSearchForm {
 input.SPSearchBox {
 	float: left;
 	margin-right: 5px;
+	width:95%!important;
 }
 
 input#top_button {
@@ -63,6 +64,34 @@ div.SPSearchSelectRangeTo {
 	float:left;
 }
 
+/*#SPSearchForm  > .SPSearchCell.mjradius .SPSearchField.center{
+	clear:both;
+}*/
+
 div.SPSearchField {
-	float: left;
+	/*float: left;*/
+	clear:both;
+	
+}
+
+/*Radius*/
+
+select#mj_rs_radius_selector {width:auto;}
+button#mj_rs_cutom {margin-bottom:10px;}
+
+/*Extended search*/
+#SPExtSearch{padding:2%; background-color:#F4F3F0;}
+
+/*Filter*/
+select.sid_list1, select.sid_list2 {width:100%;}
+
+@media screen and (max-width: 360px) {
+
+	input#mj_rs_center_selector {width:160px;}
+
+	/*Radio 'Trouver les entrées qui ont...'*/
+	/*input#spsearchphrase_all > label,
+	input#spsearchphrase_any > label,
+	input#spsearchphrase_exact > label {clear:both;}*/
+	
 }

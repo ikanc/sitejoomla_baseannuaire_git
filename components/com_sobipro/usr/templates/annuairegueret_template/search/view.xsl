@@ -17,8 +17,9 @@
     <div style="clear:both;"/>
     <div id="SPSearchForm">
       
-      <xsl:value-of select="mjradius" disable-output-escaping="yes" />
-      
+    <xsl:value-of select="mjradius" disable-output-escaping="yes" />
+    <div style="clear:both; min-height: 2px;"/>
+        
       <!-- define variable to check if there are more than 3 fields -->
       <xsl:variable name="fieldsCount">
         <xsl:value-of select="count(fields/*)" />
@@ -31,31 +32,22 @@
             <xsl:if test="position() &lt; 4">
       
               <!-- directly after the "search" button -->
-              <xsl:if test="position() = 3"></xsl:if>
-        
-              <xsl:call-template name="FieldCell" />
-        
+              <xsl:if test="position() = 2"><xsl:call-template name="FieldCell" /></xsl:if>
+              
             </xsl:if>
-          </xsl:for-each>
-          <!-- output all other fields -->
+        </xsl:for-each>
+          
+      <!-- output all other fields -->
           <div style="clear:both; min-height: 2px;"/>
           <div id="SPExtSearch">
             <xsl:for-each select="fields/*">
-              <xsl:if test="position() &gt; 3">
+         <xsl:if test="not( name() = 'top_button' )">
                 <xsl:call-template name="FieldCell" />
-              </xsl:if>
+        </xsl:if>
+
             </xsl:for-each>
             
-            <!-- on ajoute le filtre par catégories-->
-            <br/>
-      <div class="SPSearchCell">
-        <div class="SPSearchLabel">
-          <strong><xsl:text>Filtrer par : </xsl:text></strong>
-        </div>
-        <div class="SPSearchField">
-          <xsl:value-of select="spcategoriesfilterapp" disable-output-escaping="yes" />
-        </div>
-      </div>
+          
 
           </div>
         </xsl:when>
