@@ -205,10 +205,12 @@ class MJRadius extends SPPlugin{
 		
 		$km = $this->_getKm() ;
 		$db =& JFactory::getDBO();
-		$query = " SELECT DISTINCT O.id, GEO.latitude , GEO.longitude , ";
-		$query.= " ({$km}*acos(cos(radians({$ref_lat}))*cos(radians(GEO.latitude))*cos(radians(GEO.longitude)-radians({$ref_lng}))+sin(radians({$ref_lat}))*sin(radians(GEO.latitude)))) AS distance ";
+		
+		//LGW: on utilise jmapsmarkerfield 
+		$query = " SELECT DISTINCT O.id, GEO.jmlatitude , GEO.jmlongitude , ";
+		$query.= " ({$km}*acos(cos(radians({$ref_lat}))*cos(radians(GEO.jmlatitude))*cos(radians(GEO.jmlongitude)-radians({$ref_lng}))+sin(radians({$ref_lat}))*sin(radians(GEO.jmlatitude)))) AS distance ";
 		$query.= " FROM `#__sobipro_object` AS O ";
-		$query.= " LEFT JOIN `#__sobipro_field_geo` AS GEO ON GEO.sid = O.id ";
+		$query.= " LEFT JOIN `#__sobipro_field_jmapsmarker` AS GEO ON GEO.sid = O.id ";
 		$query.= " WHERE O.oType='entry' AND O.state > 0 AND  GEO.section=".Sobi::Section()." ";
 		$query.= (count($result)>0)?" AND O.id IN (".implode(',', $result).") ":" " ;
 		$query.= " HAVING (distance < {$dist} ) ";
@@ -258,10 +260,11 @@ class MJRadius extends SPPlugin{
 		$id = $data['id'] ;
 		$db	=& JFactory::getDBO();
 		
+		//LGW: on utilise jmapsmarkerfield
 		$query = " SELECT  ";
-		$query.= " ({$km}*acos(cos(radians({$ref_lat}))*cos(radians(GEO.latitude))*cos(radians(GEO.longitude)-radians({$ref_lng}))+sin(radians({$ref_lat}))*sin(radians(GEO.latitude)))) AS distance ";
+		$query.= " ({$km}*acos(cos(radians({$ref_lat}))*cos(radians(GEO.jmlatitude))*cos(radians(GEO.jmlongitude)-radians({$ref_lng}))+sin(radians({$ref_lat}))*sin(radians(GEO.jmlatitude)))) AS distance ";
 		$query.= " FROM `#__sobipro_object` AS O  ";
-		$query.= " LEFT JOIN `#__sobipro_field_geo` AS GEO ON GEO.sid = O.id ";
+		$query.= " LEFT JOIN `#__sobipro_field_jmapsmarker` AS GEO ON GEO.sid = O.id ";
 		$query.= " WHERE O.oType='entry' AND O.id = {$id} ";
 		$query.= " LIMIT 1";
 		
