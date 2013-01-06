@@ -471,6 +471,59 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 				return;
 			}
 //			console.log('JMaps Init Function - ' + mapDiv);
+			
+			//LGW : On utilise la localisation faite par myjoom radius comme centre de la carte. Si elle n'est pas dispo, c'est le centre par défaut (cf. parametres) qui est utilisé.
+			var mjlat;
+			var mjlatval;mjlatval=0;
+			mjlat=jQuery('input#mj_rs_ref_lat');
+			if (mjlat.length>0) mjlatval=mjlat.val();
+			
+			var mjlng;
+			var mjlngval; mjlngval=0;
+			mjlng=jQuery('input#mj_rs_ref_lng');
+			if (mjlng.length>0) mjlngval=mjlng.val();
+			//La localisation est disponible....
+			if  ((mjlatval!=0) || (mjlngval!=0)){
+			
+				jQuery(mapDiv).jmap('init', {
+				'backgroundColor': '<?php echo $jmapBackgroundColor; ?>', 
+				'center':[mjlatval, mjlngval], 
+				'disableDefaultUI': false,
+				'disableDoubleClickZoom': <?php echo $jmapDisableDoubleClickZoom; ?>, 
+				'draggable': <?php echo $jmapDraggable; ?>, 
+				'draggableCursor': null,
+				'draggingCursor': null,
+				'keyboardShortcuts': true,
+				'mapTypeControl': <?php echo $jmapMapTypeControl; ?>, 
+				'mapTypeControlTypes':['hybrid','roadmap', 'satellite', 'terrain'], 
+				'mapTypeControlPosition': '<?php echo $jmapMapTypeControlPosition; ?>', 
+				'mapTypeControlStyle': '<?php echo $jmapMapTypeControlStyle; ?>', 
+				'mapTypeId': '<?php echo $jmapMapTypeId; ?>', 
+		<?php if ($jmapMarkerClusterer) { ?>
+				'maxZoom': <?php echo $jmapMMMaxZoom; ?>,
+				'minZoom': <?php echo $jmapMMMinZoom; ?>,
+		<?php }?>
+				'noClear': false,
+				'overviewMapControl': <?php echo $jmapOverviewMapControl; ?>, 
+				'overviewMapControlOpened': <?php echo $jmapOverviewMapControlOpened; ?>, 
+				'panControl': <?php echo $jmapPanControl; ?>, 
+				'panControlPosition': '<?php echo $jmapPanControlPosition; ?>', 
+				'scaleControl': <?php echo $jmapScaleControl; ?>, 
+				'scaleControlPosition': '<?php echo $jmapScaleControlPosition; ?>', 
+				'scrollwheel': <?php echo $jmapScrollWheel; ?>, 
+				'streetViewControl': <?php echo $jmapStreetViewControl; ?>, 
+				'streetViewControlPosition': '<?php echo $jmapStreetViewControlPosition; ?>', 
+				
+				//LGW: on double le zoom initial si la localisation est faite
+				'zoom':<?php echo $jmapInitZoom*2; ?>, 
+				
+				'zoomControl': <?php echo $jmapZoomControl; ?>, 
+				'zoomControlPosition': '<?php echo $jmapZoomControlPosition; ?>', 
+				'zoomControlStyle': '<?php echo $jmapZoomControlStyle; ?>', 
+				'debugMode': false						
+			});
+			}
+			else {
 			jQuery(mapDiv).jmap('init', {
 				'backgroundColor': '<?php echo $jmapBackgroundColor; ?>', 
 				'center':[<?php echo $jmapCenterLatitude; ?>, <?php echo $jmapCenterLongitude; ?>], 
@@ -505,6 +558,7 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 				'zoomControlStyle': '<?php echo $jmapZoomControlStyle; ?>', 
 				'debugMode': false						
 			});
+			}
 		<?php if ($jmapMarkerClusterer == 1) { ?>
 			var mcStyles = Array();
 			mcStyles [0] = [
@@ -848,7 +902,8 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 			parent.jQuery(document).ready(function(){
 				if(!parent.jQuery.browser.opera) {
 					parent.jQuery(".sobi2ItemTitle a").colorbox({width:"<?php echo $shadowboxWidth; ?>", height:"<?php echo $shadowboxHeight; ?>", iframe:true});
-					parent.jQuery(".spEntriesListTitle a").colorbox({width:"<?php echo $shadowboxWidth; ?>", height:"<?php echo $shadowboxHeight; ?>", iframe:true});
+					//LGW: on limite la largeur de la box
+					parent.jQuery(".spEntriesListTitle a").colorbox({width:"<?php echo $shadowboxWidth; ?>", maxWidth:"900px", height:"<?php echo $shadowboxHeight; ?>", iframe:true});
 			<?php if ($jmapSOBIdetailsBoxTmpl == 1) { ?>
 						alterDetailLink();
 			<?php }?>
@@ -934,7 +989,8 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 				}
 				<?php }?>
 			if(!parent.jQuery.browser.opera) {
-				jQuery.fn.colorbox({href:linkData, width:"<?php echo $shadowboxWidth; ?>", height:"<?php echo $shadowboxHeight; ?>", iframe:true, open:true});
+				//LGW: on limite la largeur de la box
+				jQuery.fn.colorbox({href:linkData, width:"<?php echo $shadowboxWidth; ?>", maxWidth:"900px", height:"<?php echo $shadowboxHeight; ?>", iframe:true, open:true});
 				return false;
 			}
 			<?php }?>
