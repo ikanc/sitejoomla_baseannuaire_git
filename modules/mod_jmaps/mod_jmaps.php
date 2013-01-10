@@ -639,7 +639,12 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 				'maxZoom': <?php echo $jmapClustererMaxZoom; ?>
 			});
 		<?php } ?>
-            jQuery(mapDiv).animate({'width': '<?php echo $jmapWidth; ?>', 'height': '<?php echo $jmapHeight; ?>'}, function(){
+			<?php if ($jmapHeight=='100%') {?>
+				jQuery(mapDiv).animate({'width': '<?php echo $jmapWidth; ?>', 'height': window.innerHeight}, function(){
+			<?php } else {?>
+				jQuery(mapDiv).animate({'width': '<?php echo $jmapWidth; ?>', 'height': '<?php echo $jmapHeight; ?>'}, function(){
+			<?php }?>
+			
             });
 		}
 		jmaps_Initialize ();

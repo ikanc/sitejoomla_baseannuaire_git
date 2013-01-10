@@ -54,9 +54,16 @@ class SPSearchView extends SPSectionView implements SPView
 			if( $this->get( '$eInLine' ) ) {
 				$sdata[ 'entries_in_line' ] = $this->get( '$eInLine' );
 			}
-			if( $this->get( '$eCount' ) >= 0 ) {
-				$sdata[ 'message' ] = Sobi::Txt( 'SH.SEARCH_FOUND_RESULTS', array( 'count' => $this->get( '$eCount' ) ) );
+			
+			//LGW: Message différent si aucun résultat
+			if( $this->get( '$eCount' ) > 0 ) {
+				$sdata[ 'message' ] = Sobi::Txt( 'SH.SEARCH_FOUND_RESULTS', array( 'count' => $this->get( '$eCount' ) ) );	
 			}
+			else if( $this->get( '$eCount' )== 0 ) 
+			{
+				$sdata[ 'message' ] = Sobi::Txt( 'SH.SEARCH_NO_RESULTS');	
+			}
+			
 			$this->menu( $sdata );
 			$this->alphaMenu( $sdata );
 			$fData = array();
