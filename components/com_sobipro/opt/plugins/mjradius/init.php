@@ -99,7 +99,8 @@ class MJRadius extends SPPlugin{
 		$radius	= SPHtml_Input::select( 'mj_rs_radius_selector', $sout, $ref_dist, false, array( 'id' => 'mj_rs_radius_selector', 'class' => 'text_area' ));
 		$center	= SPHtml_Input::text( 'mj_rs_center_selector', $ref_loc, $input_param);
 		$button1= $this->m_uselocateme==1?SPHtml_Input::button( 'mj_rs_cutom', Sobi::Txt( 'MJRS.USE_POSITION' ), array( 'id'=>'mj_rs_cutom', 'class'=>'inputbox btn', 'onClick'=>'userPos();', 'style'=>'border: 1px solid silver;')):'';
-		$button2= $this->m_uselocateme==2?' <img style="cursor : pointer;" src="'.Sobi::FixPath( Sobi::Cfg('img_folder_live').'/locateme.png').'" onClick="userPos();" alt="'.Sobi::Txt( 'MJRS.USE_POSITION' ).'" title="'.Sobi::Txt( 'MJRS.USE_POSITION' ).'" /> ':'';
+		//$button2= $this->m_uselocateme==2?' <img style="cursor : pointer;" src="'.Sobi::FixPath( Sobi::Cfg('img_folder_live').'/locateme.png').'" onClick="userPos();" alt="'.Sobi::Txt( 'MJRS.USE_POSITION' ).'" title="'.Sobi::Txt( 'MJRS.USE_POSITION' ).'" /> ':'';
+		$button2= $this->m_uselocateme==2?' <i class="locateme icon-screenshot" onClick="userPos();"></i>':'';
 		$imageW	= $this->m_googleicon==1?' <img src="http://code.google.com/intl/fr/apis/maps/documentation/places/images/powered-by-google-on-white.png" />':'' ;		
 		$imageB	= $this->m_googleicon==2?' <img src="http://code.google.com/intl/fr/apis/maps/documentation/places/images/powered-by-google-on-black.png" />':'' ;		
 		
@@ -108,9 +109,7 @@ class MJRadius extends SPPlugin{
 								<div class="SPSearchLabel"><strong>'.$label.' :</strong></div>
 								<div class="SPSearchField center">'.$center.$button1.$button2.$imageW.$imageB.'</div>
 								<div class="SPSearchLabel"><strong>'.Sobi::Txt( 'MJRS.RADIUS' ).' :</strong></div>
-								<div class="SPSearchField radius">'.$radius.'</div> <input type="hidden" id="mj_rs_ref_lat" name="mj_rs_ref_lat" value="'.$ref_lat.'" /><input type="hidden" id="mj_rs_ref_lng" name="mj_rs_ref_lng" value="'.$ref_lng.'" />
-							
-							</div>');
+								<div class="SPSearchField radius">'.$radius.'</div> <input type="hidden" id="mj_rs_ref_lat" name="mj_rs_ref_lat" value="'.$ref_lat.'" /><input type="hidden" id="mj_rs_ref_lng" name="mj_rs_ref_lng" value="'.$ref_lng.'" /></div>');
 
 		if(!$this->m_enabled)
 			return ;

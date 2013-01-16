@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SobiProApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://xml.sigsiu.net/SobiPro/application.xsd">
+  <name>SEF Router</name>
+  <id>router</id>
+  <authorName>Sigsiu.NET GmbH</authorName>
+  <authorEmail>sobi@sigsiu.net</authorEmail>
+  <authorUrl>http://www.Sigsiu.NET/</authorUrl>
+  <copyright>Copyright (C) 2006-2012 Sigsiu.NET GmbH</copyright>
+  <license>GNU General Public License v3</license>
+  <creationDate>2012-04-02</creationDate>
+  <type>global_application</type>
+  <version>1.0</version>
+  <description>SEF URL router for Joomla! core SEF function</description>
+  <files path="front:">
+    <file>router.php</file>
+  </files>
+  <files path="config:">
+    <file>router.ini</file>
+  </files>
+  <requirements>
+    <core version="1.0.0"/>
+  </requirements>
+  <installLog>
+    <modified/>
+    <files>
+      <file>D:/wamp21e/www/sitejoomla_baseannuairethematique/components/com_sobipro/router.php</file>
+      <file>D:/wamp21e/www/sitejoomla_baseannuairethematique/components/com_sobipro/etc/router.ini</file>
+    </files>
+  </installLog>
+</SobiProApp>

@@ -223,14 +223,15 @@
 		return false;
 	 };
 	 this.highlight = function( el ) {
-		 currStyle = el.style.backgroundColor;		 
+		//LGW : un bord rouge plutot qu'un fond rouge...
+		 currStyle = el.style.borderColor;		 
 		 if ( el.attachEvent ) {
-			 el.attachEvent( 'onclick', function() { this.style.backgroundColor = currStyle; });
+			 el.attachEvent( 'onclick', function() { this.style.borderColor = currStyle; });
 		 }
 		 else {
-			 el.addEventListener( 'click',  function() { this.style.backgroundColor = currStyle; }, false );
+			 el.addEventListener( 'click',  function() { this.style.borderColor = currStyle; }, false );
 		 }
-		 el.style.backgroundColor = this.background;
+		 el.style.borderColor = this.background;
 	 };
 	 this.label = function( field ) {
 		var ElName = SobiPro.Txt( 'RED_HIGHLIGHTED_FIELD' );

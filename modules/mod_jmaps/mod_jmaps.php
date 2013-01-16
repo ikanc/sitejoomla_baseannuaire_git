@@ -521,7 +521,23 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 				'zoomControlPosition': '<?php echo $jmapZoomControlPosition; ?>', 
 				'zoomControlStyle': '<?php echo $jmapZoomControlStyle; ?>', 
 				'debugMode': false						
-			});
+				});
+
+				//On ajoute le marqueur de localisation ?
+				var localIconOptions = new Object;
+				localIconOptions.primaryColor = "#67BF4B";
+				localIconOptions.strokeColor = "#119931";
+				var myLocalIcon = MapIconMaker.createLabeledMarkerIcon(localIconOptions);
+				jQuery(mapDiv).jmap('AddMarker',{
+					'pointLatLng': [mjlatval, mjlngval],
+					'pointTitle' : '<?php echo JText::_('JMAPS_CLICK_MARKER_HOME'); ?>',
+					'pointIcon': myLocalIcon.markerImage,
+					'pointShadow': myLocalIcon.markerShadow,
+					'pointShape': myLocalIcon.shape
+				});
+				//console.log('Marker Added - Lat/Long!');
+	
+				
 			}
 			else {
 			jQuery(mapDiv).jmap('init', {

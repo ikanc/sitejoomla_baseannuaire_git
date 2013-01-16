@@ -464,15 +464,37 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 			$db =& SPFactory::db();
 			$fieldData = array();
 			$fieldNames = $db->select('*', 'spdb_field', array('section' => $data['section'], 'nid' => array($this->jmfaTitleField, $this->jmfaStreetField, $this->jmfaCityField, $this->jmfaStateField, $this->jmfaPostcodeField, $this->jmfaFeaturedField, $this->jmfaCountryField, $this->jmfaCustomField1, $this->jmfaCustomField2, $this->jmfaCustomField3, $this->jmfaCustomField4, $this->jmfaCustomField5), 'enabled' => 1))->loadObjectList();
+			
 			foreach($fieldNames as $fieldName) {
 				$fieldDataObj = $db->select('*', 'spdb_field_data', array('sid' => $data['sid'], 'fid' => $fieldName->fid))->loadObject();
 				if (isset($fieldDataObj->baseData)) {
 					$fieldData[$fieldName->nid] = $fieldDataObj->baseData;
+								
 					if ($fieldName->fieldType == 'radio') {
 						$fieldNumber[$fieldName->nid] = $fieldDataObj->fid;
 						$fieldOptionObj = $db->select('*', 'spdb_field_option_selected', array('sid' => $data['sid'], 'fid' => $fieldName->fid))->loadObject();
 						if (isset($fieldOptionObj->optValue)) {
 							$fieldData[$fieldName->nid] = $fieldOptionObj->optValue;
+						}
+					}
+					
+					//LGW: extended to checkoxes too!
+					if ($fieldName->fieldType == 'chbxgroup') {
+						$fieldNumber[$fieldName->nid] = $fieldDataObj->fid;				
+						$fieldOptionObjs = $db->select('*', 'spdb_field_option_selected', array('sid' => $data['sid'], 'fid' => $fieldName->fid))->loadObjectList();
+						$fieldData[$fieldName->nid]='';
+
+						$nbFieldOptions = count($fieldOptionObjs);
+						$i=1;
+						foreach ($fieldOptionObjs as $fieldOptionObj) {
+										
+							//On recherche le libelle valeur 
+							$optValueLib = $db->select('*', 'spdb_language', array('sKey' => $fieldOptionObj->optValue))->loadObject();
+							if (isset($optValueLib->sValue)) {
+								$fieldData[$fieldName->nid] .= $optValueLib->sValue;
+								if ($i<$nbFieldOptions) $fieldData[$fieldName->nid] .= ', ';
+								else $fieldData[$fieldName->nid] .= '.';
+							}
 						}
 					}
 				}
@@ -514,7 +536,7 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 			catch (SPException $x) {
 				Sobi::Error($this->name(), SPLang::e('CANNOT_GET_RELATIONS_DB_ERR', $x->getMessage()), SPC::ERROR, 500, __LINE__, __FILE__ );
 			}
-// Modify the next 2 lines to use parameters instead of hard coding
+			// Modify the next 2 lines to use parameters instead of hard coding
 			//LGW
 			$jmfaLink = JURI::base() . 'index.php?option=com_sobipro&sid=' . $data['sid'] . ':' . $fieldData[$this->jmfaTitleField];
 			//.'&tmpl=component';
@@ -709,11 +731,30 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 						$websiteURL = $urlArray['url'];
 						$XMLcustom = '<a target="_blank" title="' . urlencode($websiteLabel) . '" href="http://' . $websiteURL . '">' . addslashes($websiteLabel) . '</a>' . ' ';
 					}
-					if (count($HTMLarray) == 1) {
-						$HTMLwork = $XMLcustom . $HTMLarray[0];
-					} else {
-							$HTMLwork = $HTMLarray[0] . $XMLcustom . $HTMLarray[1];
-							}
+					
+					//LGW : on peut afficher les categories avec custom1 (custom1 = field_category)
+					if ($this->jmfaCustomField1 == 'field_category') {
+						$cats = count($labels);
+						$i=1;
+						$XMLcustom = 'Catégorie(s) : '; //A faire : gerer la traduction !
+						foreach ($labels as $label ) {
+							$XMLcustom .= $label['value'];
+							if ($i<$cats) $XMLcustom .= ', ';
+							$i++;
+						}					
+					}
+										
+					//LGW: si le champ est vide, on saute....
+					if ($XMLcustom!='') {
+						//LGW: on ajoute le br en dynamique pour prévoir les champs custom vides
+						if (count($HTMLarray) == 1) {
+							$HTMLwork = $XMLcustom . '</br>' . $HTMLarray[0];
+						} 
+						else {
+							$HTMLwork = $HTMLarray[0] . $XMLcustom . '</br>' . $HTMLarray[1];
+						}
+					}
+					else $HTMLwork = $HTMLarray[0] . $HTMLarray[1];
 					$custom1Start = 998;
 					continue;
 				}
@@ -729,17 +770,26 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 						$websiteURL = $urlArray['url'];
 						$XMLcustom = '<a target="_blank" title="' . urlencode($websiteLabel) . '" href="http://' . $websiteURL . '">' . addslashes($websiteLabel) . '</a>' . ' ';
 					}
-					if (count($HTMLarray) == 1) {
-						$HTMLwork = $XMLcustom . $HTMLarray[0];
-					} else {
-							$HTMLwork = $HTMLarray[0] . $XMLcustom . $HTMLarray[1];
-							}
+					
+					//LGW: si le champ est vide, on saute....
+					if ($XMLcustom!='') {
+						//LGW: on ajoute le br en dynamique pour prévoir les champs custom vides
+						if (count($HTMLarray) == 1) {
+							$HTMLwork = $XMLcustom . '</br>' . $HTMLarray[0];
+						} 
+						else {
+							$HTMLwork = $HTMLarray[0] . $XMLcustom . '</br>' . $HTMLarray[1];
+						}
+					}
+					else $HTMLwork = $HTMLarray[0] . $HTMLarray[1];
 					$custom2Start = 998;
+					
 					continue;
 				}
 				if ($bl >= $custom3Start) {
 					$HTMLarray = explode('custom3', $HTMLwork);
 					$XMLcustom = $XMLcustom3;
+					
 					if ($this->jmfaCustomField3 == 'field_email') {
 						$XMLcustom = '<a target="_blank" title="' . urlencode($XMLcustom3) . '" href="mailto:' . $XMLcustom3 . '">Email</a>' . ' ';
 					}
@@ -749,12 +799,20 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 						$websiteURL = $urlArray['url'];
 						$XMLcustom = '<a target="_blank" title="' . urlencode($websiteLabel) . '" href="http://' . $websiteURL . '">' . addslashes($websiteLabel) . '</a>' . ' ';
 					}
-					if (count($HTMLarray) == 1) {
-						$HTMLwork = $XMLcustom . $HTMLarray[0];
-					} else {
-							$HTMLwork = $HTMLarray[0] . $XMLcustom . $HTMLarray[1];
-							}
-					$custom1Start = 998;
+					
+					//LGW: si le champ est vide, on saute....
+					if ($XMLcustom!='') {
+					
+						//LGW: on ajoute le br en dynamique pour prévoir les champs custom vides
+						if (count($HTMLarray) == 1) {
+							$HTMLwork = $XMLcustom . '</br>' . $HTMLarray[0];
+						} 
+						else {
+							$HTMLwork = $HTMLarray[0] . $XMLcustom . '</br>' . $HTMLarray[1];
+								}
+					}
+					else $HTMLwork = $HTMLarray[0] . $HTMLarray[1];
+					$custom3Start = 998;
 					continue;
 				}
 				if ($bl >= $custom4Start) {
@@ -769,16 +827,24 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 						$websiteURL = $urlArray['url'];
 						$XMLcustom = '<a target="_blank" title="' . urlencode($websiteLabel) . '" href="http://' . $websiteURL . '">' . addslashes($websiteLabel) . '</a>' . ' ';
 					}
-					if (count($HTMLarray) == 1) {
-						$HTMLwork = $XMLcustom . $HTMLarray[0];
-					} else {
-							$HTMLwork = $HTMLarray[0] . $XMLcustom . $HTMLarray[1];
-							}
+					
+					//LGW: si le champ est vide, on saute....
+					if ($XMLcustom!='') {
+						//LGW: on ajoute le br en dynamique pour prévoir les champs custom vides
+						if (count($HTMLarray) == 1) {
+							$HTMLwork = $XMLcustom . '</br>' . $HTMLarray[0];
+						} else 
+						{
+							$HTMLwork = $HTMLarray[0] . $XMLcustom . '</br>' . $HTMLarray[1];
+						}
+					}
+					else $HTMLwork = $HTMLarray[0] . $HTMLarray[1];
 					$custom4Start = 998;
 					continue;
 				}
 				if ($bl >= $custom5Start) {
 					$HTMLarray = explode('custom5', $HTMLwork);
+					//LGW: on ajoute le br en dynamique pour prévoir les champs custom vides
 					$XMLcustom = $XMLcustom5;
 					if ($this->jmfaCustomField5 == 'field_email') {
 						$XMLcustom = '<a target="_blank" title="' . urlencode($XMLcustom5) . '" href="mailto:' . $XMLcustom5 . '">Email</a>' . ' ';
@@ -789,11 +855,17 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 						$websiteURL = $urlArray['url'];
 						$XMLcustom = '<a target="_blank" title="' . urlencode($websiteLabel) . '" href="http://' . $websiteURL . '">' . addslashes($websiteLabel) . '</a>' . ' ';
 					}
-					if (count($HTMLarray) == 1) {
-						$HTMLwork = $XMLcustom . $HTMLarray[0];
-					} else {
+					
+					//LGW: si le champ est vide, on saute....
+					if ($XMLcustom!='') {
+						if (count($HTMLarray) == 1) {
+							$HTMLwork = $XMLcustom . $HTMLarray[0];
+						} else 
+						{
 							$HTMLwork = $HTMLarray[0] . $XMLcustom . $HTMLarray[1];
-							}
+						}
+					}
+					else $HTMLwork = $HTMLarray[0] . $HTMLarray[1];
 					$custom5Start = 998;
 					continue;
 				}
