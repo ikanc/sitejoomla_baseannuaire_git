@@ -117,9 +117,16 @@ final class SPPayment
 					$pos[] = array( 'reference' => $payment[ 'reference' ],  'netto' => self::currency( $netto ), 'brutto' => self::currency( $brutto ), 'vat' => self::percent( $vat ), 'fid' => $payment[ 'id' ] );
 				}
 				else {
+					//LGW : on autorise la vat à 0%
+					$netto = $payment[ 'amount' ] ;
+					$brutto = $payment[ 'amount' ] ;
+					$svat = 0;
+				
 					$sumnetto += $payment[ 'amount' ];
 					$sumbrutto += $payment[ 'amount' ];
-					$pos[] = array( 'reference' => $payment[ 'reference' ],  'amount' => self::currency( $payment[ 'amount' ] ), 'fid' => $payment[ 'id' ] );
+					//LGW : on autorise la vat à 0%
+					//$pos[] = array( 'reference' => $payment[ 'reference' ],  'amount' => self::currency( $payment[ 'amount' ] ), 'fid' => $payment[ 'id' ] );
+					$pos[] = array( 'reference' => $payment[ 'reference' ],  'netto' => self::currency( $netto ), 'brutto' => self::currency( $brutto ), 'vat' => self::percent( $vat ), 'fid' => $payment[ 'id' ] );
 				}
 			}
 		}
@@ -179,7 +186,14 @@ final class SPPayment
 			);
 		}
 		else {
-			$sum = array( 'sum_brutto' => self::currency( $sumbrutto ) );
+			
+				
+			$sum = array( 
+			//LGW : on autorise la vat à 0%
+			'sum_netto' => self::currency( $sumbrutto ),
+			'sum_vat' => self::currency( $sumbrutto ),
+			'vat' => self::percent( $vat ),
+			'sum_brutto' => self::currency( $sumbrutto ) );
 		}
 		$r = array( 'positions' => $pos, 'discount' => $dis , 'summary' => $sum, 'refNum' => $this->refNum );
 		Sobi::Trigger( 'Payment', 'AfterSummary', array( &$r, $id ) );

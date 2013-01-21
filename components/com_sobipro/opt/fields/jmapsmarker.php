@@ -229,12 +229,12 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 		$field .= "\n<div style=\"width:{$this->formWidth}%; height:{$this->formHeight}px;\" id=\"{$this->nid}_canvas\" class=\"{$class}\">\n";
 		$field .= "</div>\n";
 		
-		$field .= '<span class="SPJmapsmarkerLabel SPJmapsmarkerLatitude">'.Sobi::Txt('JMFA_FORM_JMLATITUDE').'</span>';
+		$field .= '<div class=" SPJmapsmarkerLatitude"><span class="SPJmapsmarkerLabel">'.Sobi::Txt('JMFA_FORM_JMLATITUDE').' : </span>';
 		$field .= SPHtml_Input::text($this->nid.'_jmlatitude', $jmlatitude, array('id' => $this->nid.'_jmlatitude', 'class' => $class));
-		$field .= '<span class="SPJmapsmarkerLabel SPJmapsmarkerLongitude">'.Sobi::Txt('JMFA_FORM_JMLONGITUDE').'</span>';
+		$field .= '</div><div class="SPJmapsmarkerLongitude"><span class="SPJmapsmarkerLabel">'.Sobi::Txt('JMFA_FORM_JMLONGITUDE').' : </span>';
 		$field .= SPHtml_Input::text($this->nid.'_jmlongitude', $jmlongitude, array('id' => $this->nid.'_jmlongitude', 'class' => $class));
 		//LGW
-		$field .= '<div style="display:none">';
+		$field .= '</div><div style="display:none">';
 		
 		$field .= '<br /><span id="SPJmapsmarkerLabel"><input name="SPJmapsmarkerSetLatLong" type="button" id="SPJmapsmarkerSetLatLong" value="'.Sobi::Txt('JMFA_FORM_JMBUTTON').'"></span>';
 		$field .= '<br /><span class="SPJmapsmarkerLabel SPJmapsmarkerColor">'.Sobi::Txt('JMFA_FORM_JMCOLOR').'</span>';
@@ -463,7 +463,8 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 		if(count($data) && isset($data['jmlatitude']) && isset($data['jmlongitude']) && ($data['jmlatitude'] + $data['jmlongitude']) != 0) {
 			$db =& SPFactory::db();
 			$fieldData = array();
-			$fieldNames = $db->select('*', 'spdb_field', array('section' => $data['section'], 'nid' => array($this->jmfaTitleField, $this->jmfaStreetField, $this->jmfaCityField, $this->jmfaStateField, $this->jmfaPostcodeField, $this->jmfaFeaturedField, $this->jmfaCountryField, $this->jmfaCustomField1, $this->jmfaCustomField2, $this->jmfaCustomField3, $this->jmfaCustomField4, $this->jmfaCustomField5), 'enabled' => 1))->loadObjectList();
+			//LGW: on ajoute le logo field_logo
+			$fieldNames = $db->select('*', 'spdb_field', array('section' => $data['section'], 'nid' => array($this->jmfaTitleField, 'field_logo', $this->jmfaStreetField, $this->jmfaCityField, $this->jmfaStateField, $this->jmfaPostcodeField, $this->jmfaFeaturedField, $this->jmfaCountryField, $this->jmfaCustomField1, $this->jmfaCustomField2, $this->jmfaCustomField3, $this->jmfaCustomField4, $this->jmfaCustomField5), 'enabled' => 1))->loadObjectList();
 			
 			foreach($fieldNames as $fieldName) {
 				$fieldDataObj = $db->select('*', 'spdb_field_data', array('sid' => $data['sid'], 'fid' => $fieldName->fid))->loadObject();
@@ -477,23 +478,30 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 							$fieldData[$fieldName->nid] = $fieldOptionObj->optValue;
 						}
 					}
-					
+	
 					//LGW: extended to checkoxes too!
 					if ($fieldName->fieldType == 'chbxgroup') {
 						$fieldNumber[$fieldName->nid] = $fieldDataObj->fid;				
-						$fieldOptionObjs = $db->select('*', 'spdb_field_option_selected', array('sid' => $data['sid'], 'fid' => $fieldName->fid))->loadObjectList();
+						$fieldOptionObjs = $db->select('*', 'spdb_field_option_selected', array('sid' => $data['sid'], 'fid' => $fieldName->fid,  'copy' => 0))->loadObjectList();
 						$fieldData[$fieldName->nid]='';
-
+						
 						$nbFieldOptions = count($fieldOptionObjs);
-						$i=1;
-						foreach ($fieldOptionObjs as $fieldOptionObj) {
-										
-							//On recherche le libelle valeur 
-							$optValueLib = $db->select('*', 'spdb_language', array('sKey' => $fieldOptionObj->optValue))->loadObject();
-							if (isset($optValueLib->sValue)) {
-								$fieldData[$fieldName->nid] .= $optValueLib->sValue;
-								if ($i<$nbFieldOptions) $fieldData[$fieldName->nid] .= ', ';
-								else $fieldData[$fieldName->nid] .= '.';
+						if ($nbFieldOptions>0) {
+							//On cherche le label du champ...
+							$fieldLabel  = $db->select('*', 'spdb_language', array('sKey' => 'name', 'fid' => $fieldDataObj->fid, 'language' =>Sobi::Lang()))->loadObject();
+							$fieldData[$fieldName->nid]='<strong>'.$fieldLabel->sValue.'</strong> : ';
+					
+							$i=1;
+							foreach ($fieldOptionObjs as $fieldOptionObj) {
+											
+								//On recherche le libelle valeur 
+								$optValueLib = $db->select('*', 'spdb_language', array('sKey' => $fieldOptionObj->optValue))->loadObject();
+								if (isset($optValueLib->sValue)) {
+									$fieldData[$fieldName->nid] .= $optValueLib->sValue;
+									if ($i<$nbFieldOptions) $fieldData[$fieldName->nid] .= ', ';
+									else $fieldData[$fieldName->nid] .= '.';
+									$i++;
+								}
 							}
 						}
 					}
@@ -541,7 +549,14 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 			$jmfaLink = JURI::base() . 'index.php?option=com_sobipro&sid=' . $data['sid'] . ':' . $fieldData[$this->jmfaTitleField];
 			//.'&tmpl=component';
 			
-			$jmfaTitle = '<b>' . $fieldData[$this->jmfaTitleField] . '</b><br/>';
+			
+			//LGW : on ajoute un champ fixe : field_logo
+			$imageArray = SPConfig::unserialize($fieldData['field_logo']);
+			$logosrc = $imageArray['ico']; //ico, thumb, image,original
+			$jmfaLogo = '<img src="'.JURI::base() .$logosrc.'">';
+	
+			//Modification de l'entete
+			$jmfaTitle = $jmfaLogo.'<b>' . $fieldData[$this->jmfaTitleField] . '</b><br/>';
 			$jmfaDetails = '<div class="SOBIproDetailsDIV"><a href="' . $jmfaLink . '" class="SOBIproDetails" onclick="if(!parent.jQuery.browser.opera) {var linkData = \'' . $jmfaLink . '\'; var returnData = openColorbox(linkData); return returnData;}" target="_blank">' . Sobi::Txt('JMFA_DETAILS_LABEL') . '</a></div>';
 			$XMLname = $fieldData[$this->jmfaTitleField];
 			$XMLID = $data['sid'];
@@ -711,6 +726,7 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 				}
 				if ($bl >= $featuredStart) {
 					$HTMLarray = explode('featured', $HTMLwork);
+									
 					if (count($HTMLarray) == 1) {
 						$HTMLwork = $XMLfeatured . $HTMLarray[0];
 					} else {
