@@ -553,11 +553,11 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 			//LGW : on ajoute un champ fixe : field_logo
 			$imageArray = SPConfig::unserialize($fieldData['field_logo']);
 			$logosrc = $imageArray['ico']; //ico, thumb, image,original
-			$jmfaLogo = '<img src="'.JURI::base() .$logosrc.'">';
+			$jmfaLogo = '<img style="float:left" src="'.JURI::base() .$logosrc.'">';
 	
-			//Modification de l'entete
+			//LGW:Modification de l'entete
 			$jmfaTitle = $jmfaLogo.'<b>' . $fieldData[$this->jmfaTitleField] . '</b><br/>';
-			$jmfaDetails = '<div class="SOBIproDetailsDIV"><a href="' . $jmfaLink . '" class="SOBIproDetails" onclick="if(!parent.jQuery.browser.opera) {var linkData = \'' . $jmfaLink . '\'; var returnData = openColorbox(linkData); return returnData;}" target="_blank">' . Sobi::Txt('JMFA_DETAILS_LABEL') . '</a></div>';
+			$jmfaDetails = '<div class="SOBIproDetailsDIV"><a href="' . $jmfaLink . '" class="SOBIproDetails" onclick="if(!parent.jQuery.browser.opera) {var linkData = \'' . $jmfaLink . '\'; var returnData = openColorbox(linkData); return returnData;}" target="_blank"><i class="icon-plus-sign"></i> ' . Sobi::Txt('JMFA_DETAILS_LABEL') . '</a></div>';
 			$XMLname = $fieldData[$this->jmfaTitleField];
 			$XMLID = $data['sid'];
 			$XMLstreet = $fieldData[$this->jmfaStreetField];
@@ -747,19 +747,7 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 						$websiteURL = $urlArray['url'];
 						$XMLcustom = '<a target="_blank" title="' . urlencode($websiteLabel) . '" href="http://' . $websiteURL . '">' . addslashes($websiteLabel) . '</a>' . ' ';
 					}
-					
-					//LGW : on peut afficher les categories avec custom1 (custom1 = field_category)
-					if ($this->jmfaCustomField1 == 'field_category') {
-						$cats = count($labels);
-						$i=1;
-						$XMLcustom = 'Catégorie(s) : '; //A faire : gerer la traduction !
-						foreach ($labels as $label ) {
-							$XMLcustom .= $label['value'];
-							if ($i<$cats) $XMLcustom .= ', ';
-							$i++;
-						}					
-					}
-										
+								
 					//LGW: si le champ est vide, on saute....
 					if ($XMLcustom!='') {
 						//LGW: on ajoute le br en dynamique pour prévoir les champs custom vides
@@ -886,7 +874,18 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 					continue;
 				}
 			}
-			$XMLhtml .= $HTMLwork;			
+			
+			//LGW : On ajoute la categorie		
+			$nbcats = count($labels);
+			$i=1;
+			$cats = '<br/><br/>Catégorie(s) : '; //A faire : gerer la traduction !
+			foreach ($labels as $label ) {
+				$cats .= $label['value'];
+				if ($i<$nbcats) $cats .= ', ';
+				$i++;
+			}
+								
+			$XMLhtml .= $HTMLwork.$cats;			
 			$XMLcatID = 0;
 			if (!empty($main)) {
 				$XMLcatID = $main['pid'];

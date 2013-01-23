@@ -42,8 +42,9 @@ abstract class SPTooltip
 	 */
 	public static function toolTip( $tooltip, $title = null, $image = null, $width = null, $text = null, $href = null, $target = '_blank' )
 	{
-		//LGW
-		$class = '';//SPFactory::config()->key( 'html.tooltip_class', 'editlinktip hasTip' );
+		//LGW: Adaptation pour les tooltip Bootstrap...pffff...
+		$class = 'hasBootstrapTip'; //SPFactory::config()->key( 'html.tooltip_class', 'editlinktip hasTip' );
+		
 		while ( strstr( $text, "\'" ) ) {
 			$text = stripcslashes( $text );
 		}
@@ -53,13 +54,14 @@ abstract class SPTooltip
 		while ( strstr( $title, "\'" ) ) {
 			$title = stripcslashes( $title );
 		}
-		//LGW
 		if ( !$text || $image ) {
 			$tip = "<img src=\"{$image}\" alt=\"{$title}\"/>";
-			$tip = "<span class=\"{$class}\" title=\"{$tooltip}\">{$tip}</span>";
+			//LGW: Adaptation pour les tooltip Bootstrap
+			$tip = "<a href=\"#\" class=\"{$class}\" rel=\"tooltip\" title=\"{$title}::{$tooltip}\">{$tip}</a>";
 		}
 		else {
-			$tip = "<span class=\"{$class}\" title=\"{$tooltip}\">{$text}</span>";
+			//LGW: Adaptation pour les tooltip Bootstrap
+			$tip = "<a href=\"#\" class=\"{$class}\" rel=\"tooltip\" title=\"{$tooltip}\">{$text}</a>";
 		}
 		if( $href ) {
 			$tip = "<a href=\"{$href}\" target=\"{$target}\">{$tip}</a>";
