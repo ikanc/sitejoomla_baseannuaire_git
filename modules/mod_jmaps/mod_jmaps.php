@@ -463,6 +463,7 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 			}  
 		<?php }?>
 		});
+		
 		function jmaps_Initialize () {
 			latLongArray = new Array();
 			llIndex = 0;
@@ -472,196 +473,131 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 			}
 //			console.log('JMaps Init Function - ' + mapDiv);
 			
-			//LGW : On utilise la localisation faite par myjoom radius comme centre de la carte. Si elle n'est pas dispo, c'est le centre par défaut (cf. parametres) qui est utilisé.
-			var mjlat;
-			var mjlatval;mjlatval=0;
-			mjlat=jQuery('input#mj_rs_ref_lat');
-			if (mjlat.length>0) mjlatval=mjlat.val();
-			
-			var mjlng;
-			var mjlngval; mjlngval=0;
-			mjlng=jQuery('input#mj_rs_ref_lng');
-			if (mjlng.length>0) mjlngval=mjlng.val();
-			//La localisation est disponible....
-			if  ((mjlatval!=0) || (mjlngval!=0)){
+			if (addGeolocalizationMarker()==false) {
 			
 				jQuery(mapDiv).jmap('init', {
-				'backgroundColor': '<?php echo $jmapBackgroundColor; ?>', 
-				'center':[mjlatval, mjlngval], 
-				'disableDefaultUI': false,
-				'disableDoubleClickZoom': <?php echo $jmapDisableDoubleClickZoom; ?>, 
-				'draggable': <?php echo $jmapDraggable; ?>, 
-				'draggableCursor': null,
-				'draggingCursor': null,
-				'keyboardShortcuts': true,
-				'mapTypeControl': <?php echo $jmapMapTypeControl; ?>, 
-				'mapTypeControlTypes':['hybrid','roadmap', 'satellite', 'terrain'], 
-				'mapTypeControlPosition': '<?php echo $jmapMapTypeControlPosition; ?>', 
-				'mapTypeControlStyle': '<?php echo $jmapMapTypeControlStyle; ?>', 
-				'mapTypeId': '<?php echo $jmapMapTypeId; ?>', 
-		<?php if ($jmapMarkerClusterer) { ?>
-				'maxZoom': <?php echo $jmapMMMaxZoom; ?>,
-				'minZoom': <?php echo $jmapMMMinZoom; ?>,
-		<?php }?>
-				'noClear': false,
-				'overviewMapControl': <?php echo $jmapOverviewMapControl; ?>, 
-				'overviewMapControlOpened': <?php echo $jmapOverviewMapControlOpened; ?>, 
-				'panControl': <?php echo $jmapPanControl; ?>, 
-				'panControlPosition': '<?php echo $jmapPanControlPosition; ?>', 
-				'scaleControl': <?php echo $jmapScaleControl; ?>, 
-				'scaleControlPosition': '<?php echo $jmapScaleControlPosition; ?>', 
-				'scrollwheel': <?php echo $jmapScrollWheel; ?>, 
-				'streetViewControl': <?php echo $jmapStreetViewControl; ?>, 
-				'streetViewControlPosition': '<?php echo $jmapStreetViewControlPosition; ?>', 
-				
-				//LGW: on double le zoom initial si la localisation est faite
-				'zoom':<?php echo $jmapInitZoom*2; ?>, 
-				
-				'zoomControl': <?php echo $jmapZoomControl; ?>, 
-				'zoomControlPosition': '<?php echo $jmapZoomControlPosition; ?>', 
-				'zoomControlStyle': '<?php echo $jmapZoomControlStyle; ?>', 
-				'debugMode': false						
+					'backgroundColor': '<?php echo $jmapBackgroundColor; ?>', 
+					'center':[<?php echo $jmapCenterLatitude; ?>, <?php echo $jmapCenterLongitude; ?>], 
+					'disableDefaultUI': false,
+					'disableDoubleClickZoom': <?php echo $jmapDisableDoubleClickZoom; ?>, 
+					'draggable': <?php echo $jmapDraggable; ?>, 
+					'draggableCursor': null,
+					'draggingCursor': null,
+					'keyboardShortcuts': true,
+					'mapTypeControl': <?php echo $jmapMapTypeControl; ?>, 
+					'mapTypeControlTypes':['hybrid','roadmap', 'satellite', 'terrain'], 
+					'mapTypeControlPosition': '<?php echo $jmapMapTypeControlPosition; ?>', 
+					'mapTypeControlStyle': '<?php echo $jmapMapTypeControlStyle; ?>', 
+					'mapTypeId': '<?php echo $jmapMapTypeId; ?>', 
+			<?php if ($jmapMarkerClusterer) { ?>
+					'maxZoom': <?php echo $jmapMMMaxZoom; ?>,
+					'minZoom': <?php echo $jmapMMMinZoom; ?>,
+			<?php }?>
+					'noClear': false,
+					'overviewMapControl': <?php echo $jmapOverviewMapControl; ?>, 
+					'overviewMapControlOpened': <?php echo $jmapOverviewMapControlOpened; ?>, 
+					'panControl': <?php echo $jmapPanControl; ?>, 
+					'panControlPosition': '<?php echo $jmapPanControlPosition; ?>', 
+					'scaleControl': <?php echo $jmapScaleControl; ?>, 
+					'scaleControlPosition': '<?php echo $jmapScaleControlPosition; ?>', 
+					'scrollwheel': <?php echo $jmapScrollWheel; ?>, 
+					'streetViewControl': <?php echo $jmapStreetViewControl; ?>, 
+					'streetViewControlPosition': '<?php echo $jmapStreetViewControlPosition; ?>', 
+					'zoom':<?php echo $jmapInitZoom; ?>, 
+					'zoomControl': <?php echo $jmapZoomControl; ?>, 
+					'zoomControlPosition': '<?php echo $jmapZoomControlPosition; ?>', 
+					'zoomControlStyle': '<?php echo $jmapZoomControlStyle; ?>', 
+					'debugMode': false						
 				});
-
-				//On ajoute le marqueur de localisation ?
-				var localIconOptions = new Object;
-				localIconOptions.primaryColor = "#67BF4B";
-				localIconOptions.strokeColor = "#119931";
-				var myLocalIcon = MapIconMaker.createLabeledMarkerIcon(localIconOptions);
-				jQuery(mapDiv).jmap('AddMarker',{
-					'pointLatLng': [mjlatval, mjlngval],
-					'pointTitle' : '<?php echo JText::_('JMAPS_CLICK_MARKER_HOME'); ?>',
-					'pointIcon': myLocalIcon.markerImage,
-					'pointShadow': myLocalIcon.markerShadow,
-					'pointShape': myLocalIcon.shape
+			}
+			<?php if ($jmapMarkerClusterer == 1) { ?>
+				var mcStyles = Array();
+				mcStyles [0] = [
+							{
+								url: 'modules/mod_jmaps/js/images/people35.png',
+								height: 35,
+								width: 35,
+								anchor: [16, 0],
+								textColor: '#ff00ff',
+								textSize: 10
+							}, {
+								url: 'modules/mod_jmaps/js/images/people45.png',
+								height: 45,
+								width: 45,
+								anchor: [24, 0],
+								textColor: '#ff0000',
+								textSize: 11
+							}, {
+								url: 'modules/mod_jmaps/js/images/people55.png',
+								height: 55,
+								width: 55,
+								anchor: [32, 0],
+								textColor: '#ffffff',
+								textSize: 12
+							}]; 
+				mcStyles [1] = [
+							{
+								url: 'modules/mod_jmaps/js/images/conv30.png',
+								height: 27,
+								width: 30,
+								anchor: [3, 0],
+								textColor: '#ff00ff',
+								textSize: 10
+							}, {
+								url: 'modules/mod_jmaps/js/images/conv40.png',
+								height: 36,
+								width: 40,
+								anchor: [6, 0],
+								textColor: '#ff0000',
+								textSize: 11
+							}, {
+								url: 'modules/mod_jmaps/js/images/conv50.png',
+								width: 50,
+								height: 45,
+								anchor: [8, 0],
+								textSize: 12
+							}]; 
+				mcStyles [2] = [
+							{
+								url: 'modules/mod_jmaps/js/images/heart30.png',
+								height: 26,
+								width: 30,
+								anchor: [4, 0],
+								textColor: '#ff00ff',
+								textSize: 10
+							}, {
+								url: 'modules/mod_jmaps/js/images/heart40.png',
+								height: 35,
+								width: 40,
+								anchor: [8, 0],
+								textColor: '#ff0000',
+								textSize: 11
+							}, {
+								url: 'modules/mod_jmaps/js/images/heart50.png',
+								width: 50,
+								height: 44,
+								anchor: [12, 0],
+								textSize: 12
+							}];
+				jQuery(mapDiv).jmap('CreateMarkerClusterer', {
+					'gridSize': <?php echo $jmapClustererGridSize; ?>,
+					'minimumClusterSize': <?php echo $jmapClustererMinimumClusterSize; ?>,
+					'zoomOnClick': <?php echo $jmapClustererZoomOnClick; ?>,
+					'averageCenter': <?php echo $jmapClustererAverageCenter; ?>,
+				<?php if ($jmapClustererStyle != 'default') { ?>
+					'styles': mcStyles[<?php echo $jmapClustererStyle; ?>],
+				<?php } ?>
+					'maxZoom': <?php echo $jmapClustererMaxZoom; ?>
 				});
-				//console.log('Marker Added - Lat/Long!');
-	
-				
-			}
-			else {
-			jQuery(mapDiv).jmap('init', {
-				'backgroundColor': '<?php echo $jmapBackgroundColor; ?>', 
-				'center':[<?php echo $jmapCenterLatitude; ?>, <?php echo $jmapCenterLongitude; ?>], 
-				'disableDefaultUI': false,
-				'disableDoubleClickZoom': <?php echo $jmapDisableDoubleClickZoom; ?>, 
-				'draggable': <?php echo $jmapDraggable; ?>, 
-				'draggableCursor': null,
-				'draggingCursor': null,
-				'keyboardShortcuts': true,
-				'mapTypeControl': <?php echo $jmapMapTypeControl; ?>, 
-				'mapTypeControlTypes':['hybrid','roadmap', 'satellite', 'terrain'], 
-				'mapTypeControlPosition': '<?php echo $jmapMapTypeControlPosition; ?>', 
-				'mapTypeControlStyle': '<?php echo $jmapMapTypeControlStyle; ?>', 
-				'mapTypeId': '<?php echo $jmapMapTypeId; ?>', 
-		<?php if ($jmapMarkerClusterer) { ?>
-				'maxZoom': <?php echo $jmapMMMaxZoom; ?>,
-				'minZoom': <?php echo $jmapMMMinZoom; ?>,
-		<?php }?>
-				'noClear': false,
-				'overviewMapControl': <?php echo $jmapOverviewMapControl; ?>, 
-				'overviewMapControlOpened': <?php echo $jmapOverviewMapControlOpened; ?>, 
-				'panControl': <?php echo $jmapPanControl; ?>, 
-				'panControlPosition': '<?php echo $jmapPanControlPosition; ?>', 
-				'scaleControl': <?php echo $jmapScaleControl; ?>, 
-				'scaleControlPosition': '<?php echo $jmapScaleControlPosition; ?>', 
-				'scrollwheel': <?php echo $jmapScrollWheel; ?>, 
-				'streetViewControl': <?php echo $jmapStreetViewControl; ?>, 
-				'streetViewControlPosition': '<?php echo $jmapStreetViewControlPosition; ?>', 
-				'zoom':<?php echo $jmapInitZoom; ?>, 
-				'zoomControl': <?php echo $jmapZoomControl; ?>, 
-				'zoomControlPosition': '<?php echo $jmapZoomControlPosition; ?>', 
-				'zoomControlStyle': '<?php echo $jmapZoomControlStyle; ?>', 
-				'debugMode': false						
-			});
-			}
-		<?php if ($jmapMarkerClusterer == 1) { ?>
-			var mcStyles = Array();
-			mcStyles [0] = [
-						{
-							url: 'modules/mod_jmaps/js/images/people35.png',
-							height: 35,
-							width: 35,
-							anchor: [16, 0],
-							textColor: '#ff00ff',
-							textSize: 10
-						}, {
-							url: 'modules/mod_jmaps/js/images/people45.png',
-							height: 45,
-							width: 45,
-							anchor: [24, 0],
-							textColor: '#ff0000',
-							textSize: 11
-						}, {
-							url: 'modules/mod_jmaps/js/images/people55.png',
-							height: 55,
-							width: 55,
-							anchor: [32, 0],
-							textColor: '#ffffff',
-							textSize: 12
-						}]; 
-			mcStyles [1] = [
-						{
-							url: 'modules/mod_jmaps/js/images/conv30.png',
-							height: 27,
-							width: 30,
-							anchor: [3, 0],
-							textColor: '#ff00ff',
-							textSize: 10
-						}, {
-							url: 'modules/mod_jmaps/js/images/conv40.png',
-							height: 36,
-							width: 40,
-							anchor: [6, 0],
-							textColor: '#ff0000',
-							textSize: 11
-						}, {
-							url: 'modules/mod_jmaps/js/images/conv50.png',
-							width: 50,
-							height: 45,
-							anchor: [8, 0],
-							textSize: 12
-						}]; 
-			mcStyles [2] = [
-						{
-							url: 'modules/mod_jmaps/js/images/heart30.png',
-							height: 26,
-							width: 30,
-							anchor: [4, 0],
-							textColor: '#ff00ff',
-							textSize: 10
-						}, {
-							url: 'modules/mod_jmaps/js/images/heart40.png',
-							height: 35,
-							width: 40,
-							anchor: [8, 0],
-							textColor: '#ff0000',
-							textSize: 11
-						}, {
-							url: 'modules/mod_jmaps/js/images/heart50.png',
-							width: 50,
-							height: 44,
-							anchor: [12, 0],
-							textSize: 12
-						}];
-			jQuery(mapDiv).jmap('CreateMarkerClusterer', {
-				'gridSize': <?php echo $jmapClustererGridSize; ?>,
-				'minimumClusterSize': <?php echo $jmapClustererMinimumClusterSize; ?>,
-				'zoomOnClick': <?php echo $jmapClustererZoomOnClick; ?>,
-				'averageCenter': <?php echo $jmapClustererAverageCenter; ?>,
-			<?php if ($jmapClustererStyle != 'default') { ?>
-				'styles': mcStyles[<?php echo $jmapClustererStyle; ?>],
 			<?php } ?>
-				'maxZoom': <?php echo $jmapClustererMaxZoom; ?>
-			});
-		<?php } ?>
+		
 			<?php if ($jmapHeight=='100%') {?>
 				jQuery(mapDiv).animate({'width': '<?php echo $jmapWidth; ?>', 'height': window.innerHeight}, function(){
 			<?php } else {?>
 				jQuery(mapDiv).animate({'width': '<?php echo $jmapWidth; ?>', 'height': '<?php echo $jmapHeight; ?>'}, function(){
 			<?php }?>
 			
-            });
+			});
 		}
 		jmaps_Initialize ();
 		function buildJmapMarkers(jmapsMarkerArray, cookieCount, iconOptions) {
@@ -1134,53 +1070,167 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
         jQuery(document).ready(function(){
 //			console.log('About to INIT');	
 //			jmaps_Initialize();
-			console.log('About to get XML');	
+			//console.log('About to get XML');	
+			
 			var xmlCount = 0;
 			var jmapsMarkersBuilt = 0;
 			var jmapsMarkerArray = Array();
-			<?php for ($j=0;$j<count($jmapXMLname);++$j) { ?>
-	
-			jQuery.ajax({
-				type: "GET",
-				url: "<?php echo $jmapXMLname[$j]; ?>",
-				dataType: "xml",
-				success: parseXML,
-				error:function (xhr, ajaxOptions, thrownError){
-				<?php if ($jmapFeed != 'none') { ?>
-					jQuery('#<?php echo $jmapDivID; ?>').jmap('AddFeed', {
-						'feedUrl':'<?php echo $jmapFeed; ?>',
-						'mapCenter': []
-					});
-				<?php }?>
-				}
-			});
-            <?php } ?>
-            function parseXML(xml) {
-//find every Marker and build an array of the markers attributes
-				console.log('Parse');
-                xmlCount++;
-                jQuery(xml).find('sgmMarker').each(function() {
-                    var MapMarkerObject = jQuery(this);
-					jmapsMarkerArray[jmapsMarkersBuilt] = MapMarkerObject;
-					jmapsMarkersBuilt++;
-				});
-				if(xmlCount == <?php echo count($jmapXMLname); ?>) {
-					if(jmapsMarkersBuilt != 0) {
-						var iconOptions = new Object;
-						buildJmapMarkers(jmapsMarkerArray, jmapsMarkersBuilt, iconOptions);
-					} else {
-						<?php if ($jmapFeed != 'none') { ?>
-							jQuery('#<?php echo $jmapDivID; ?>').jmap('AddFeed', {
-								'feedUrl':'<?php echo $jmapFeed; ?>',
-								'mapCenter': []
-							});
-						<?php }?>
-//							console.log('Hide');
-							jQuery('#loadmessagehtml').hide();
+					
+			//Si la localisation n'est pas disponible par le module mjradius
+			if (((jQuery("#mj_rs_ref_lat").val()==0) && (jQuery("#mj_rs_ref_lng").val()==0)) || (jQuery("#mj_rs_center_selector").val()=='')){
+
+				var gc = new google.maps.Geocoder();
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(function (po) {
+						gc.geocode({"latLng":  new google.maps.LatLng(po.coords.latitude, po.coords.longitude) }, function(results, status) {
+							
+							if(status == google.maps.GeocoderStatus.OK) {
+											
+								//On met à jour mjradius ?
+								jQuery("input#mj_rs_ref_lat").val(po.coords.latitude) ;
+								jQuery("input#mj_rs_ref_lng").val(po.coords.longitude) ;								
+								jQuery("input#mj_rs_center_selector").val(results[0]["formatted_address"]);
+
+								//On ajoute le marker de localisation
+								addGeolocalizationMarker();
+								
+								//On ajoute les marker XML	
+								<?php for ($j=0;$j<count($jmapXMLname);++$j) { ?>
+					
+									jQuery.ajax({
+										type: "GET",
+										url: "<?php echo $jmapXMLname[$j]; ?>",
+										dataType: "xml",
+										success: parseXML,
+										error:function (xhr, ajaxOptions, thrownError){
+										<?php if ($jmapFeed != 'none') { ?>
+											jQuery('#<?php echo $jmapDivID; ?>').jmap('AddFeed', {
+												'feedUrl':'<?php echo $jmapFeed; ?>',
+												'mapCenter': []
+											});
+										<?php }?>
+										}
+									});
+								
+								<?php } ?>
+								
+								
+
 							}
-				}
+						});
+					});
+				}	
 			}
+			function parseXML(xml) {
+									//find every Marker and build an array of the markers attributes
+									//console.log('Parse');
+									xmlCount++;
+									jQuery(xml).find('sgmMarker').each(function() {
+										var MapMarkerObject = jQuery(this);
+										jmapsMarkerArray[jmapsMarkersBuilt] = MapMarkerObject;
+										jmapsMarkersBuilt++;
+									});
+									if(xmlCount == <?php echo count($jmapXMLname); ?>) {
+										if(jmapsMarkersBuilt != 0) {
+											var iconOptions = new Object;
+											buildJmapMarkers(jmapsMarkerArray, jmapsMarkersBuilt, iconOptions);
+										} else {
+											<?php if ($jmapFeed != 'none') { ?>
+												jQuery('#<?php echo $jmapDivID; ?>').jmap('AddFeed', {
+													'feedUrl':'<?php echo $jmapFeed; ?>',
+													'mapCenter': []
+												});
+											<?php }?>
+					//						console.log('Hide');
+											jQuery('#loadmessagehtml').hide();
+										}
+									}
+								}
+			
+			
+			
+			
+				
 		});
 <?php } ?>
+
+
+	//LGW : On utilise la localisation faite par myjoom radius comme centre de la carte. On ajoute un marker.
+	function addGeolocalizationMarker() {
+		
+		var mapDiv = document.getElementById('<?php echo $jmapDivID; ?>');
+		if(mapDiv != null) {
+		
+			var mjlat;
+			var mjlatval;mjlatval=0;
+			mjlat=jQuery('input#mj_rs_ref_lat');
+			if (mjlat.length>0) mjlatval=mjlat.val();
+			
+			var mjlng;
+			var mjlngval; mjlngval=0;
+			mjlng=jQuery('input#mj_rs_ref_lng');
+			if (mjlng.length>0) mjlngval=mjlng.val();
+			//La localisation est disponible....
+				if  ((mjlatval!=0) || (mjlngval!=0)){
+				
+					jQuery(mapDiv).jmap('init', {
+					'backgroundColor': '<?php echo $jmapBackgroundColor; ?>', 
+					'center':[mjlatval, mjlngval], 
+					'disableDefaultUI': false,
+					'disableDoubleClickZoom': <?php echo $jmapDisableDoubleClickZoom; ?>, 
+					'draggable': <?php echo $jmapDraggable; ?>, 
+					'draggableCursor': null,
+					'draggingCursor': null,
+					'keyboardShortcuts': true,
+					'mapTypeControl': <?php echo $jmapMapTypeControl; ?>, 
+					'mapTypeControlTypes':['hybrid','roadmap', 'satellite', 'terrain'], 
+					'mapTypeControlPosition': '<?php echo $jmapMapTypeControlPosition; ?>', 
+					'mapTypeControlStyle': '<?php echo $jmapMapTypeControlStyle; ?>', 
+					'mapTypeId': '<?php echo $jmapMapTypeId; ?>', 
+			<?php if ($jmapMarkerClusterer) { ?>
+					'maxZoom': <?php echo $jmapMMMaxZoom; ?>,
+					'minZoom': <?php echo $jmapMMMinZoom; ?>,
+			<?php }?>
+					'noClear': false,
+					'overviewMapControl': <?php echo $jmapOverviewMapControl; ?>, 
+					'overviewMapControlOpened': <?php echo $jmapOverviewMapControlOpened; ?>, 
+					'panControl': <?php echo $jmapPanControl; ?>, 
+					'panControlPosition': '<?php echo $jmapPanControlPosition; ?>', 
+					'scaleControl': <?php echo $jmapScaleControl; ?>, 
+					'scaleControlPosition': '<?php echo $jmapScaleControlPosition; ?>', 
+					'scrollwheel': <?php echo $jmapScrollWheel; ?>, 
+					'streetViewControl': <?php echo $jmapStreetViewControl; ?>, 
+					'streetViewControlPosition': '<?php echo $jmapStreetViewControlPosition; ?>', 
+					
+					//LGW: on double le zoom initial si la localisation est faite
+					'zoom':<?php echo $jmapInitZoom*2-1; ?>, 
+					
+					'zoomControl': <?php echo $jmapZoomControl; ?>, 
+					'zoomControlPosition': '<?php echo $jmapZoomControlPosition; ?>', 
+					'zoomControlStyle': '<?php echo $jmapZoomControlStyle; ?>', 
+					'debugMode': false						
+					});
+
+					//On ajoute le marqueur de localisation ?
+					var localIconOptions = new Object;
+					localIconOptions.primaryColor = "#67BF4B";
+					localIconOptions.strokeColor = "#119931";
+					var myLocalIcon = MapIconMaker.createLabeledMarkerIcon(localIconOptions);
+					jQuery(mapDiv).jmap('AddMarker',{
+						'pointLatLng': [mjlatval, mjlngval],
+						'pointTitle' : '<?php echo JText::_('JMAPS_CLICK_MARKER_HOME'); ?>',
+						'pointIcon': myLocalIcon.markerImage,
+						'pointShadow': myLocalIcon.markerShadow,
+						'pointShape': myLocalIcon.shape
+					});
+					//console.log('Marker Added - Lat/Long!');
+					
+					return true;
+				}
+		}
+		
+		return false;
+		
+	}
 
 	</script>
