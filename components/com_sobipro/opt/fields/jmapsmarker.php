@@ -553,7 +553,7 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 			//LGW : on ajoute un champ fixe : field_logo
 			$imageArray = SPConfig::unserialize($fieldData['field_logo']);
 			$logosrc = $imageArray['ico']; //ico, thumb, image,original
-			$jmfaLogo = '<img style="float:left" src="'.JURI::base() .$logosrc.'">';
+			$jmfaLogo = '<img style="float:left" src="'.JURI::base().$logosrc.'">';
 	
 			//LGW:Modification de l'entete
 			$jmfaTitle = $jmfaLogo.'<b>' . $fieldData[$this->jmfaTitleField] . '</b><br/>';

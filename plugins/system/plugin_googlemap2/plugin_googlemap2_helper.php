@@ -1882,7 +1882,7 @@ overmap".$this->_mp->mapnm.".setCenter(map".$this->_mp->mapnm.".getCenter(), c);
 			$code.="map".$this->_mp->mapnm.".enableScrollWheelZoom();
 			";
 		} 
-	
+		
 		if (($this->_inline_coords == 0 && count($this->_mp->kml)==0) // No inline coordinates and no kml => standard configuration
 			||($this->_mp->latitude !=''&&$this->_mp->longitude!=''&&!($this->_mp->geocoded==1&&$this->_mp->toaddress!=''&&$this->_mp->description==''))) { // Inline coordinates and text is not empty
 			$options = '';
@@ -2315,10 +2315,19 @@ overmap".$this->_mp->mapnm.".setCenter(map".$this->_mp->mapnm.".getCenter(), c);
 		}
 
 		$code.= "\nvar mapconfig".$this->_mp->mapnm." = ".$this->json_encode($this->_mp).";";
+		
 		$code.= "\nvar mapstyled".$this->_mp->mapnm." = ".$this->_styledmap.";";
 		$code.= "\nvar googlemap".$this->_mp->mapnm." = new GoogleMaps('".$this->_mp->mapnm."', mapconfig".$this->_mp->mapnm.", mapstyled".$this->_mp->mapnm.");";
+	
+		//LGW
+		/*$code.="\nvar myLatlng = new google.maps.LatLng(50.875311, 0.351563);";
+		$code.="\nvar myMarker = new google.maps.Marker({
+				position: myLatlng, 
+				map: map".$this->_mp->mapnm."});";*/
+				
 		$code.= "\n/*]]>*/</script>";
-		
+
+
 		return array($code, $lbcode);
 	}
 	
@@ -2810,6 +2819,7 @@ overmap".$this->_mp->mapnm.".setCenter(map".$this->_mp->mapnm.".getCenter(), c);
 	
 	function _processMapv3_templatedirform($type) {
 		$dirform="";
+	
 		$dirform="<form id='directionform".$this->_mp->mapnm."' action='".$this->protocol.$this->googlewebsite."/maps' method='get' target='_blank' onsubmit='javascript:googlemap".$this->_mp->mapnm.".DirectionMarkersubmit(this);return false;' class='mapdirform'>";
 		
 		//LGW: ajout saut de ligne
@@ -2828,8 +2838,24 @@ overmap".$this->_mp->mapnm.".setCenter(map".$this->_mp->mapnm.".getCenter(), c);
 		if ($type=='Form') {
 			$dirform.=(($this->_mp->txtfrom=='')?"":"<br />").$this->_mp->txtfrom."<input ".(($this->_mp->txtfrom=='')?"type='hidden' ":"type='text'")." class='inputbox' size='20' name='saddr' id='saddr' value='".(($this->_mp->formdir=='1')?$this->_mp->address:(($this->_mp->formdir=='2')?$this->_mp->toaddress:""))."' />";
 
-			$dirform.=(($this->_mp->txtto=='')?"":"<br />").$this->_mp->txtto."<input ".(($this->_mp->txtto=='')?"type='hidden' ":"type='text'")." class='inputbox' size='20' name='daddr' id='daddr' value='".(($this->_mp->formdir=='1')?$this->_mp->toaddress:(($this->_mp->formdir=='2')?$this->_mp->address:""))."' />";
+			$dirform.=(($this->_mp->txtto=='')?"":"<br />").$this->_mp->txtto."<input ".(($this->_mp->txtto=='')?"type='hidden' ":"type='text'")." class='inputbox' size='20' name='daddr' id='daddr' value='".(($this->_mp->formdir=='1')?$this->_mp->toaddress:(($this->_mp->formdir=='2')?$this->_mp->address:""))."' />";			
 		}
+		
+			//LGW : on fait la geolocation pour remplir le de de directions	
+			$code="<script type='text/javascript'>var gc = new google.maps.Geocoder();
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(function (po) {
+						gc.geocode({'latLng':  new google.maps.LatLng(po.coords.latitude, po.coords.longitude) }, function(results, status) {
+							if(status == google.maps.GeocoderStatus.OK) {";
+
+						
+							$code.='jQuery("input#saddr").val(results[0]["formatted_address"]);';
+
+							$code.="}";
+						$code.="});";
+					$code.="});";
+				$code.="}</script>";
+			$dirform.=$code;
 		
 		
 		if ($this->_mp->txt_driving!=''||$this->_mp->txt_avhighways!=''||$this->_mp->txt_walking!='')

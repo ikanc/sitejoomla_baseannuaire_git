@@ -307,7 +307,9 @@ for ($j=0; $j<count($markerArrayCatID); $j++) {
 }
 
 ?>
-<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+
+<script src="http://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>
 
 <script>
 
@@ -429,6 +431,9 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 				jQuery('#loadmessagehtml').show();
 				return false;
 			});
+			
+			
+					
 		<?php if($jmapKeepInView == 1) { ?>
 			var jmapKIVstart = jQuery('#<?php echo $jmapDivID; ?>').scrollTop();
 			jQuery('#jmapKeepInView').css('left', jmapKIVstart + 'px');
@@ -474,7 +479,7 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 //			console.log('JMaps Init Function - ' + mapDiv);
 			
 			if (addGeolocalizationMarker()==false) {
-			
+
 				jQuery(mapDiv).jmap('init', {
 					'backgroundColor': '<?php echo $jmapBackgroundColor; ?>', 
 					'center':[<?php echo $jmapCenterLatitude; ?>, <?php echo $jmapCenterLongitude; ?>], 
@@ -600,6 +605,22 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 			});
 		}
 		jmaps_Initialize ();
+		
+		//LGW: evenement de recentrage dynamique
+		jQuery('#<?php echo $jmapDivID; ?>').on('recentermap', function(event, param1, param2) {
+
+			var currentzoom = Mapifies.MapObjects.Get(jQuery(this)).getZoom();
+			
+			jQuery(this).jmap('MoveTo', {
+				mapCenter:[param1, param2],
+				mapZoom:  currentzoom, //<?php echo $jmapInitZoom; ?>,
+				mapType: 0
+			});	
+
+			alert('move');		
+			
+		});
+			
 		function buildJmapMarkers(jmapsMarkerArray, cookieCount, iconOptions) {
 			var mapDiv = parent.document.getElementById('<?php echo $jmapDivID; ?>');
 			if(mapDiv == null) {
@@ -710,7 +731,13 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 					iconElement = jQuery('.cbUserListCol1:eq(' + entryIndex + ')');
 				<?php } ?>
 					if (iconElement != null) {
-						jQuery(iconElement).prepend('<img src="' + myIcon.markerImage.url + '" />');
+
+						//jQuery(iconElement).prepend('<img src="' + myIcon.markerImage.url + '" />');	
+						
+						//LGW : on ajoute lat et lon a l'image du marker
+						myIcon.latitude = MapMarkerObject.attr('Latitude');
+						myIcon.longitude = MapMarkerObject.attr('Longitude')
+						jQuery(iconElement).prepend('<img class="jmapsInfoMarker" data-lat="' + myIcon.latitude + '" data-lon="' + myIcon.longitude +'" src="' + myIcon.markerImage.url + '" />');
 					}
 				}
 //Set category priority
@@ -720,7 +747,7 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 					catZindex = catZindex + 100;
 				}
 			<?php }?>
-//Check for latitude and longitude and place the map marker
+				//Check for latitude and longitude and place the map marker
 				if (MapMarkerObject.attr("Latitude") == 0 || MapMarkerObject.attr("Longitude") == 0) {
 //					console.log('cookie = ' + cookieNumber + ' Count = ' + cookieCount);
 //					console.log('Address');
@@ -1155,7 +1182,7 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 <?php } ?>
 
 
-	//LGW : On utilise la localisation faite par myjoom radius comme centre de la carte. On ajoute un marker.
+	//LGW : On utilise la géolocalisation comme centre de la carte. Et on ajoute un marker.
 	function addGeolocalizationMarker() {
 		
 		var mapDiv = document.getElementById('<?php echo $jmapDivID; ?>');
@@ -1170,6 +1197,7 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 			var mjlngval; mjlngval=0;
 			mjlng=jQuery('input#mj_rs_ref_lng');
 			if (mjlng.length>0) mjlngval=mjlng.val();
+			
 			//La localisation est disponible....
 				if  ((mjlatval!=0) || (mjlngval!=0)){
 				
@@ -1210,9 +1238,30 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 					'zoomControlStyle': '<?php echo $jmapZoomControlStyle; ?>', 
 					'debugMode': false						
 					});
+					
+					<?php $jmapInitZoom = $jmapInitZoom*2-1; ?>
+			
+					var image = new google.maps.MarkerImage(
+					  '<?php echo JURI::base();?>media/markers/marker-images/image.png',
+					  new google.maps.Size(32,33),
+					  new google.maps.Point(0,0),
+					  new google.maps.Point(16,33)
+					);
 
-					//On ajoute le marqueur de localisation ?
-					var localIconOptions = new Object;
+					var shadow = new google.maps.MarkerImage(
+					  '<?php echo JURI::base();?>media/markers/marker-images/shadow.png',
+					  new google.maps.Size(52,33),
+					  new google.maps.Point(0,0),
+					  new google.maps.Point(16,33)
+					);
+
+					var shape = {
+					  coord: [18,0,18,1,18,2,18,3,19,4,21,5,22,6,24,7,25,8,25,9,26,10,26,11,27,12,30,13,31,14,31,15,31,16,31,17,31,18,31,19,27,20,26,21,26,22,25,23,25,24,24,25,23,26,21,27,19,28,18,29,18,30,18,31,18,32,13,32,12,31,12,30,13,29,11,28,10,27,8,26,7,25,6,24,5,23,5,22,4,21,4,20,0,19,0,18,0,17,0,16,0,15,0,14,0,13,4,12,4,11,5,10,5,9,6,8,7,7,8,6,10,5,12,4,13,3,12,2,12,1,13,0,18,0],
+					  type: 'poly'
+					};
+
+					//On ajoute le marqueur de localisation (classique)?
+					/*var localIconOptions = new Object;
 					localIconOptions.primaryColor = "#67BF4B";
 					localIconOptions.strokeColor = "#119931";
 					var myLocalIcon = MapIconMaker.createLabeledMarkerIcon(localIconOptions);
@@ -1222,8 +1271,17 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 						'pointIcon': myLocalIcon.markerImage,
 						'pointShadow': myLocalIcon.markerShadow,
 						'pointShape': myLocalIcon.shape
-					});
+					});*/
 					//console.log('Marker Added - Lat/Long!');
+	
+					jQuery(mapDiv).jmap('AddMarker',{
+						'pointLatLng': [mjlatval, mjlngval],
+						'pointTitle' : '<?php echo JText::_('JMAPS_CLICK_MARKER_HOME'); ?>',
+						'pointIcon': image,
+						'pointShadow': shadow,
+						'pointShape': shape
+					});
+					console.log('GelocalizedMarker Added - Lat/Long!');
 					
 					return true;
 				}
