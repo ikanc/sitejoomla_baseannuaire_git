@@ -172,13 +172,19 @@
 
 						var $panel = $panels.eq(index).attr('aria-expanded', $panels[index].ariaExpanded = true);
 
-						if(self.resize().type === 'taa-tabs') $tabs.eq(index).addClass('current');
-						else $content.eq(index).css('height', 'auto');
+						if(self.resize().type === 'taa-tabs') $tabs.eq(index).addClass('current');		
+						//LGW
+						else {
+							
+							$content.eq(index).css('height', 'auto');
+							//$content.eq(index).height($content.eq(index).children('div').outerHeight(true));
+							
+						}
 
 						$element
 						.attr('aria-activedescendant', $panels[self.index.curr].id);
 						
-						//$element.trigger('expand', [index, $panel]);
+						$element.trigger('expand', [index, $panel]);
 
 						return self;
 					},
@@ -190,16 +196,26 @@
 						if(self.type === 'taa-tabs') $tabs.eq(index).removeClass('current');
 						else $content.eq(index).height(0);
 
-						//$element.trigger('collapse', [index, $panel]);
+						$element.trigger('collapse', [index, $panel]);
 
 						return self;
 					},
 
 					goTo: function(index) {
 
-						if(self.index.curr !== index && typeof self.index.curr === 'number') self.collapse(self.index.curr);
+						if(self.index.curr !== index && typeof self.index.curr === 'number') {
+		
+							//LGW : pour eviter de se se retrouver en bas de site une fois l'onglet precedent replié et le nouveau déroulé ?
+							//Pas de meilleure solution pour le moment
+							//self.collapse(self.index.curr);
+				
+							/* $('html, body').animate({  
+								scrollTop:$panel.offset().top  
+							}, 'slow');  */
+	
+						}
 						self.index.set(index);
-
+						
 						return self[self.type === 'taa-accordion' && $panels.eq(index).prop('ariaExpanded') ? 'collapse' : 'expand'](self.index.curr);
 					},
 

@@ -606,12 +606,13 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 		}
 		jmaps_Initialize ();
 		
-		//LGW: evenement de recentrage dynamique
+		//LGW: evenement de recentrage dynamique( sur la carte Home)
 		jQuery('#<?php echo $jmapDivID; ?>').on('recentermap', function(event, param1, param2) {
 
 			var currentzoom = Mapifies.MapObjects.Get(jQuery(this)).getZoom();
 			
 			jQuery(this).jmap('MoveTo', {
+				centerMethod:'pan',
 				mapCenter:[param1, param2],
 				mapZoom:  currentzoom, //<?php echo $jmapInitZoom; ?>,
 				mapType: 0
@@ -704,7 +705,8 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 						if (MapMarkerObject.attr("IconLabel") == "1" && centerOnMarker1 == 1) {
 //	            						console.log('Centering');	
 							centerNow = 1;
-						}
+					
+	}
 					<?php }?>
 						if (showMarkerLabel == 1 || (iconOptions.width == 32 && iconOptions.height == 32)) {
 							var myIcon = MapIconMaker.createLabeledMarkerIcon(iconOptions);            
@@ -810,7 +812,10 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 									if (cookieNumber == numberOfCookies) {
 								<?php if ($jmapZoom == 0) { ?>
 										zoomCenterMap();
-								<?php }?>
+								//LGW : on veut regler le zoom dans ce cas d'apres le rayon de recherche....
+								<?php } else {?>
+										zoomMarker1(centerNow);
+								<?php } ?>
 										jQuery('#loadmessagehtml').hide();
 //										console.log('Zoom and Center Map for ' + iconNumber + ' markers!');
 									}
@@ -868,7 +873,10 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 						if (cookieNumber == numberOfCookies) {
 					<?php if ($jmapZoom == 0) { ?>
 							zoomCenterMap();
-					<?php }?>
+					//LGW : on veut regler le zoom dans ce cas d'apres le rayon de recherche....
+					<?php } else {?>
+							zoomMarker1(centerNow);
+					<?php } ?>
 							jQuery('#loadmessagehtml').hide();
 //							console.log('Zoom and Center Map for ' + iconNumber + ' markers!');
 						}
@@ -896,6 +904,50 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 			});
 	<?php }?>
 		};
+		
+		//LGW  : on adapte le zoom d'apres le roayon selectionné par mjradius
+		function zoomMarker1(centerNow) {
+			if (centerNow>0) {
+				var mapDiv = parent.document.getElementById('<?php echo $jmapDivID; ?>');
+				var element = jQuery(mapDiv);
+				var thisMap = Mapifies.MapObjects.Get(element);
+	
+				var e = document.getElementById("mj_rs_radius_selector");
+				var radius = e.options[e.selectedIndex].value;	
+				var zoomLevel = <?php echo $jmapZoom; ?>;
+
+				switch(radius)
+				{
+					case '5':
+						zoomLevel=zoomLevel+2;
+						break;
+					case '10':
+						zoomLevel=zoomLevel+1;
+						break;
+					case '50':
+						zoomLevel=zoomLevel-1;
+						break;
+					case '100':
+						zoomLevel=zoomLevel-2;
+						break;
+					case '200':
+						zoomLevel=zoomLevel-3;
+						break;
+					case '500':
+						zoomLevel=zoomLevel-5;
+						break;
+					case '1000':
+						zoomLevel=zoomLevel-7;
+						break;
+					default:
+						break;
+				}
+
+										
+				thisMap.setZoom(zoomLevel); 
+				console.log('New zoom level = ' + zoomLevel);
+			}
+		}
 
 		function zoomCenterMap() {
 			var mapDiv = parent.document.getElementById('<?php echo $jmapDivID; ?>');
@@ -1099,111 +1151,15 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 //			jmaps_Initialize();
 			//console.log('About to get XML');	
 			
+			var mapDiv = document.getElementById('<?php echo $jmapDivID; ?>');
+			
 			var xmlCount = 0;
 			var jmapsMarkersBuilt = 0;
 			var jmapsMarkerArray = Array();
-					
-			//Si la localisation n'est pas disponible par le module mjradius
-			if (((jQuery("#mj_rs_ref_lat").val()==0) && (jQuery("#mj_rs_ref_lng").val()==0)) || (jQuery("#mj_rs_center_selector").val()=='')){
-
-				var gc = new google.maps.Geocoder();
-				if (navigator.geolocation) {
-					navigator.geolocation.getCurrentPosition(function (po) {
-						gc.geocode({"latLng":  new google.maps.LatLng(po.coords.latitude, po.coords.longitude) }, function(results, status) {
-							
-							if(status == google.maps.GeocoderStatus.OK) {
-											
-								//On met à jour mjradius ?
-								jQuery("input#mj_rs_ref_lat").val(po.coords.latitude) ;
-								jQuery("input#mj_rs_ref_lng").val(po.coords.longitude) ;								
-								jQuery("input#mj_rs_center_selector").val(results[0]["formatted_address"]);
-
-								//On ajoute le marker de localisation
-								addGeolocalizationMarker();
-								
-								//On ajoute les marker XML	
-								<?php for ($j=0;$j<count($jmapXMLname);++$j) { ?>
-					
-									jQuery.ajax({
-										type: "GET",
-										url: "<?php echo $jmapXMLname[$j]; ?>",
-										dataType: "xml",
-										success: parseXML,
-										error:function (xhr, ajaxOptions, thrownError){
-										<?php if ($jmapFeed != 'none') { ?>
-											jQuery('#<?php echo $jmapDivID; ?>').jmap('AddFeed', {
-												'feedUrl':'<?php echo $jmapFeed; ?>',
-												'mapCenter': []
-											});
-										<?php }?>
-										}
-									});
-								
-								<?php } ?>
-								
-								
-
-							}
-						});
-					});
-				}	
-			}
-			function parseXML(xml) {
-									//find every Marker and build an array of the markers attributes
-									//console.log('Parse');
-									xmlCount++;
-									jQuery(xml).find('sgmMarker').each(function() {
-										var MapMarkerObject = jQuery(this);
-										jmapsMarkerArray[jmapsMarkersBuilt] = MapMarkerObject;
-										jmapsMarkersBuilt++;
-									});
-									if(xmlCount == <?php echo count($jmapXMLname); ?>) {
-										if(jmapsMarkersBuilt != 0) {
-											var iconOptions = new Object;
-											buildJmapMarkers(jmapsMarkerArray, jmapsMarkersBuilt, iconOptions);
-										} else {
-											<?php if ($jmapFeed != 'none') { ?>
-												jQuery('#<?php echo $jmapDivID; ?>').jmap('AddFeed', {
-													'feedUrl':'<?php echo $jmapFeed; ?>',
-													'mapCenter': []
-												});
-											<?php }?>
-					//						console.log('Hide');
-											jQuery('#loadmessagehtml').hide();
-										}
-									}
-								}
-			
-			
-			
-			
-				
-		});
-<?php } ?>
-
-
-	//LGW : On utilise la géolocalisation comme centre de la carte. Et on ajoute un marker.
-	function addGeolocalizationMarker() {
-		
-		var mapDiv = document.getElementById('<?php echo $jmapDivID; ?>');
-		if(mapDiv != null) {
-		
-			var mjlat;
-			var mjlatval;mjlatval=0;
-			mjlat=jQuery('input#mj_rs_ref_lat');
-			if (mjlat.length>0) mjlatval=mjlat.val();
-			
-			var mjlng;
-			var mjlngval; mjlngval=0;
-			mjlng=jQuery('input#mj_rs_ref_lng');
-			if (mjlng.length>0) mjlngval=mjlng.val();
-			
-			//La localisation est disponible....
-				if  ((mjlatval!=0) || (mjlngval!=0)){
-				
-					jQuery(mapDiv).jmap('init', {
+	
+				jQuery(mapDiv).jmap('init', {
 					'backgroundColor': '<?php echo $jmapBackgroundColor; ?>', 
-					'center':[mjlatval, mjlngval], 
+					'center':[<?php echo $jmapCenterLatitude; ?>, <?php echo $jmapCenterLongitude; ?>], 
 					'disableDefaultUI': false,
 					'disableDoubleClickZoom': <?php echo $jmapDisableDoubleClickZoom; ?>, 
 					'draggable': <?php echo $jmapDraggable; ?>, 
@@ -1229,18 +1185,120 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 					'scrollwheel': <?php echo $jmapScrollWheel; ?>, 
 					'streetViewControl': <?php echo $jmapStreetViewControl; ?>, 
 					'streetViewControlPosition': '<?php echo $jmapStreetViewControlPosition; ?>', 
-					
-					//LGW: on double le zoom initial si la localisation est faite
-					'zoom':<?php echo $jmapInitZoom*2-1; ?>, 
-					
+					'zoom':<?php echo $jmapInitZoom/**2-1*/; ?>, 
 					'zoomControl': <?php echo $jmapZoomControl; ?>, 
 					'zoomControlPosition': '<?php echo $jmapZoomControlPosition; ?>', 
 					'zoomControlStyle': '<?php echo $jmapZoomControlStyle; ?>', 
 					'debugMode': false						
 					});
 					
-					<?php $jmapInitZoom = $jmapInitZoom*2-1; ?>
+			//Si la localisation n'est pas disponible par le module mjradius
+			if (((jQuery("#mj_rs_ref_lat").val()==0) && (jQuery("#mj_rs_ref_lng").val()==0)) || (jQuery("#mj_rs_center_selector").val()=='')){
+
+				var gc = new google.maps.Geocoder();
+				if (navigator.geolocation)
+				{
+					navigator.geolocation.getCurrentPosition(function (po) {
+						
+						gc.geocode({"latLng":  new google.maps.LatLng(po.coords.latitude, po.coords.longitude) }, function(results, status) {
+							
+							if(status == google.maps.GeocoderStatus.OK) {
+											
+								//On met à jour mjradius ?
+								jQuery("input#mj_rs_ref_lat").val(po.coords.latitude) ;
+								jQuery("input#mj_rs_ref_lng").val(po.coords.longitude) ;								
+								jQuery("input#mj_rs_center_selector").val(results[0]["formatted_address"]);
+
+								//On ajoute le marker de localisation
+								addGeolocalizationMarker();		
+
+							}
+							
+							
+						});
+					});
+				}
+				
+			}	
+
+			//On ajoute les marker XML	
+			<?php for ($j=0;$j<count($jmapXMLname);++$j) { ?>
+
+				jQuery.ajax({
+					type: "GET",
+					url: "<?php echo $jmapXMLname[$j]; ?>",
+					dataType: "xml",
+					success: parseXML,
+					error:function (xhr, ajaxOptions, thrownError){
+					<?php if ($jmapFeed != 'none') { ?>
+						jQuery('#<?php echo $jmapDivID; ?>').jmap('AddFeed', {
+							'feedUrl':'<?php echo $jmapFeed; ?>',
+							'mapCenter': []
+						});
+					<?php }?>
+					}
+				});
 			
+			<?php } ?>
+
+				
+			function parseXML(xml) {
+				//find every Marker and build an array of the markers attributes
+				//console.log('Parse');
+				xmlCount++;
+				jQuery(xml).find('sgmMarker').each(function() {
+					var MapMarkerObject = jQuery(this);
+					jmapsMarkerArray[jmapsMarkersBuilt] = MapMarkerObject;
+					jmapsMarkersBuilt++;
+				});
+				if(xmlCount == <?php echo count($jmapXMLname); ?>) {
+					if(jmapsMarkersBuilt != 0) {
+						var iconOptions = new Object;
+						buildJmapMarkers(jmapsMarkerArray, jmapsMarkersBuilt, iconOptions);
+					} else {
+						<?php if ($jmapFeed != 'none') { ?>
+							jQuery('#<?php echo $jmapDivID; ?>').jmap('AddFeed', {
+								'feedUrl':'<?php echo $jmapFeed; ?>',
+								'mapCenter': []
+							});
+						<?php }?>
+//						console.log('Hide');
+						jQuery('#loadmessagehtml').hide();
+					}
+				}
+			}
+				
+		});
+<?php } ?>
+
+
+	//LGW : On utilise la géolocalisation comme centre de la carte. Et on ajoute un marker.
+	function addGeolocalizationMarker() {
+		
+		var mapDiv = document.getElementById('<?php echo $jmapDivID; ?>');
+		if(mapDiv != null) {
+		
+			var mjlat;
+			var mjlatval;mjlatval=0;
+			mjlat=jQuery('input#mj_rs_ref_lat');
+			if (mjlat.length>0) mjlatval=mjlat.val();
+			
+			var mjlng;
+			var mjlngval; mjlngval=0;
+			mjlng=jQuery('input#mj_rs_ref_lng');
+			if (mjlng.length>0) mjlngval=mjlng.val();
+			
+			//La localisation est disponible....
+				if  ((mjlatval!=0) || (mjlngval!=0)){
+				
+					var thisMap = Mapifies.MapObjects.Get(jQuery(mapDiv));
+					//Ce marker devient le centre
+					thisMap.setCenter(new google.maps.LatLng(mjlatval, mjlngval));
+		
+					//On zoom X 2 sur le marker 
+					var newzoomlevel = <?php echo $jmapInitZoom; ?> *2 - 1;
+					thisMap.setZoom(newzoomlevel); 
+
 					var image = new google.maps.MarkerImage(
 					  '<?php echo JURI::base();?>media/markers/marker-images/image.png',
 					  new google.maps.Size(32,33),
@@ -1282,6 +1340,8 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 						'pointShape': shape
 					});
 					console.log('GelocalizedMarker Added - Lat/Long!');
+					
+					
 					
 					return true;
 				}
