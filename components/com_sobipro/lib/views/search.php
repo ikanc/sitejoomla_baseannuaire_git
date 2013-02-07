@@ -50,7 +50,8 @@ class SPSearchView extends SPSectionView implements SPView
 			$searchPhrase = $this->get( 'search_for' );
 			$phrase = $this->get( 'search_phrase' );
 			$searchPhrase = strlen( $searchPhrase ) ? $searchPhrase : Sobi::Txt( 'SH.SEARCH_FOR_BOX' );
-			SPFactory::header()->addJsCode( 'var spSearchDefStr = "'.Sobi::Txt( 'SH.SEARCH_FOR_BOX' ).'"' );
+			//LGW: Ajout d'un ;
+			SPFactory::header()->addJsCode( 'var spSearchDefStr = "'.Sobi::Txt( 'SH.SEARCH_FOR_BOX' ).'";' );
 			if( $this->get( '$eInLine' ) ) {
 				$sdata[ 'entries_in_line' ] = $this->get( '$eInLine' );
 			}

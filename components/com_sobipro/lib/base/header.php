@@ -551,7 +551,11 @@ final class SPHeader
                         else {
                             $jsContent .= SPFs::read( $file );
                         }
-                        $jsContent .= ";\n";
+						
+						//LGW: ; ajouté pas systemematiquement...
+                        //$jsContent .= ";\n";
+						if ($jsContent[strlen($jsContent)-1]!=";") $jsContent .= ";\n";
+						else $jsContent .= "\n";
                     }
                     SPFs::write( SOBI_PATH . "/var/js/{$check}.js", $jsContent );
                 }

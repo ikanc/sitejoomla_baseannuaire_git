@@ -411,11 +411,10 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 
     <link type="text/css" media="screen" rel="stylesheet" href="modules/mod_jmaps/js/colorbox.css" />
 	<script>if(typeof jQuery=="undefined") {document.write("\u003cscript \src=\u0022http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js\u0022>\u003c/script>");}</script>
-	<!--<script type="text/javascript" src="modules/mod_jmaps/js/jquery.jmap.min.js"></script>
+	<script type="text/javascript" src="modules/mod_jmaps/js/jquery.jmap.min.js"></script>
 	<script type="text/javascript" src="modules/mod_jmaps/js/markerclusterer_packed.js"></script>
 	<script type="text/javascript" src="modules/mod_jmaps/js/mapiconmaker.min.js"></script>
-	<script type="text/javascript" src="modules/mod_jmaps/js/jquery.colorbox-min.js"></script>-->
-	<script type="text/javascript" src="/min/g=jmapsjs"></script>
+	<script type="text/javascript" src="modules/mod_jmaps/js/jquery.colorbox-min.js"></script>
 <?php if($jmapSOBIoneLiner == 1) { ?> 
 	<script src="modules/mod_sobionelinesearch/js/jquery.hint.js"></script>
 	<script src="modules/mod_sobionelinesearch/js/jquery.qtip-1.0.0.min.js"></script>
@@ -479,7 +478,7 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 			}
 //			console.log('JMaps Init Function - ' + mapDiv);
 		
-			//if (addGeolocalizationMarker(true)==false) {
+			if (addGeolocalizationMarker(true)==false) {
 
 				jQuery(mapDiv).jmap('init', {
 					'backgroundColor': '<?php echo $jmapBackgroundColor; ?>', 
@@ -515,7 +514,7 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 					'zoomControlStyle': '<?php echo $jmapZoomControlStyle; ?>', 
 					'debugMode': false						
 				});
-			//}
+			}
 	
 			<?php if ($jmapMarkerClusterer == 1) { ?>
 				var mcStyles = Array();
@@ -608,40 +607,31 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 		}
 		jmaps_Initialize ();
 		
-		//LGW: evenement de recentrage dynamique
-		//On ne traite que si des markers sont afichés...
-		var currentmap = jQuery('#<?php echo $jmapDivID; ?>');
-		if (currentmap.length>0) {
-			currentmap.on('recentermap', function(event, param1, param2) {
-				if (cookieNumber>0) {
-					var thisMap = Mapifies.MapObjects.Get(jQuery(this));
-					var currentzoom = Mapifies.MapObjects.Get(jQuery(this)).getZoom();
-					
-					//On glisse à la position demandée
-					thisMap.panTo(new google.maps.LatLng(param1, param2));
-				}
-		
-				/*jQuery(this).jmap('MoveTo', {
-					centerMethod:'pan',
-					mapCenter:[param1, param2],
-					mapZoom:  currentzoom, //<?php echo $jmapInitZoom; ?>,
-					mapType: 0
-				});		*/	
-			});
+		//LGW: evenement de recentrage dynamique( sur la carte Home)
+		jQuery('#<?php echo $jmapDivID; ?>').on('recentermap', function(event, param1, param2) {
+
+			var element = jQuery(this);
+								
+			var thisMap = Mapifies.MapObjects.Get(element);
+			var currentzoom = Mapifies.MapObjects.Get(element).getZoom();
 			
-			//LGW: evenement de localisation de l'utilisateur
-			//On ne traite que si des markers sont afichés...
-			currentmap.on('userpos', function(event, param1, param2) {
-				if (cookieNumber>0) {
-					//On ajoute le marker de localisation et on centre dessus
-					addGeolocalizationMarker(jQuery(this), param1, param2);			
-					centerMap(jQuery(this), param1, param2);
-					
-					//On regle le niveau de zoom d'apres le radius de ljradius
-					zoomFromRadius(jQuery(this));	
-				}
-			});
-		}
+			//On glisse à la position demandée
+			thisMap.panTo(new google.maps.LatLng(param1, param2));
+	
+			/*jQuery(this).jmap('MoveTo', {
+				centerMethod:'pan',
+				mapCenter:[param1, param2],
+				mapZoom:  currentzoom, //<?php echo $jmapInitZoom; ?>,
+				mapType: 0
+			});		*/	
+		});
+		
+		jQuery('.userposregistered').on('userpos', function(event, param1, param2) {
+			alert('usepos in jmaps');
+		});
+		
+		//LGW: avant d'ajouter les markers, on regle le niveau de zoom d'apres le radius de ljradius
+		zoomFromRadius();
 			
 		function buildJmapMarkers(jmapsMarkerArray, cookieCount, iconOptions) {
 			var mapDiv = parent.document.getElementById('<?php echo $jmapDivID; ?>');
@@ -834,7 +824,7 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 //									console.log('Marker Added - Address!');
 									if (cookieNumber == numberOfCookies) {
 								<?php if ($jmapZoom == 0) { ?>
-										zoomCenterMap(jQuery(this));					
+										zoomCenterMap();					
 								<?php }?>
 										jQuery('#loadmessagehtml').hide();
 //										console.log('Zoom and Center Map for ' + iconNumber + ' markers!');
@@ -893,21 +883,12 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 //						console.log('Marker Added - Lat/Long!');
 						if (cookieNumber == numberOfCookies) {
 					<?php if ($jmapZoom == 0) { ?>
-							zoomCenterMap(jQuery(this));					
+							zoomCenterMap();					
 					<?php }?>
 							jQuery('#loadmessagehtml').hide();
 //							console.log('Zoom and Center Map for ' + iconNumber + ' markers!');
-					}
-				}
-				
-				//LGW: on demande à mjradius la localisation si disponible pour positionnement sur la carte
-				localizeFromCenter(jQuery(mapDiv));
-			
-				//LGW: on regle le niveau de zoom d'apres le radius de ljradius
-				<?php if ($jmapZoom !== 0) { ?>
-					zoomFromRadius(jQuery(mapDiv));						
-				<?php }?>
-						
+						}
+						}
 //				console.log('cookie = ' + cookieNumber + ' Count = ' + cookieCount);
 //				console.log('Lat/Long');						iconNumber++;
 			});
@@ -932,109 +913,65 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 	<?php }?>
 		};
 		
-		function latitudeFromLatitude() {
-			var mjlat;
-			var mjlatval;mjlatval=0;
-			mjlat=jQuery('input#mj_rs_ref_lat');
-			if (mjlat.length>0) return mjlatval=mjlat.val();
-			
-			return 0;
-		}
-		
-		function longitudeFromLongitude() {
-			var mjlng;
-			var mjlngval; mjlngval=0;
-			mjlng=jQuery('input#mj_rs_ref_lng');
-			if (mjlng.length>0) return mjlngval=mjlng.val();
-			
-			return 0;
-		}
-		
-		function localizeFromCenter(map) {
-			var mjlat= latitudeFromLatitude();
-			var mjlon= longitudeFromLongitude();		
-						
-			//La localisation est disponible....
-			if  ((mjlat!=0) || (mjlon!=0)) {
-
-				//On ajoute en meme temps le marker de localisation...
-				addGeolocalizationMarker(map, mjlat, mjlon);
-			}
-		}
-		
-		//LGW : on centre d'apres le centre donné par mjradius
-		function centerFromCenter(map) {
-		
-			var mjlat= latitudeFromLatitude();
-			var mjlon= longitudeFromLongitude();		
-						
-			//La localisation est disponible....
-			if  ((mjlat!=0) || (mjlon!=0)) {
-			
-				//On ajoute en meme temps le marker de localisation...
-				addGeolocalizationMarker(map, mjlat, mjlon);
-
-				if (center=true) centerMap(map, mjlat, mjlon);			
-			}	
-		}
-		
-		//LGW  : on adapte le zoom d'apres le rayon selectionné par mjradius
-		function zoomFromRadius(map) {
-			<?php if ($jmapZoom != 0) { ?>
-	
-				var thisMap = Mapifies.MapObjects.Get(map);
-	
-				var lat = document.getElementById("mj_rs_ref_lat");		
-				var lon = document.getElementById("mj_rs_ref_lng");		
-				if (lat.value.length!=0 && lon.value.length!=0) {
-					var radiusselector = document.getElementById("mj_rs_radius_selector");
-					if (radiusselector!=undefined) {		
-					var radius = radiusselector.options[radiusselector.selectedIndex].value;	
-					var zoomLevel = <?php echo $jmapZoom; ?>;
-
-					switch(radius)
-					{
-						case '5':
-							zoomLevel=zoomLevel+2;
-							break;
-						case '10':
-							zoomLevel=zoomLevel+1;
-							break;
-						case '50':
-							zoomLevel=zoomLevel-2;
-							break;
-						case '100':
-							zoomLevel=zoomLevel-3;
-							break;
-						case '200':
-							zoomLevel=zoomLevel-4;
-							break;
-						case '500':
-							zoomLevel=zoomLevel-5;
-							break;
-						case '1000':
-							zoomLevel=zoomLevel-7;
-							break;
-						default:
-							break;
-					}
+		//LGW  : on adapte le zoom d'apres le roayon selectionné par mjradius
+		function zoomFromRadius() {
+				<?php if ($jmapZoom != 0) { ?>
+				var mapDiv = parent.document.getElementById('<?php echo $jmapDivID; ?>');			
+				if (mapDiv!=null) {
 					
-					thisMap.setZoom(zoomLevel); 
-					console.log('New zoom level = ' + zoomLevel);
+					var element = jQuery(mapDiv);
+					var thisMap = Mapifies.MapObjects.Get(element);
+		
+					var lat = document.getElementById("mj_rs_ref_lat");		
+					var lon = document.getElementById("mj_rs_ref_lng");		
+					if (lat.value.length!=0 && lon.value.length!=0) {
+						var radiusselector = document.getElementById("mj_rs_radius_selector");
+						if (radiusselector!=undefined) {		
+						var radius = radiusselector.options[radiusselector.selectedIndex].value;	
+						var zoomLevel = <?php echo $jmapZoom; ?>;
+
+						switch(radius)
+						{
+							case '5':
+								zoomLevel=zoomLevel+2;
+								break;
+							case '10':
+								zoomLevel=zoomLevel+1;
+								break;
+							case '50':
+								zoomLevel=zoomLevel-2;
+								break;
+							case '100':
+								zoomLevel=zoomLevel-3;
+								break;
+							case '200':
+								zoomLevel=zoomLevel-4;
+								break;
+							case '500':
+								zoomLevel=zoomLevel-5;
+								break;
+							case '1000':
+								zoomLevel=zoomLevel-7;
+								break;
+							default:
+								break;
+						}
+						
+						thisMap.setZoom(zoomLevel); 
+						console.log('New zoom level = ' + zoomLevel);
+						}
 					}
 				}
-
-			<?php } ?>
+				<?php } ?>
 		}
 
-		function zoomCenterMap(map) {
-			//var mapDiv = parent.document.getElementById('<?php echo $jmapDivID; ?>');
-			//var element = jQuery(mapDiv);
-			
-			var thisMap = Mapifies.MapObjects.Get(map);
-			var thisMarkers = Mapifies.MapObjects.GetMarkers(map);
+		function zoomCenterMap() {
+			var mapDiv = parent.document.getElementById('<?php echo $jmapDivID; ?>');
+			var element = jQuery(mapDiv);
+			var thisMap = Mapifies.MapObjects.Get(element);
+			var thisMarkers = Mapifies.MapObjects.GetMarkers(element);
 			var latlngbounds = new google.maps.LatLngBounds();
-			var thisMarkers = Mapifies.MapObjects.GetMarkers(map);
+			var thisMarkers = Mapifies.MapObjects.GetMarkers(element);
 			jQuery.each(thisMarkers, function (index, thisMarker) {
 				latlngbounds.extend(thisMarker.position);
 			});
@@ -1045,8 +982,7 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 				thisMap.setZoom(zoomLevel); 
 			}
 //			console.log('New Center = ' + thisMap.getCenter() + ' zoomLevel = ' + zoomLevel);
-		}
-		
+		};
 		function addStreetView(jmapsLat, jmapsLong) {
 			var mapDiv = parent.document.getElementById('<?php echo $jmapDivID; ?>');
 		<?php if (!empty($jmapSVOverrideContainer)) { ?>
@@ -1245,22 +1181,9 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 			var jmapsMarkersBuilt = 0;
 			var jmapsMarkerArray = Array();
 	
-			//LGW: on recupere les données de la localisation eventuelle par mjradius
-			var latitude = latitudeFromLatitude();
-			var longitude = longitudeFromLongitude();
-			var localized=false;
-			if ((latitude!=0) && (longitude!=0)) localized=true;
-
-			if (latitude==0) latitude = <?php echo $jmapCenterLatitude; ?>;		
-			if (longitude==0) longitude = <?php echo $jmapCenterLongitude; ?>;
-			
-			//LGW : on adapte le zoom en cas de localization
-			var zoomlevel = <?php echo $jmapInitZoom; ?>;
-			if (localized) zoomlevel=zoomlevel*2-1;
-			
 				jQuery(mapDiv).jmap('init', {
 					'backgroundColor': '<?php echo $jmapBackgroundColor; ?>', 
-					'center':[latitude, longitude], 
+					'center':[<?php echo $jmapCenterLatitude; ?>, <?php echo $jmapCenterLongitude; ?>], 
 					'disableDefaultUI': false,
 					'disableDoubleClickZoom': <?php echo $jmapDisableDoubleClickZoom; ?>, 
 					'draggable': <?php echo $jmapDraggable; ?>, 
@@ -1286,13 +1209,51 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 					'scrollwheel': <?php echo $jmapScrollWheel; ?>, 
 					'streetViewControl': <?php echo $jmapStreetViewControl; ?>, 
 					'streetViewControlPosition': '<?php echo $jmapStreetViewControlPosition; ?>', 
-					'zoom': zoomlevel, 
+					'zoom':<?php echo $jmapInitZoom; ?>, 
 					'zoomControl': <?php echo $jmapZoomControl; ?>, 
 					'zoomControlPosition': '<?php echo $jmapZoomControlPosition; ?>', 
 					'zoomControlStyle': '<?php echo $jmapZoomControlStyle; ?>', 
 					'debugMode': false						
 					});
-	
+					
+			//Si la localisation n'est pas disponible par le module mjradius
+			if (((jQuery("#mj_rs_ref_lat").val()==0) && (jQuery("#mj_rs_ref_lng").val()==0)) || (jQuery("#mj_rs_center_selector").val()=='')){
+
+				var gc = new google.maps.Geocoder();
+				if (navigator.geolocation)
+				{
+					navigator.geolocation.getCurrentPosition(function (po) {
+						
+						gc.geocode({"latLng":  new google.maps.LatLng(po.coords.latitude, po.coords.longitude) }, function(results, status) {
+							
+							if(status == google.maps.GeocoderStatus.OK) {
+											
+								//On met à jour mjradius ?
+								jQuery("input#mj_rs_ref_lat").val(po.coords.latitude) ;
+								jQuery("input#mj_rs_ref_lng").val(po.coords.longitude) ;								
+								jQuery("input#mj_rs_center_selector").val(results[0]["formatted_address"]);
+
+								//On ajoute le marker de localisation
+								addGeolocalizationMarker(false);	
+
+								if (mapDiv!=null) {
+									var element = jQuery(mapDiv);
+									var thisMap = Mapifies.MapObjects.Get(element);
+									
+									//Ce marker devient le centre
+									thisMap.setCenter(new google.maps.LatLng(po.coords.latitude, po.coords.longitude));
+						
+									//On zoom X 2 sur le marker 
+									var newzoomlevel = <?php echo $jmapInitZoom; ?> *2 - 1;
+									thisMap.setZoom(newzoomlevel);
+								}
+							}							
+						});
+					});
+				}
+				
+			}	
+			
 			//On ajoute les marker XML	
 			<?php for ($j=0;$j<count($jmapXMLname);++$j) { ?>
 
@@ -1338,40 +1299,68 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 					}
 				}
 			}
-			
-			//LGW: evenement de localisation de l'utilisateur
-			jQuery(mapDiv).on('userpos', function(event, param1, param2) {
-			
-				//On ajoute le marker de localisation
-				addGeolocalizationMarker(jQuery(this), param1, param2);	
-					
-				centerMap(jQuery(this), param1, param2);
-
-				//On adapte le zoom	
-				var thisMap = Mapifies.MapObjects.Get(jQuery(this));
-				var newzoomlevel = <?php echo $jmapInitZoom; ?> *2 - 1;
-				thisMap.setZoom(newzoomlevel);								
-			});				
+				
 		});
 	
 <?php } ?>
 
-		//LGW: 
-		function centerMap (mapdiv, lat, lon) {
-			//Ce marker devient le centre
-			if (mapdiv!=null) {
-				var thisMap = Mapifies.MapObjects.Get(mapdiv);
-				thisMap.setCenter(new google.maps.LatLng(lat, lon));
-			}
-		}
-
-	    //LGW  : On utilise la géolocalisation comme centre de la carte. Et on ajoute un marker.
-		function addGeolocalizationMarker(mapdiv, param1, param2) {
+	   //LGW  : On utilise la géolocalisation comme centre de la carte. Et on ajoute un marker.
+		function addGeolocalizationMarker(init) {
 		
-				if (mapdiv!=null) {
+				var mapDiv = document.getElementById('<?php echo $jmapDivID; ?>');
 
-					if  ((param1!=0) && (param2!=0)){
-	
+				var mjlat;
+				var mjlatval;mjlatval=0;
+				mjlat=jQuery('input#mj_rs_ref_lat');
+				if (mjlat.length>0) mjlatval=mjlat.val();
+				
+				var mjlng;
+				var mjlngval; mjlngval=0;
+				mjlng=jQuery('input#mj_rs_ref_lng');
+				if (mjlng.length>0) mjlngval=mjlng.val();
+				
+				//La localisation est disponible....
+					if  ((mjlatval!=0) || (mjlngval!=0)){
+					
+						if (init) {
+							
+							jQuery(mapDiv).jmap('init', {
+							'backgroundColor': '<?php echo $jmapBackgroundColor; ?>', 
+							'center':[mjlatval, mjlngval], 
+							'disableDefaultUI': false,
+							'disableDoubleClickZoom': <?php echo $jmapDisableDoubleClickZoom; ?>, 
+							'draggable': <?php echo $jmapDraggable; ?>, 
+							'draggableCursor': null,
+							'draggingCursor': null,
+							'keyboardShortcuts': true,
+							'mapTypeControl': <?php echo $jmapMapTypeControl; ?>, 
+							'mapTypeControlTypes':['hybrid','roadmap', 'satellite', 'terrain'], 
+							'mapTypeControlPosition': '<?php echo $jmapMapTypeControlPosition; ?>', 
+							'mapTypeControlStyle': '<?php echo $jmapMapTypeControlStyle; ?>', 
+							'mapTypeId': '<?php echo $jmapMapTypeId; ?>', 
+					<?php if ($jmapMarkerClusterer) { ?>
+							'maxZoom': <?php echo $jmapMMMaxZoom; ?>,
+							'minZoom': <?php echo $jmapMMMinZoom; ?>,
+					<?php }?>
+							'noClear': false,
+							'overviewMapControl': <?php echo $jmapOverviewMapControl; ?>, 
+							'overviewMapControlOpened': <?php echo $jmapOverviewMapControlOpened; ?>, 
+							'panControl': <?php echo $jmapPanControl; ?>, 
+							'panControlPosition': '<?php echo $jmapPanControlPosition; ?>', 
+							'scaleControl': <?php echo $jmapScaleControl; ?>, 
+							'scaleControlPosition': '<?php echo $jmapScaleControlPosition; ?>', 
+							'scrollwheel': <?php echo $jmapScrollWheel; ?>, 
+							'streetViewControl': <?php echo $jmapStreetViewControl; ?>, 
+							'streetViewControlPosition': '<?php echo $jmapStreetViewControlPosition; ?>', 
+							'zoom':<?php echo $jmapInitZoom; ?>, 
+							'zoomControl': <?php echo $jmapZoomControl; ?>, 
+							'zoomControlPosition': '<?php echo $jmapZoomControlPosition; ?>', 
+							'zoomControlStyle': '<?php echo $jmapZoomControlStyle; ?>', 
+							'debugMode': false						
+							});
+						}
+					
+						
 						var image = new google.maps.MarkerImage(
 						  '<?php echo JURI::base();?>media/markers/marker-images/image.png',
 						  new google.maps.Size(32,33),
@@ -1405,18 +1394,24 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 						});*/
 						//console.log('Marker Added - Lat/Long!');
 		
-						mapdiv.jmap('AddMarker',{
-							'pointLatLng': [param1, param2],
+						jQuery(mapDiv).jmap('AddMarker',{
+							'pointLatLng': [mjlatval, mjlngval],
 							'pointTitle' : '<?php echo JText::_('JMAPS_CLICK_MARKER_HOME'); ?>',
 							'pointIcon': image,
 							'pointShadow': shadow,
 							'pointShape': shape
 						});
 						console.log('GelocalizedMarker Added - Lat/Long!');
-			
+						
+						
+						
 						return true;
 					}
-				}
-			return false;			
+		
+			
+			return false;
+			
 		}
+
+
 	</script>

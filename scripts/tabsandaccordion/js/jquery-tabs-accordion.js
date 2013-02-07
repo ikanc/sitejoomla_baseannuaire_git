@@ -70,9 +70,9 @@
 							'taa-tabindex': 0
 						})
 						.on('click.' + idNamespace, self.type === 'taa-accordion' && '> * > :first-child' || '> :first-child > *', function(event) {
-
+alert('toto');
 							self.goTo($tabs.index(event.target));
-						})
+						});
 						.on('keydown.' + idNamespace, function(event) {
 
 							// event.target should be the element and not a descendant 
@@ -184,7 +184,7 @@
 						$element
 						.attr('aria-activedescendant', $panels[self.index.curr].id);
 						
-						$element.trigger('expand', [index, $panel]);
+						//$element.trigger('expand', [index, $panel]);
 
 						return self;
 					},
@@ -196,7 +196,7 @@
 						if(self.type === 'taa-tabs') $tabs.eq(index).removeClass('current');
 						else $content.eq(index).height(0);
 
-						$element.trigger('collapse', [index, $panel]);
+						//$element.trigger('collapse', [index, $panel]);
 
 						return self;
 					},
@@ -204,10 +204,11 @@
 					goTo: function(index) {
 
 						if(self.index.curr !== index && typeof self.index.curr === 'number') {
-		
-							//LGW : pour eviter de se se retrouver en bas de site une fois l'onglet precedent replié et le nouveau déroulé ?
+			alert('ok');
+
+		//LGW : pour eviter de se se retrouver en bas de site une fois l'onglet precedent replié et le nouveau déroulé ?
 							//Pas de meilleure solution pour le moment
-							//self.collapse(self.index.curr);
+							if (self.type === 'taa-tabs') self.collapse(self.index.curr);
 				
 							/* $('html, body').animate({  
 								scrollTop:$panel.offset().top  

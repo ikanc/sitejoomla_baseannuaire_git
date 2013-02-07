@@ -451,6 +451,7 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 	public function struct() {
 		SPLang::load('SpApp.jmapsmarker');
 		$data = $this->getData(false);
+		
 		if ($this->_firstsw == 1) {
 //		if (empty($GLOBALS['app']['jmFirst'])) {
 //			$GLOBALS['app']['jmFirst'] = true;
@@ -557,7 +558,7 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 	
 			//LGW:Modification de l'entete
 			$jmfaTitle = $jmfaLogo.'<b>' . $fieldData[$this->jmfaTitleField] . '</b><br/>';
-			$jmfaDetails = '<div class="SOBIproDetailsDIV"><a href="' . $jmfaLink . '" class="SOBIproDetails" onclick="if(!parent.jQuery.browser.opera) {var linkData = \'' . $jmfaLink . '\'; var returnData = openColorbox(linkData); return returnData;}" target="_blank"><i class="icon-plus-sign"></i> ' . Sobi::Txt('JMFA_DETAILS_LABEL') . '</a></div>';
+			$jmfaDetails = '<div class="SOBIproDetailsDIV"><a href="' . $jmfaLink . '" class="SOBIproDetails" onclick="if(!parent.jQuery.browser.opera) {var linkData = \'' . $jmfaLink . '\'; var returnData = openColorbox(linkData); return returnData;}"><i class="icon-plus-sign"></i> ' . Sobi::Txt('JMFA_DETAILS_LABEL') . '</a></div>';
 			$XMLname = $fieldData[$this->jmfaTitleField];
 			$XMLID = $data['sid'];
 			$XMLstreet = $fieldData[$this->jmfaStreetField];

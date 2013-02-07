@@ -15,15 +15,15 @@
  * $Revision: 1100 $
  * $Author: Cindy Johnson $
  */
- 
-//LGW
-//jQuery.noConflict();
+
+jQuery.noConflict();
 
 if (typeof SPJmapsMarkerReq == 'undefined') {
 	var SPJmapsMarkerReg = {};
 	var jmapsMarkerArray = new Array();
 	var jmapsMarkersBuilt = 0;
 }
+
 function SPJmapsMarkerGeoCoder(Opt, pid) {
 
 	jQuery(document).ready(function() { 
@@ -109,25 +109,24 @@ function SPJmapsMarkerUpdate(Opt) {
 			}*/
 				
 			//LGW
-			if (change) {
+			//if (change) {
 		
 				var searchAddress = new Array();
 				c = 0;
 				for(var i in this.Address) {
 					searchAddress[c] = this.Address[i];
-					c++
+					c++;
 				}
 				var jmfaGeocoder = new google.maps.Geocoder();
 				var jmfaUpdater = this;
 				jmfaGeocoder.geocode({'address': searchAddress.join('+')}, function(results, status) {
 					if (status == google.maps.GeocoderStatus.OK) {
 						// LGW : reset lock
-			        	this.MarkerLock = false;
-					
+			        	this.MarkerLock = false;		
 						jmfaUpdater.SetCoordinates(results[0].geometry.location);
 					} 
 				});	
-			}
+			//}
 		}
 	};
 	
@@ -176,7 +175,7 @@ function SPJmapsMarkerUpdate(Opt) {
 		var mapOptions = {
 			zoom: 12,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
-	    }
+	    };
 
 		this.Map = new google.maps.Map( SP_id( this.Opt.Id+'_'+'canvas'), mapOptions );
 		
@@ -185,8 +184,7 @@ function SPJmapsMarkerUpdate(Opt) {
 		var tempLatitude = jQuery('input#'+this.Opt.Id+'_jmlatitude').val();
 		var tempLongitude = jQuery('input#'+this.Opt.Id+'_jmlongitude').val();
 		if ((!tempLatitude || tempLatitude == 0) && (!tempLongitude || tempLongitude == 0)) {
-			if (navigator.geolocation) {
-			
+			if (navigator.geolocation) {			
 				navigator.geolocation.getCurrentPosition(function(position) {
 				
 					initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -222,7 +220,6 @@ function SPJmapsMarkerUpdate(Opt) {
 			
 	};
 	this.NoInit = function() {
-	
 		//LGW: position par défaut
 		this.SetCoordinates(this.defaultLocation, true);
 	};
@@ -243,6 +240,7 @@ function SPJmapsMarkerUpdate(Opt) {
 }
 function SPJmapsMarkerAddMarkers() {
 	jQuery(document).ready(function() { 
+	
 		if(jmapsMarkersBuilt != 0) {
 //	      console.log('Build');
 			if(window.jmaps_Initialize) {
@@ -253,12 +251,15 @@ function SPJmapsMarkerAddMarkers() {
 				var iconOptions = new Object;
 				buildJmapMarkers(jmapsMarkerArray, cookieCount, iconOptions);
 				jmapsMarkersBuilt = 0;
+				
 	//			zoomCenterMap();
-			}
+				//LGW: avant d'ajouter les markers, on regle le niveau de zoom d'apres le radius de ljradius
+				//zoomFromRadius();
+			} 
 		} else {
 				if(window.jmaps_Initialize) {
 					jQuery('#loadmessagehtml').hide();
 				}
-				}
+		}
 	});
 }

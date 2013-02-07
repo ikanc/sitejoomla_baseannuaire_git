@@ -173,6 +173,8 @@ class MJRadius extends SPPlugin{
 		$session->clear('mj_rs_ref_lat') ;
 		$session->clear('mj_rs_ref_lng') ;
 		$session->clear('mj_rs_ref_dist') ;
+		//LGW ??? Ne faut-il pas peter aussi le centre ?
+		$session->clear('mj_rs_center_selector') ;
 		
 		// récupère du form
 		$dist		= SPRequest::string('mj_rs_radius_selector', 10 );		
@@ -372,6 +374,17 @@ class MJRadius extends SPPlugin{
 						jQuery("#mj_rs_ref_lat").val(results[0].geometry.location.lat()) ;
 						jQuery("#mj_rs_ref_lng").val(results[0].geometry.location.lng()) ;
 						jQuery("#mj_rs_center_selector").val(results[0].formatted_address);
+						
+						jQuery("#JmapsHome").trigger("userpos", [po.coords.latitude, po.coords.longitude]);
+						jQuery("#JmapsSearch").trigger("userpos", [po.coords.latitude, po.coords.longitude]);
+		
+						var elt = results[0]["address_components"];
+						for(i in elt){
+							if(elt[i].types[0] == "postal_code") {
+								jQuery(".module.newsletter").trigger("userposzip", [elt[i].long_name, 0]);
+								break;
+							}
+						}				
 					} else {
 						jQuery("#mj_rs_center_selector").val("'.Sobi::Txt( 'MJRS.GEOCODE_NOT_FOLLOWING_REASON').' " + status);
 					}
@@ -392,6 +405,18 @@ class MJRadius extends SPPlugin{
 										jQuery("#mj_rs_ref_lat").val(po.coords.latitude) ;
 										jQuery("#mj_rs_ref_lng").val(po.coords.longitude) ;
 										jQuery("#mj_rs_center_selector").val(results[0]["formatted_address"]);
+										
+										jQuery("#JmapsHome").trigger("userpos", [po.coords.latitude, po.coords.longitude]);
+										jQuery("#JmapsSearch").trigger("userpos", [po.coords.latitude, po.coords.longitude]);
+						
+										var elt = results[0]["address_components"];
+										for(i in elt){
+											if(elt[i].types[0] == "postal_code") {
+												jQuery(".module.newsletter").trigger("userposzip", [elt[i].long_name, 0]);
+												break;
+											}
+										}				
+										
 									} else {
 										alert("'.Sobi::Txt( 'MJRS.GEOCODE_NOT_FOLLOWING_REASON').' " + status);
 									}
