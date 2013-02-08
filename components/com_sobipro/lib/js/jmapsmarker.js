@@ -16,7 +16,7 @@
  * $Author: Cindy Johnson $
  */
 
-jQuery.noConflict();
+//jQuery.noConflict();
 
 if (typeof SPJmapsMarkerReq == 'undefined') {
 	var SPJmapsMarkerReg = {};

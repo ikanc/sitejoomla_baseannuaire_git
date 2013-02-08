@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SobiProApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://xml.sigsiu.net/SobiPro/application.xsd">
+  <name>Download Field</name>
+  <id>download_field</id>
+  <authorName>Sigsiu.NET GmbH</authorName>
+  <authorEmail>sobi@sigsiu.net</authorEmail>
+  <authorUrl>http://www.Sigsiu.NET/</authorUrl>
+  <copyright>Copyright (C) 2009-2011 Sigsiu.NET GmbH</copyright>
+  <license>GNU General Public License v3</license>
+  <creationDate>2011-03-31</creationDate>
+  <fieldType typeId="download" fieldGroup="special">Download</fieldType>
+  <version>0.9.4</version>
+  <description>
+  	With a download field, files can be uploaded to each entry in your SobiPro directory in the add entry form.
+  	The visitors of your site can download these files in the details view. 
+  	You can see this in action in our download directory.
+  </description>
+  <sql>install.sql</sql>
+  <language>
+    <file lang="en_GB">en-GB.SpApp.download.ini</file>
+    <file lang="de_DE">de-DE.SpApp.download.ini</file>
+    <file lang="fr_FR">fr-FR.SpApp.download.ini</file>
+    <file lang="pl_PL">pl-PL.SpApp.download.ini</file>
+  </language>
+  <files path="adm:field">
+    <folder>Adm/</folder>
+  </files>
+  <files path="config:">
+    <folder>Cfg/</folder>
+  </files>
+  <files path="ctrl:">
+    <folder>Ctrl/</folder>
+  </files>
+  <files path="fields:adm">
+    <folder>FieldAdm/</folder>
+  </files>
+  <files path="img:icons.Mime">
+    <folder>Icons/</folder>
+  </files>
+  <files path="css:">
+    <file>download.css</file>
+  </files>
+  <files path="js:">
+    <file>download.js</file>
+  </files>
+  <files path="fields:">
+    <file>download.php</file>
+  </files>
+  <requirements>
+    <core version="1.0.0.1000"/>
+    <field>inbox</field>
+  </requirements>
+  <installLog>
+    <modified>
+      <file>
+        <path>D:/wamp21e/www/sitejoomla_sortiesenfamille/components/com_sobipro/etc/download.ini</path>
+        <size>6240</size>
+        <checksum>63836e6a23cc9b6072812655721d67a3</checksum>
+        <backup>D:/wamp21e/www/sitejoomla_sortiesenfamille/components/com_sobipro/etc/installed/fields/download_field/backup/Cfg/download.ini</backup>
+      </file>
+      <file>
+        <path>D:/wamp21e/www/sitejoomla_sortiesenfamille/components/com_sobipro/etc/mime_icons.ini</path>
+        <size>1912</size>
+        <checksum>6f534fe458052ebd07d1dbd0d6a6d2b8</checksum>
+        <backup>D:/wamp21e/www/sitejoomla_sortiesenfamille/components/com_sobipro/etc/installed/fields/download_field/backup/Cfg/mime_icons.ini</backup>
+      </file>
+      <file>
+        <path>D:/wamp21e/www/sitejoomla_sortiesenfamille/components/com_sobipro/lib/ctrl/adm/download.php</path>
+        <size>4820</size>
+        <checksum>39d68a04220b7291cee262f6c6e9acb4</checksum>
+        <backup>D:/wamp21e/www/sitejoomla_sortiesenfamille/components/com_sobipro/etc/installed/fields/download_field/backup/Ctrl/adm/download.php</backup>
+      </file>
+      <file>
+        <path>D:/wamp21e/www/sitejoomla_sortiesenfamille/components/com_sobipro/lib/ctrl/download.php</path>
+        <size>4947</size>
+        <checksum>52077c40ce98264512163a329a2a74b1</checksum>
+        <backup>D:/wamp21e/www/sitejoomla_sortiesenfamille/components/com_sobipro/etc/installed/fields/download_field/backup/Ctrl/download.php</backup>
+      </file>
+      <file>
+        <path>D:/wamp21e/www/sitejoomla_sortiesenfamille/components/com_sobipro/opt/fields/adm/download.php</path>
+        <size>3081</size>
+        <checksum>28f9be67974c5c6543ecac275ce47871</checksum>
+        <backup>D:/wamp21e/www/sitejoomla_sortiesenfamille/components/com_sobipro/etc/installed/fields/download_field/backup/FieldAdm/download.php</backup>
+      </file>
+      <file>
+        <path>D:/wamp21e/www/sitejoomla_sortiesenfamille/components/com_sobipro/lib/js/download.js</path>
+        <size>1996</size>
+        <checksum>ad70636781226e41893112b3f9d8a4b5</checksum>
+        <backup>D:/wamp21e/www/sitejoomla_sortiesenfamille/components/com_sobipro/etc/installed/fields/download_field/backup/download.js</backup>
+      </file>
+      <file>
+        <path>D:/wamp21e/www/sitejoomla_sortiesenfamille/components/com_sobipro/opt/fields/download.php</path>
+        <size>22465</size>
+        <checksum>089326b26df4bf6f2ec534cc98da8897</checksum>
+        <backup>D:/wamp21e/www/sitejoomla_sortiesenfamille/components/com_sobipro/etc/installed/fields/download_field/backup/download.php</backup>
+      </file>
+    </modified>
+    <files>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/administrator/components/com_sobipro/field/edit/download.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/administrator/components/com_sobipro/field/edit/download.php</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/administrator/components/com_sobipro/field/license.php</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/administrator/components/com_sobipro/field/licenses.php</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/address-book.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/archive.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/audio-x-generic.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/book.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/cd.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/colors.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/document.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/exec.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/file.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/files.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/flash.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/font.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/image-bmp.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/image-gif.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/image-jpeg.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/image-png.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/image-tiff.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/image-x-generic.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/java.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/ms-excel.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/ms-powerpoint.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/ms-word.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/multimedia.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/pdf.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/presentation.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/spreadsheet.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/text-source.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/text.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/user-info.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/vcalendar.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/windows.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/icons/Mime/xml.png</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/media/sobipro/css/download.css</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/language/en-GB/en-GB.SpApp.download.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_sortiesenfamille/language/fr-FR/fr-FR.SpApp.download.ini</file>
+    </files>
+    <sql>
+      <tables>
+        <table>spdb_downloads</table>
+      </tables>
+    </sql>
+    <field>download</field>
+  </installLog>
+</SobiProApp>

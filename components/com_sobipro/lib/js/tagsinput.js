@@ -24,7 +24,7 @@
  * $Revision: 1392 $
  * $Author: Radek Suski $
  */
-jQuery.noConflict();
+//jQuery.noConflict();
 ( function( jQuery ) {
 	var delimiter = new Array();
 	jQuery.fn.SPaddTag = function( value, options ) {
