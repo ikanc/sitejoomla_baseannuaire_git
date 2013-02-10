@@ -986,41 +986,44 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 	
 				var lat = document.getElementById("mj_rs_ref_lat");		
 				var lon = document.getElementById("mj_rs_ref_lng");		
-				if (lat.value.length!=0 && lon.value.length!=0) {
-					var radiusselector = document.getElementById("mj_rs_radius_selector");
-					if (radiusselector!=undefined) {		
-					var radius = radiusselector.options[radiusselector.selectedIndex].value;	
-					var zoomLevel = <?php echo $jmapZoom; ?>;
+				if (lat!=null && lon!=null) {
+				
+					if (lat.value.length!=0 && lon.value.length!=0) {
+						var radiusselector = document.getElementById("mj_rs_radius_selector");
+						if (radiusselector!=undefined) {		
+						var radius = radiusselector.options[radiusselector.selectedIndex].value;	
+						var zoomLevel = <?php echo $jmapZoom; ?>;
 
-					switch(radius)
-					{
-						case '5':
-							zoomLevel=zoomLevel+2;
-							break;
-						case '10':
-							zoomLevel=zoomLevel+1;
-							break;
-						case '50':
-							zoomLevel=zoomLevel-2;
-							break;
-						case '100':
-							zoomLevel=zoomLevel-3;
-							break;
-						case '200':
-							zoomLevel=zoomLevel-4;
-							break;
-						case '500':
-							zoomLevel=zoomLevel-5;
-							break;
-						case '1000':
-							zoomLevel=zoomLevel-7;
-							break;
-						default:
-							break;
-					}
-					
-					thisMap.setZoom(zoomLevel); 
-					console.log('New zoom level = ' + zoomLevel);
+						switch(radius)
+						{
+							case '5':
+								zoomLevel=zoomLevel+2;
+								break;
+							case '10':
+								zoomLevel=zoomLevel+1;
+								break;
+							case '50':
+								zoomLevel=zoomLevel-2;
+								break;
+							case '100':
+								zoomLevel=zoomLevel-3;
+								break;
+							case '200':
+								zoomLevel=zoomLevel-4;
+								break;
+							case '500':
+								zoomLevel=zoomLevel-5;
+								break;
+							case '1000':
+								zoomLevel=zoomLevel-7;
+								break;
+							default:
+								break;
+						}
+						
+						thisMap.setZoom(zoomLevel); 
+						console.log('New zoom level = ' + zoomLevel);
+						}
 					}
 				}
 
