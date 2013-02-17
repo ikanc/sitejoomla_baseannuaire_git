@@ -599,7 +599,9 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 			<?php } ?>
 		
 			<?php if ($jmapHeight=='100%') {?>
-				jQuery(mapDiv).animate({'width': '<?php echo $jmapWidth; ?>', 'height': window.innerHeight}, function(){
+				var usedHeight = window.innerHeight ? window.innerHeight : jQuery(window).height();
+				var usedWidth =  window.innerWidth ? window.innerWidth : jQuery(window).width();
+				jQuery(mapDiv).animate({'width': usedWidth, 'height': usedHeight}, function(){
 			<?php } else {?>
 				jQuery(mapDiv).animate({'width': '<?php echo $jmapWidth; ?>', 'height': '<?php echo $jmapHeight; ?>'}, function(){
 			<?php }?>
@@ -632,6 +634,7 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 			//LGW: evenement de localisation de l'utilisateur
 			//On ne traite que si des markers sont afichés...
 			currentmap.on('userpos', function(event, param1, param2) {
+			
 				if (cookieNumber>0) {
 					//On ajoute le marker de localisation et on centre dessus
 					addGeolocalizationMarker(jQuery(this), param1, param2);			

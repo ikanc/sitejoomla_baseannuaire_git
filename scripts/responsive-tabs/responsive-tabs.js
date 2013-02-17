@@ -149,7 +149,7 @@
 						$(".nav-tabs li:last-child",$el).append("<span class='right tab-control-spacer'> </span>");
 						
 						//LGW: Support Swipe pour le carousel (via jQuery mobile)
-						var tabpanes = $(".tab-pane");
+						/*var tabpanes = $(".tab-pane");
 						tabpanes.each(function (i) {
 		
 							var thisLi = $(this).parent().siblings("ul").first().children("li:nth-child("+(i+1)+")"),
@@ -177,7 +177,7 @@
 								}
 								
 							}); 		
-						});
+						});*/
 				}
 
 				// Set the large screen version of tabbable navigation;
@@ -351,7 +351,7 @@
 		// passing an object literal, or after initialization:
 		// $('#el').responsive-tabs('option', 'key', value);
 		$.fn[pluginName].defaults = {
-				maxSmallWidth: 767,   // biggest screen size for which we use "small" configuration
+				maxSmallWidth: 1200,   // biggest screen size for which we use "small" configuration
 				slideTime: 500,       // milliseconds to slide from one tab to another
 				onInit: function() {},
 				onDestroy: function() {}

@@ -365,6 +365,7 @@ class MJRadius extends SPPlugin{
 		}
 		if ($this->m_geocodeMode>0){
 			$js = 'function _manGeocode(){
+
 				jQuery("#top_button").fadeOut("fast");
 				var entry = jQuery("#mj_rs_center_selector").val();
 				if (entry.length<3){return ;}
@@ -402,6 +403,7 @@ class MJRadius extends SPPlugin{
 							navigator.geolocation.getCurrentPosition(function (po) {
 								gc.geocode({"latLng":  new google.maps.LatLng(po.coords.latitude, po.coords.longitude) }, function(results, status) {
 									if(status == google.maps.GeocoderStatus.OK) {
+									
 										jQuery("#mj_rs_ref_lat").val(po.coords.latitude) ;
 										jQuery("#mj_rs_ref_lng").val(po.coords.longitude) ;
 										jQuery("#mj_rs_center_selector").val(results[0]["formatted_address"]);
@@ -421,7 +423,9 @@ class MJRadius extends SPPlugin{
 										alert("'.Sobi::Txt( 'MJRS.GEOCODE_NOT_FOLLOWING_REASON').' " + status);
 									}
 								});
-							});
+							}, 
+							function(error) {},
+							{maximumAge:60000, timeout:10000, enableHighAccuracy:false} );
 						}
 						else{
 							alert("'.Sobi::Txt( 'MJRS.ALLOW_GEOCODE' ).'");
