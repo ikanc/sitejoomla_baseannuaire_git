@@ -351,7 +351,7 @@
 		// passing an object literal, or after initialization:
 		// $('#el').responsive-tabs('option', 'key', value);
 		$.fn[pluginName].defaults = {
-				maxSmallWidth: 1200,   // biggest screen size for which we use "small" configuration
+				maxSmallWidth: 979,   // biggest screen size for which we use "small" configuration
 				slideTime: 500,       // milliseconds to slide from one tab to another
 				onInit: function() {},
 				onDestroy: function() {}

@@ -411,6 +411,8 @@ class MJRadius extends SPPlugin{
 										jQuery("#JmapsHome").trigger("userpos", [po.coords.latitude, po.coords.longitude]);
 										jQuery("#JmapsSearch").trigger("userpos", [po.coords.latitude, po.coords.longitude]);
 						
+										jQuery("#SPSearchForm .button").trigger("click");
+										
 										var elt = results[0]["address_components"];
 										for(i in elt){
 											if(elt[i].types[0] == "postal_code") {
