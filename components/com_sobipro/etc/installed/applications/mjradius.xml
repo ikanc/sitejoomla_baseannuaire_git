@@ -54,17 +54,32 @@
       <action>list.*</action>
       <action>adm_menu</action>
     </actions>
-    <modified/>
+    <modified>
+      <file>
+        <path>D:/wamp21e/www/sitejoomla_baseannuairecommercants/components/com_sobipro/opt/plugins/mjradius/init.php</path>
+        <size>19298</size>
+        <checksum>dc1f3b87977e32dd40954567d6b1de90</checksum>
+        <backup>D:/wamp21e/www/sitejoomla_baseannuairecommercants/components/com_sobipro/etc/installed/applications/mjradius/backup/init.php</backup>
+      </file>
+      <file>
+        <path>D:/wamp21e/www/sitejoomla_baseannuairecommercants/components/com_sobipro/opt/plugins/mjradius/description_en-GB.html</path>
+        <size>1209</size>
+        <checksum>167a80eb3f4a5253e10645b6dc6963ca</checksum>
+        <backup>D:/wamp21e/www/sitejoomla_baseannuairecommercants/components/com_sobipro/etc/installed/applications/mjradius/backup/description_en-GB.html</backup>
+      </file>
+      <file>
+        <path>D:/wamp21e/www/sitejoomla_baseannuairecommercants/components/com_sobipro/lib/ctrl/adm/mjradius.php</path>
+        <size>5305</size>
+        <checksum>ed046a79e2b31a1f3c902fcf7e25ccdb</checksum>
+        <backup>D:/wamp21e/www/sitejoomla_baseannuairecommercants/components/com_sobipro/etc/installed/applications/mjradius/backup/Ctrl/mjradius.php</backup>
+      </file>
+    </modified>
     <files>
-      <file>D:/wamp21e/www/sitejoomla_baseannuairethematique/components/com_sobipro/opt/plugins/mjradius/</file>
-      <file>D:/wamp21e/www/sitejoomla_baseannuairethematique/components/com_sobipro/opt/plugins/mjradius/init.php</file>
-      <file>D:/wamp21e/www/sitejoomla_baseannuairethematique/components/com_sobipro/opt/plugins/mjradius/description_en-GB.html</file>
-      <file>D:/wamp21e/www/sitejoomla_baseannuairethematique/components/com_sobipro/lib/ctrl/adm/mjradius.php</file>
-      <file>D:/wamp21e/www/sitejoomla_baseannuairethematique/administrator/components/com_sobipro/extensions/mjradius.php</file>
-      <file>D:/wamp21e/www/sitejoomla_baseannuairethematique/administrator/components/com_sobipro/extensions/mjradius.ini</file>
-      <file>D:/wamp21e/www/sitejoomla_baseannuairethematique/media/sobipro/locateme.png</file>
-      <file>D:/wamp21e/www/sitejoomla_baseannuairethematique/language/en-GB/en-GB.SpApp.mjradius.ini</file>
-      <file>D:/wamp21e/www/sitejoomla_baseannuairethematique/language/fr-FR/fr-FR.SpApp.mjradius.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_baseannuairecommercants/administrator/components/com_sobipro/extensions/mjradius.php</file>
+      <file>D:/wamp21e/www/sitejoomla_baseannuairecommercants/administrator/components/com_sobipro/extensions/mjradius.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_baseannuairecommercants/media/sobipro/locateme.png</file>
+      <file>D:/wamp21e/www/sitejoomla_baseannuairecommercants/language/en-GB/en-GB.SpApp.mjradius.ini</file>
+      <file>D:/wamp21e/www/sitejoomla_baseannuairecommercants/language/fr-FR/fr-FR.SpApp.mjradius.ini</file>
     </files>
   </installLog>
 </SobiProApp>
