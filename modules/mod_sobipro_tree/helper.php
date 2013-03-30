@@ -161,7 +161,8 @@ class ModSobiproTreeHelper
 
 			// Current Page Sid
 			$class = ($actual_sid == $item->id ? ' active sobiprocateg_active' : null);
-			$class = ($defaultItemid == $item->id ? ' active sobiprocateg_active' : null);
+			//LGW : test : pas d'ouverture par défaut...
+			//$class = ($defaultItemid == $item->id ? ' active sobiprocateg_active' : null);
 			$expand = ($actual_sid == $item->id ? ' in' : null);
 
 			// Leaf
@@ -193,8 +194,7 @@ class ModSobiproTreeHelper
 					
 					$output .= "<div id=\"collapse{$level}{$i}\" class=\"accordion-body collapse\">
 ";
-					$output .= "<div class=\"accordion-inner\">";
-									
+					$output .= "<div class=\"accordion-inner\">";		
 					$output .= 	self::generate(
 									$list, $item->id,
 									$actual_sid,

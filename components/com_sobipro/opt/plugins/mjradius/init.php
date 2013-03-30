@@ -8,7 +8,7 @@
  * @author mail	info@myJoom.com
  * @website		www.myJoom.com
  */
- 
+
 defined( 'SOBIPRO' ) || exit( 'Restricted access' );
 //ini_set("display_errors","on");	error_reporting(E_ALL);
 class MJRadius extends SPPlugin{
@@ -410,8 +410,6 @@ class MJRadius extends SPPlugin{
 										
 										jQuery("#JmapsHome").trigger("userpos", [po.coords.latitude, po.coords.longitude]);
 										jQuery("#JmapsSearch").trigger("userpos", [po.coords.latitude, po.coords.longitude]);
-						
-										jQuery("#SPSearchForm .button").trigger("click");
 										
 										var elt = results[0]["address_components"];
 										for(i in elt){
@@ -419,7 +417,10 @@ class MJRadius extends SPPlugin{
 												jQuery(".module.newsletter").trigger("userposzip", [elt[i].long_name, 0]);
 												break;
 											}
-										}				
+										}
+
+										jQuery("#SobiPro").trigger("userposget");
+										
 										
 									} else {
 										alert("'.Sobi::Txt( 'MJRS.GEOCODE_NOT_FOLLOWING_REASON').' " + status);

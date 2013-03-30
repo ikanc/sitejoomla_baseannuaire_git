@@ -1,0 +1,36 @@
+Message: less: parsed file:///D:/Outils/Soft/brackets-sprint-12/brackets/src/styles/brackets.less successfully.
+Source: file:///D:/Outils/Soft/brackets-sprint-12/brackets/src/thirdparty/less-1.3.0.min.js
+Line: 8
+-----------------------
+Message: less: css for file:///D:/Outils/Soft/brackets-sprint-12/brackets/src/styles/brackets.less generated in 468ms
+Source: file:///D:/Outils/Soft/brackets-sprint-12/brackets/src/thirdparty/less-1.3.0.min.js
+Line: 8
+-----------------------
+Message: less: css generated in 468ms
+Source: file:///D:/Outils/Soft/brackets-sprint-12/brackets/src/thirdparty/less-1.3.0.min.js
+Line: 8
+-----------------------
+Message: [Extension] starting to load extensions/default/HTMLCodeHints
+Source: file:///D:/Outils/Soft/brackets-sprint-12/brackets/src/utils/ExtensionLoader.js
+Line: 71
+-----------------------
+Message: [Extension] starting to load extensions/default/JavaScriptQuickEdit
+Source: file:///D:/Outils/Soft/brackets-sprint-12/brackets/src/utils/ExtensionLoader.js
+Line: 71
+-----------------------
+Message: [Extension] starting to load extensions/default/QuickOpenCSS
+Source: file:///D:/Outils/Soft/brackets-sprint-12/brackets/src/utils/ExtensionLoader.js
+Line: 71
+-----------------------
+Message: [Extension] starting to load extensions/default/QuickOpenHTML
+Source: file:///D:/Outils/Soft/brackets-sprint-12/brackets/src/utils/ExtensionLoader.js
+Line: 71
+-----------------------
+Message: [Extension] starting to load extensions/default/QuickOpenJavaScript
+Source: file:///D:/Outils/Soft/brackets-sprint-12/brackets/src/utils/ExtensionLoader.js
+Line: 71
+-----------------------
+Message: [Extension] starting to load extensions/user/brackets-recent-projects
+Source: file:///D:/Outils/Soft/brackets-sprint-12/brackets/src/utils/ExtensionLoader.js
+Line: 71
+-----------------------

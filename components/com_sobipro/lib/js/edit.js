@@ -21,6 +21,7 @@
 
 var selectedCat = 0;
 var selectedCatName = '';
+var selectedCatIsLeaf = 0;
 var selectedCats = new Array();
 var selectedCatNames = new Array();
 var selectedPath = '';
@@ -41,7 +42,7 @@ SobiPro.onReady( function () {
 } );
 
 function SP_selectCat( sid, add )
-{
+
 	var separator = "__SEPARATOR__";
 	var node = SP_id( 'sobiCatsstNode' + sid );
 	var cats = new Array();
@@ -61,10 +62,11 @@ function SP_selectCat( sid, add )
 	        		{ 
 	        			cats[ cat.id ] = cat.name; 
 	        			selectedCatName = cat.name; 
+						selectedCatIsLeaf = cat.leaf;
 	        		} 
 		        );
 		        selectedPath = cats.join( separator );
-		        if( add == 1 ) {
+		        if( add == 1 && selectedCatIsLeaf==1) {
 		        	SP_addCat();
 			    }
 			}
@@ -80,6 +82,13 @@ function SP_Save()
 
 function SP_addCat()
 {
+
+	if (selectedCatIsLeaf == 0)
+		{
+			SobiPro.Alert( "PLEASE_SELECT_A_LEAF_CATEGORY" );
+			return false;
+		}
+
 	if( selectedCat == 0 || selectedPath == '' ) {
 		SobiPro.Alert( "PLEASE_SELECT_CATEGORY_YOU_WANT_TO_ADD_IN_THE_TREE_FIRST" );
 				

@@ -215,9 +215,17 @@ class SPCategoryCtrl extends SPSectionCtrl
 		$out = SPRequest::cmd( 'out', 'json' );
 		$path = SPFactory::config()->getParentPath( $sid, true );
 		$cats = array();
+		
+		//LGW : on marque la feuille de la branche
 		if( count( $path ) ) {
+			$i=1;
 			foreach ( $path as $cid => $cname ) {
-				$cats[] = array( 'id' => $cid, 'name' => $cname );
+				//LGW: Beurk... c'est feuillle si on est au niveau EN DUR 3...
+				if ($i<1)
+					$cats[] = array( 'id' => $cid, 'name' => $cname, 'leaf' => 0);
+				else 
+					$cats[] = array( 'id' => $cid, 'name' => $cname, 'leaf' => 1);
+				$i++;
 			}
 		}
 		switch ( $out ) {

@@ -86,9 +86,11 @@ function SPJmapsMarkerUpdate(Opt) {
 	
 	this.GetCoordinates = function(force) {
 		change = false;
+	
 		if (force) {
 			change = true;
 		}
+		
 		// if these data has been changed - replace it in the array and eventually get new coordinates
 		for(var i = 0; i < this.Fields.length; i++) {
 			id = this.Fields[i].attr('id');
@@ -99,6 +101,7 @@ function SPJmapsMarkerUpdate(Opt) {
 				change = true;
 			}
 		}
+		
 		// if changed
 		if(change) {
 		
@@ -107,27 +110,26 @@ function SPJmapsMarkerUpdate(Opt) {
 			/*if( this.MarkerLock ) {
 				change = confirm( this.Opt.ChngMsg );
 			}*/
-				
-			//LGW
-			//if (change) {
 		
-				var searchAddress = new Array();
-				c = 0;
-				for(var i in this.Address) {
-					searchAddress[c] = this.Address[i];
-					c++;
-				}
-				var jmfaGeocoder = new google.maps.Geocoder();
-				var jmfaUpdater = this;
-				jmfaGeocoder.geocode({'address': searchAddress.join('+')}, function(results, status) {
-					if (status == google.maps.GeocoderStatus.OK) {
-						// LGW : reset lock
-			        	this.MarkerLock = false;		
-						jmfaUpdater.SetCoordinates(results[0].geometry.location);
-					} 
-				});	
-			//}
+			var searchAddress = new Array();
+			c = 0;
+			for(var i in this.Address) {
+				searchAddress[c] = this.Address[i];
+				c++;
+			}
+			
+			var jmfaGeocoder = new google.maps.Geocoder();
+			var jmfaUpdater = this;
+			jmfaGeocoder.geocode({'address': searchAddress.join('+')}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					// LGW : reset lock
+					this.MarkerLock = false;		
+					jmfaUpdater.SetCoordinates(results[0].geometry.location);
+
+				} 
+			});	
 		}
+
 	};
 	
 	//LGW
@@ -179,11 +181,14 @@ function SPJmapsMarkerUpdate(Opt) {
 
 		this.Map = new google.maps.Map( SP_id( this.Opt.Id+'_'+'canvas'), mapOptions );
 		
+		//LGW : on recupere d'abord les coordonnées / adresses saisies. Si non dispo, on passe par la géolocalisation
+		this.GetCoordinates(true);
+		
 		// Try W3C Geolocation (Preferred)
-		var u = this;
+		/*var u = this;
 		var tempLatitude = jQuery('input#'+this.Opt.Id+'_jmlatitude').val();
 		var tempLongitude = jQuery('input#'+this.Opt.Id+'_jmlongitude').val();
-		if ((!tempLatitude || tempLatitude == 0) && (!tempLongitude || tempLongitude == 0)) {
+		if ((tempLatitude=="") && (tempLongitude=="")) {
 			if (navigator.geolocation) {			
 				navigator.geolocation.getCurrentPosition(function(position) {
 				
@@ -216,14 +221,16 @@ function SPJmapsMarkerUpdate(Opt) {
 		{
 			initialLocation = new google.maps.LatLng(tempLatitude,tempLongitude);
 			u.SetCoordinates(initialLocation, true);
-		}
-			
+		}	*/	
 	};
 	this.NoInit = function() {
 		//LGW: position par défaut
 		this.SetCoordinates(this.defaultLocation, true);
 	};
-	this.JmapsMarkerInit();	
+	
+	//LGW : déplacé
+	//this.JmapsMarkerInit();	
+	
 	// traverse address fields and store these as DOM objects
 	for(var i = 0; i < Opt.Fields.length; i++) {
 		try {
@@ -236,7 +243,10 @@ function SPJmapsMarkerUpdate(Opt) {
 	for(var i = 0; i < this.Fields.length; i++) {
 		this.FieldEvent(this.Fields[i]);		
 	}
-	this.ButtonEvent(jQuery('#SPJmapsmarkerSetLatLong'));		
+	this.ButtonEvent(jQuery('#SPJmapsmarkerSetLatLong'));	
+
+	//LGW : on deplace l'init apres la recup des champs pour avoir l'adresse...
+	this.JmapsMarkerInit();	
 }
 function SPJmapsMarkerAddMarkers() {
 	jQuery(document).ready(function() { 

@@ -516,6 +516,18 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 					'debugMode': false						
 				});
 			//}
+
+				//LGW: on demande à mjradius la localisation si disponible pour positionnement sur la carte
+				if (localizeFromCenter(jQuery(mapDiv))) {
+				
+					centerFromCenter(jQuery(mapDiv));
+				
+					//LGW: on regle le niveau de zoom d'apres le radius de ljradius
+					<?php if ($jmapZoom !== 0) { ?>
+						zoomFromRadius(jQuery(mapDiv));						
+					<?php }?>
+				}
+	
 	
 			<?php if ($jmapMarkerClusterer == 1) { ?>
 				var mcStyles = Array();
@@ -610,6 +622,8 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 		}
 		jmaps_Initialize ();
 		
+		
+		
 		//LGW: evenement de recentrage dynamique
 		//On ne traite que si des markers sont afichés...
 		var currentmap = jQuery('#<?php echo $jmapDivID; ?>');
@@ -635,14 +649,14 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 			//On ne traite que si des markers sont afichés...
 			currentmap.on('userpos', function(event, param1, param2) {
 			
-				if (cookieNumber>0) {
+				//if (cookieNumber>0) {
 					//On ajoute le marker de localisation et on centre dessus
 					addGeolocalizationMarker(jQuery(this), param1, param2);			
 					centerMap(jQuery(this), param1, param2);
 					
 					//On regle le niveau de zoom d'apres le radius de ljradius
 					zoomFromRadius(jQuery(this));	
-				}
+				//}
 			});
 		}
 			
@@ -962,7 +976,11 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 
 				//On ajoute en meme temps le marker de localisation...
 				addGeolocalizationMarker(map, mjlat, mjlon);
+				
+				return true;
 			}
+			
+			return false;
 		}
 		
 		//LGW : on centre d'apres le centre donné par mjradius
@@ -977,8 +995,12 @@ for ($i=0; $i<count($customMarkerJSCodeArray); $i++) {
 				//On ajoute en meme temps le marker de localisation...
 				addGeolocalizationMarker(map, mjlat, mjlon);
 
-				if (center=true) centerMap(map, mjlat, mjlon);			
+				if (center=true) centerMap(map, mjlat, mjlon);	
+
+				return true;
 			}	
+			
+			return false;
 		}
 		
 		//LGW  : on adapte le zoom d'apres le rayon selectionné par mjradius

@@ -53,8 +53,13 @@ $subItemsid = ModSobiproTreeHelper::getSubItemsid($defaultItemid);
 
 // Current Url, SID
 $raw_sid_full = JRequest::getVar('sid');
+//LGW : si le pid (category) est donné, il prend le pas sur le sid (entry)
+$raw_pid_full = JRequest::getVar('pid');
+if ($raw_pid_full!='') $raw_sid_full = $raw_pid_full;
+
 $actual_sid_full = explode(":", $raw_sid_full);
-$actual_sid = (count($actual_sid_full) == 2 ? $actual_sid_full[0] : null);
+//$actual_sid = (count($actual_sid_full) == 2 ? $actual_sid_full[0] : null);
+$actual_sid = $actual_sid_full[0];
 
 if ($require_stats)
 {

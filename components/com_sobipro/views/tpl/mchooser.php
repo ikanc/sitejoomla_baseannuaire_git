@@ -23,6 +23,7 @@ SPFactory::header()->addCSSCode( '.sigsiuTree {height: 330px;}');
 ?>
 <script language="javascript" type="text/javascript">
     var selectedCat = 0;
+	var selectedCatIsLeaf = 0;
     var selectedCatName = '';
     var selectedCats = new Array();
     var selectedCatNames = new Array();
@@ -57,10 +58,13 @@ SPFactory::header()->addCSSCode( '.sigsiuTree {height: 330px;}');
 			{
 				onComplete: function( jsonObj, jsons )
 				{
+			
 					selectedCat = sid;
-			        jsonObj.categories.each( function( cat ) { cats[ cat.id ] = cat.name; selectedCatName = cat.name; } );
+					selectedCatIsLeaf = 0;
+					/*LGW : On note si la categorie teminale est une feuille de la branche*/
+			        jsonObj.categories.each( function( cat ) {cats[ cat.id ] = cat.name; selectedCatIsLeaf = cat.leaf;selectedCatName = cat.name; } );
 			        selectedPath = cats.join( separator );
-			        if( add == 1 ) {
+			        if( add == 1 && selectedCatIsLeaf == 1 ) {
 			        	SP_addCat();
 				    }
 				}
@@ -69,7 +73,7 @@ SPFactory::header()->addCSSCode( '.sigsiuTree {height: 330px;}');
 	}
 	function SP_Save()
 	{
-		if( selectedCat ) {
+		if ( selectedCat ) {
 			parent.document.getElementById( SPObjType + '.path' ).value = SobiPro.StripSlashes( selectedCatNames.join( '\n' ) );
 			parent.document.getElementById( SPObjType + '.parent' ).value = selectedCats.join( ', ' );
 		}
@@ -77,6 +81,12 @@ SPFactory::header()->addCSSCode( '.sigsiuTree {height: 330px;}');
 	}
 	function SP_addCat()
 	{
+		if (selectedCatIsLeaf == 0)
+		{
+			SobiPro.Alert( "PLEASE_SELECT_A_LEAF_CATEGORY" );
+			return false;
+		}
+	
 		if( selectedCat == 0 || selectedPath == '' ) {
 			SobiPro.Alert( "PLEASE_SELECT_CATEGORY_YOU_WANT_TO_ADD_IN_THE_TREE_FIRST" );
 			return false;

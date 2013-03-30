@@ -750,7 +750,7 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 					}
 								
 					//LGW: si le champ est vide, on saute....
-					if ($XMLcustom!='') {
+					if (strlen($XMLcustom)>0) {
 						//LGW: on ajoute le br en dynamique pour prévoir les champs custom vides
 						if (count($HTMLarray) == 1) {
 							$HTMLwork = $XMLcustom . '</br>' . $HTMLarray[0];
@@ -777,7 +777,7 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 					}
 					
 					//LGW: si le champ est vide, on saute....
-					if ($XMLcustom!='') {
+					if (strlen($XMLcustom)>0) {
 						//LGW: on ajoute le br en dynamique pour prévoir les champs custom vides
 						if (count($HTMLarray) == 1) {
 							$HTMLwork = $XMLcustom . '</br>' . $HTMLarray[0];
@@ -806,7 +806,7 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 					}
 					
 					//LGW: si le champ est vide, on saute....
-					if ($XMLcustom!='') {
+					if (strlen($XMLcustom)>0) {
 					
 						//LGW: on ajoute le br en dynamique pour prévoir les champs custom vides
 						if (count($HTMLarray) == 1) {
@@ -834,7 +834,7 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 					}
 					
 					//LGW: si le champ est vide, on saute....
-					if ($XMLcustom!='') {
+					if (strlen($XMLcustom)>0) {
 						//LGW: on ajoute le br en dynamique pour prévoir les champs custom vides
 						if (count($HTMLarray) == 1) {
 							$HTMLwork = $XMLcustom . '</br>' . $HTMLarray[0];
@@ -862,7 +862,7 @@ class SPField_JmapsMarker extends SPField_Inbox implements SPFieldInterface {
 					}
 					
 					//LGW: si le champ est vide, on saute....
-					if ($XMLcustom!='') {
+					if (strlen($XMLcustom)>0) {
 						if (count($HTMLarray) == 1) {
 							$HTMLwork = $XMLcustom . $HTMLarray[0];
 						} else 
